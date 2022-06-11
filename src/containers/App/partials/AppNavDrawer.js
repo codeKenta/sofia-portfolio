@@ -3,14 +3,8 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 import { styled } from '@mui/system'
-import { Drawer, IconButton, Link, Toolbar, Typography } from '@mui/material'
-import {
-  useCentraSelection,
-  useGlobalHandlers,
-  useGlobalState,
-  useI18n,
-  useRemoteConfig,
-} from '~/context'
+import { Drawer, IconButton, Toolbar } from '@mui/material'
+import { useGlobalHandlers, useGlobalState, useI18n, useRemoteConfig } from '~/context'
 import { Close as CloseIcon } from '~/components/icons'
 import AppNavDrawerListItem from './AppNavDrawerListItem'
 
@@ -49,9 +43,8 @@ const AppNavDrawerList = styled('ul', {
 const AppNavDrawer = React.memo(function AppNavDrawer(props) {
   const { isNavMenuOpen, ...other } = props
 
-  const { location, selection } = useCentraSelection()
   const { menus } = useRemoteConfig()
-  const { onMarketMenuToggle, onNavMenuClose } = useGlobalHandlers()
+  const { onNavMenuClose } = useGlobalHandlers()
   const { t } = useI18n()
 
   return (
@@ -85,19 +78,6 @@ const AppNavDrawer = React.memo(function AppNavDrawer(props) {
             </AppNavDrawerList>
           )}
         </nav>
-
-        <Typography variant="body2">
-          {t(__translationGroup)`Country`}:{' '}
-          <Link // eslint-disable-line jsx-a11y/anchor-is-valid
-            onClick={onMarketMenuToggle}
-            component="button"
-            type="button"
-            underline="always"
-            variant="body2"
-          >
-            {location.country} / {selection.currency}
-          </Link>
-        </Typography>
       </AppNavDrawerScrollContainer>
     </AppNavDrawerRoot>
   )

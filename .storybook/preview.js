@@ -3,7 +3,7 @@ import { ThemeProvider as EmotionThemeProvider } from 'emotion-theming'
 import { ThemeProvider } from '@mui/material/styles'
 import { CssBaseline } from '@mui/material'
 import { settings as remoteConfig } from '~/api/__mock__'
-import { CentraProvider, GlobalProvider, I18nProvider, RemoteConfigProvider } from '~/context'
+import { GlobalProvider, I18nProvider, RemoteConfigProvider } from '~/context'
 import { createTheme } from '~/components/styles'
 import breakpoints from '~/components/styles/breakpoints'
 
@@ -65,11 +65,9 @@ export const decorators = [
 
           <I18nProvider>
             <RemoteConfigProvider {...remoteConfig}>
-              <CentraProvider>
-                <GlobalProvider>
-                  <Story />
-                </GlobalProvider>
-              </CentraProvider>
+              <GlobalProvider>
+                <Story />
+              </GlobalProvider>
             </RemoteConfigProvider>
           </I18nProvider>
         </ThemeProvider>

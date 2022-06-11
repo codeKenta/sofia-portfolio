@@ -5,15 +5,9 @@ import PropTypes from 'prop-types'
 import useSize from '@react-hook/size'
 import { generateUtilityClasses } from '@mui/base'
 import { styled } from '@mui/system'
-import { AppBar, Badge, IconButton, Toolbar } from '@mui/material'
-import { useCentraSelection, useGlobalHandlers, useGlobalState, useI18n } from '~/context'
-import {
-  Brand as BrandIcon,
-  Cart as CartIcon,
-  Search as SearchIcon,
-  Close as CloseIcon,
-  Menu as MenuIcon,
-} from '~/components/icons'
+import { AppBar, IconButton, Toolbar } from '@mui/material'
+import { useGlobalHandlers, useGlobalState, useI18n } from '~/context'
+import { Brand as BrandIcon, Close as CloseIcon, Menu as MenuIcon } from '~/components/icons'
 import RouterLink from '../../RouterLink'
 
 const BREAKPOINT_KEY = 'md'
@@ -73,7 +67,6 @@ const AppHeader = React.memo(function AppHeader(props) {
   const {
     headerColor = 'inherit',
     headerMode = 'opaque',
-    isCartMenuOpen,
     isNavMenuOpen,
     isSearchMenuOpen,
     isSomeMenuOpen,
@@ -81,7 +74,7 @@ const AppHeader = React.memo(function AppHeader(props) {
     ...other
   } = props
 
-  const { onCartMenuToggle, onNavMenuToggle, onSearchMenuToggle } = useGlobalHandlers()
+  const { onNavMenuToggle } = useGlobalHandlers()
   const { t } = useI18n()
 
   const rootRef = React.useRef(null)
@@ -163,35 +156,6 @@ const AppHeader = React.memo(function AppHeader(props) {
         <AppHeaderBrandLink href="/" aria-label={t(__translationGroup)`Go to the homepage`}>
           <BrandIcon />
         </AppHeaderBrandLink>
-
-        <IconButton
-          onClick={onSearchMenuToggle}
-          color="inherit" // Inherit color from `headerColor`.
-          size="small"
-          aria-haspopup="true"
-          aria-expanded={isSearchMenuOpen}
-          aria-label={t(__translationGroup)`Toggle search`}
-        >
-          {isSearchMenuOpen ? <CloseIcon /> : <SearchIcon />}
-        </IconButton>
-
-        <IconButton
-          onClick={onCartMenuToggle}
-          color="inherit" // Inherit color from `headerColor`.
-          edge="end"
-          size="small"
-          aria-haspopup="true"
-          aria-expanded={isCartMenuOpen}
-          aria-label={t(__translationGroup)`Toggle cart menu`}
-        >
-          {isCartMenuOpen ? (
-            <CloseIcon />
-          ) : (
-            <Badge badgeContent={productsCount} color="primary" overlap="circular">
-              <CartIcon />
-            </Badge>
-          )}
-        </IconButton>
       </Toolbar>
     </AppHeaderRoot>
   )
@@ -200,7 +164,6 @@ const AppHeader = React.memo(function AppHeader(props) {
 AppHeader.propTypes = {
   headerColor: PropTypes.string,
   headerMode: PropTypes.oneOf(['opaque', 'transparent', 'auto']),
-  isCartMenuOpen: PropTypes.bool,
   isNavMenuOpen: PropTypes.bool,
   isSearchMenuOpen: PropTypes.bool,
   isSomeMenuOpen: PropTypes.bool,
@@ -208,18 +171,13 @@ AppHeader.propTypes = {
 }
 
 function AppHeaderContainer(props) {
-  const { isCartMenuOpen, isNavMenuOpen, isSearchMenuOpen, isSomeMenuOpen } = useGlobalState()
-  const {
-    selection: { items },
-  } = useCentraSelection()
+  const { isNavMenuOpen, isSearchMenuOpen, isSomeMenuOpen } = useGlobalState()
 
   return (
     <AppHeader
-      isCartMenuOpen={isCartMenuOpen}
       isNavMenuOpen={isNavMenuOpen}
       isSearchMenuOpen={isSearchMenuOpen}
       isSomeMenuOpen={isSomeMenuOpen}
-      productsCount={items.length}
       {...props}
     />
   )

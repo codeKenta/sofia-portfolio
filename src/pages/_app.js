@@ -8,7 +8,7 @@ import { CacheProvider } from '@emotion/react'
 import { ThemeProvider } from '@mui/material/styles'
 import { CssBaseline } from '@mui/material'
 import { settings as remoteConfig } from '~/api/__mock__'
-import { CentraProvider, GlobalProvider, I18nProvider, RemoteConfigProvider } from '~/context'
+import { GlobalProvider, I18nProvider, RemoteConfigProvider } from '~/context'
 import createEmotionCache from '~/utils/createEmotionCache'
 import theme from '~/utils/theme.light'
 import AppBase from '~/containers/App'
@@ -41,18 +41,16 @@ function App(props) {
 
         <I18nProvider defaultLocale={defaultLocale} locale={locale}>
           <RemoteConfigProvider {...cmsProps}>
-            <CentraProvider>
-              <GlobalProvider>
-                <AppBase
-                  disableFooter={pageProps?.disableFooter}
-                  disableHeader={pageProps?.disableHeader}
-                  headerColor={pageProps?.headerColor}
-                  headerMode={pageProps?.headerMode}
-                >
-                  <Component {...pageProps} />
-                </AppBase>
-              </GlobalProvider>
-            </CentraProvider>
+            <GlobalProvider>
+              <AppBase
+                disableFooter={pageProps?.disableFooter}
+                disableHeader={pageProps?.disableHeader}
+                headerColor={pageProps?.headerColor}
+                headerMode={pageProps?.headerMode}
+              >
+                <Component {...pageProps} />
+              </AppBase>
+            </GlobalProvider>
           </RemoteConfigProvider>
         </I18nProvider>
       </ThemeProvider>

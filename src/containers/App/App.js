@@ -5,13 +5,10 @@ import { SITE_FOOTER_ID, SITE_HEADER_ID, SITE_MAIN_ID } from '~/utils/constants'
 import { GlobalStateContext } from '~/context'
 import {
   AppCookieBar,
-  AppCartDrawer,
   AppFooter,
   AppHeader,
   AppLoader,
-  AppMarketDialog,
   AppNavDrawer,
-  AppSearchDrawer,
   AppSkipLink,
 } from './partials'
 
@@ -50,9 +47,6 @@ function App(props) {
       {!disableFooter && <AppFooter id={SITE_FOOTER_ID} />}
 
       <AppNavDrawer />
-      <AppCartDrawer />
-      <AppSearchDrawer />
-      <AppMarketDialog />
       <AppLoader />
 
       <GlobalStateContext.Consumer>

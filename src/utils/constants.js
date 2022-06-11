@@ -1,6 +1,3 @@
-export const CENTRA_CART_ITEM_UNIQUE_KEY = 'line'
-export const CENTRA_PRODUCT_UNIQUE_KEY = 'item'
-
 export const SITE_NAME = 'Create Ignite App'
 
 export const SITE_FOOTER_ID = 'site-footer'
