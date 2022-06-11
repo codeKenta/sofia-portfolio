@@ -7,11 +7,11 @@ import Head from 'next/head'
 import { CacheProvider } from '@emotion/react'
 import { ThemeProvider } from '@mui/material/styles'
 import { CssBaseline } from '@mui/material'
-import { settings as remoteConfig } from '~/api/__mock__'
 import { GlobalProvider, I18nProvider, RemoteConfigProvider } from '~/context'
 import createEmotionCache from '~/utils/createEmotionCache'
 import theme from '~/utils/theme.light'
 import AppBase from '~/containers/App'
+import { getGlobal } from '~/api/sanity'
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
@@ -63,8 +63,7 @@ App.getInitialProps = async (props) => {
 
   let cmsProps = {}
   if (ctx.req) {
-    // @todo - Replace `remoteConfig` with cms fetch
-    cmsProps = remoteConfig
+    cmsProps = await getGlobal()
   }
 
   let pageProps = {}

@@ -1,0 +1,11 @@
+{
+  "idStructure": "subpath",
+  "referenceBehavior": "disabled",
+  "base": "default",
+  "withTranslationsMaintenance": true,
+  "languages": [
+    { "id": "default", "title": "Default" },
+    { "id": "se", "title": "Sweden" },
+    { "id": "en", "title": "England" }
+  ]
+}

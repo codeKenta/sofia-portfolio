@@ -1,4 +1,4 @@
-import { formatCtaLink, formatAdvancedMedia } from 'api/sanity/utils'
+import { formatCtaLink, formatAdvancedMedia } from '~/api/sanity/utils'
 
 export default `{
   heading,

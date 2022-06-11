@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { blocks } from '~/api/__mock__'
+import mock from './mock'
 import Content from './Content'
 
 export default {
@@ -10,4 +10,4 @@ export default {
 const Template = (args) => <Content {...args} />
 
 export const Default = Template.bind({})
-Default.args = blocks.Content
+Default.args = mock

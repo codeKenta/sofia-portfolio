@@ -1,0 +1,39 @@
+{
+  "root": true,
+  "project": {
+    "name": "sofia-portfolio",
+    "basePath": "/admin"
+  },
+  "api": {
+    "projectId": "xnlkgtwy",
+    "dataset": "production"
+  },
+  "plugins": [
+    "@sanity/base",
+    "@sanity/default-layout",
+    "@sanity/default-login",
+    "@sanity/desk-tool",
+    "@sanity/document-internationalization",
+    "@sanity/vision"
+  ],
+  "env": {
+    "development": {
+      "dataset": "develop",
+      "plugins": ["@sanity/vision"]
+    }
+  },
+  "parts": [
+    {
+      "name": "part:@sanity/base/schema",
+      "path": "./src/schemas/schema.js"
+    },
+    {
+      "name": "part:@sanity/desk-tool/structure",
+      "path": "./src/desk-structure/deskStructure.js"
+    },
+    {
+      "name": "part:@sanity/base/initial-value-templates",
+      "path": "./src/desk-structure/initialValueTemplates.js"
+    }
+  ]
+}

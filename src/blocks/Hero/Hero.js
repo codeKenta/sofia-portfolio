@@ -1,9 +1,9 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 import { styled } from '@mui/system'
-import { Button, Typography } from '@mui/material'
+import { Button } from '@mui/material'
 import { Media, MediaReveal } from '@noaignite/oui'
-import { RouterLink } from '~/containers'
+import { RouterLink, SanityHtml } from '~/containers'
 import linkType from '~/utils/linkType'
 
 const HeroRoot = styled('section', {
@@ -90,7 +90,7 @@ function Hero(props) {
       <HeroMain>
         <HeroHeading>{heading}</HeroHeading>
 
-        {excerpt && <Typography>{excerpt}</Typography>}
+        {excerpt && <SanityHtml textBlocks={excerpt} />}
 
         {ctaPrimary && ctaPrimary.url && ctaPrimary.label && (
           <HeroButton
@@ -122,7 +122,7 @@ Hero.propTypes = {
   mediaProps: PropTypes.object.isRequired,
   renderIndex: PropTypes.number.isRequired,
   heading: PropTypes.string,
-  excerpt: PropTypes.string,
+  excerpt: PropTypes.array,
   ctaPrimary: PropTypes.shape(linkType),
   ctaSecondary: PropTypes.shape(linkType),
 }

@@ -1,0 +1,5 @@
+/* Override default indentation (not thrilled about this selector either) */
+.fieldset > * > * > * {
+  padding-left: 0 !important;
+  border-left: 0 !important;
+}
