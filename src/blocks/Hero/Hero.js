@@ -4,6 +4,7 @@ import { styled } from '@mui/system'
 import { Button, Typography } from '@mui/material'
 import { Media, MediaReveal } from '@noaignite/oui'
 import { RouterLink } from '~/containers'
+import linkType from '~/utils/linkType'
 
 const HeroRoot = styled('section', {
   name: 'Hero',
@@ -65,7 +66,7 @@ const HeroButton = styled(Button, {
 }))
 
 function Hero(props) {
-  const { mediaProps, ctaLabel, ctaUrl, heading, excerpt, renderIndex } = props
+  const { heading, excerpt, mediaProps, ctaPrimary, ctaSecondary, renderIndex } = props
 
   return (
     <HeroRoot>
@@ -91,9 +92,25 @@ function Hero(props) {
 
         {excerpt && <Typography>{excerpt}</Typography>}
 
-        {ctaLabel && ctaUrl && (
-          <HeroButton component={RouterLink} href={ctaUrl} color="inherit" variant="outlined">
-            {ctaLabel}
+        {ctaPrimary && ctaPrimary.url && ctaPrimary.label && (
+          <HeroButton
+            component={RouterLink}
+            href={ctaPrimary.url}
+            color="inherit"
+            variant="outlined"
+          >
+            {ctaPrimary.label}
+          </HeroButton>
+        )}
+
+        {ctaSecondary && ctaSecondary.url && ctaSecondary.label && (
+          <HeroButton
+            component={RouterLink}
+            href={ctaSecondary.url}
+            color="inherit"
+            variant="outlined"
+          >
+            {ctaSecondary.label}
           </HeroButton>
         )}
       </HeroMain>
@@ -102,12 +119,12 @@ function Hero(props) {
 }
 
 Hero.propTypes = {
-  mediaProps: PropTypes.object,
-  ctaLabel: PropTypes.string,
-  ctaUrl: PropTypes.string,
-  excerpt: PropTypes.string,
-  heading: PropTypes.string.isRequired,
+  mediaProps: PropTypes.object.isRequired,
   renderIndex: PropTypes.number.isRequired,
+  heading: PropTypes.string,
+  excerpt: PropTypes.string,
+  ctaPrimary: PropTypes.shape(linkType),
+  ctaSecondary: PropTypes.shape(linkType),
 }
 
 export default Hero

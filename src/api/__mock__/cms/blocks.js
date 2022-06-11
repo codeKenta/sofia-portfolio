@@ -1,17 +1,7 @@
+import Hero from '~/blocks/Hero/mock'
+
 export default {
-  Hero: {
-    mediaProps: {
-      component: 'picture',
-      breakpoints: {
-        xs: '//source.unsplash.com/Sl03gvNZuss/1280x720',
-        sm: '//source.unsplash.com/Sl03gvNZuss/1920x1080',
-      },
-    },
-    heading: 'Lorem ipsum dolor',
-    excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In molestie varius viverra. Quisque urna tortor, bibendum ac quam a, bibendum fringilla nulla.', // prettier-ignore
-    ctaLabel: 'Discover',
-    ctaUrl: '/foo',
-  },
+  Hero,
   ArticleSlideshow: {
     heading: 'Generic Heading',
     entries: Array.from(new Array(6), () => ({
