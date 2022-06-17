@@ -4,11 +4,12 @@ import { menuQuery } from '../utils'
 
 export default async function getGlobal() {
   const globalQuery = groq`
-    *[_type == "siteSettings"][0] {
-      "primaryMenu": primaryMenu.${menuQuery},
-      "footerMenu": footerMenu.${menuQuery},
-    }
+  *[_type == "siteSettings"][0] {
+     "menus": {
+       "primary": primaryMenu.${menuQuery},
+       "footer": footerMenu.${menuQuery},
+     }
+  }
  `
-
   return sanityClient.fetch(globalQuery)
 }
