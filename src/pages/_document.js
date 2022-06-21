@@ -21,7 +21,60 @@ export default class MyDocument extends Document {
           <link rel="manifest" href="/site.webmanifest" />
 
           {/* Preload font files here: */}
-          {/* <link rel="preload" href="/fonts/family/family-regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" /> */}
+
+          <link
+            rel="preload"
+            href="/fonts/Abril_Fatface/AbrilFatface-Regular.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+
+          <link
+            rel="preload"
+            href="/fonts/Crimson_Text/CrimsonText-Bold.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/Crimson_Text/CrimsonText-BoldItalic.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+
+          <link
+            rel="preload"
+            href="/fonts/Crimson_Text/CrimsonText-Italic.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/Crimson_Text/CrimsonText-Regular.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+
+          <link
+            rel="preload"
+            href="/fonts/Open_Sans/OpenSans-Light.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+
+          <link
+            rel="preload"
+            href="/fonts/Open_Sans/OpenSans-Medium.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
         </Head>
         <body>
           <Main />

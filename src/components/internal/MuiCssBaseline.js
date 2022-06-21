@@ -1,14 +1,54 @@
 const overrides = {
   styleOverrides: (theme) => `
     /* Include font files here. */
-    /*
+
+
     @font-face {
-      font-family: 'Family';
+      font-family: 'Abril Fatface';
       font-weight: 400;
       font-display: swap;
-      src: url('/fonts/family/family-regular.woff2') format('woff2');
+      src: url('/fonts/Abril_Fatface/AbrilFatface-Regular.woff2') format('woff2');
     }
-    */
+
+    @font-face {
+      font-family: 'Crimson Text';
+      font-weight: 700;
+      font-display: swap;
+      src: url('/fonts/Crimson_Text/CrimsonText-Bold.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Crimson Text';
+      font-weight: 700;
+      font-display: swap;
+      src: url('/fonts/Crimson_Text/CrimsonText-BoldItalic.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Crimson Text';
+      font-weight: 400;
+      font-display: swap;
+      src: url('/fonts/Crimson_Text/CrimsonText-Italic.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Crimson Text';
+      font-weight: 400;
+      font-display: swap;
+      src: url('/fonts/Crimson_Text/CrimsonText-Regular.woff2') format('woff2');
+    }
+
+    @font-face {
+      font-family: 'Open Sans';
+      font-weight: 300;
+      font-display: swap;
+      src: url('/fonts/Open_Sans/OpenSans-Light.woff2') format('woff2');
+    }
+
+    @font-face {
+      font-family: 'Open Sans';
+      font-weight: 500;
+      font-display: swap;
+      src: url('/fonts/Open_Sans/OpenSans-Medium.woff2') format('woff2');
+    }
+
     /* Define :root css variables. */
     :root {
       --cia-theme-spacing: ${theme.spacing(1)};

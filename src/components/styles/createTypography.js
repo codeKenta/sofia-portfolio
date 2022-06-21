@@ -6,8 +6,11 @@ const caseAllCaps = {
 
 export default function createTypography(palette, typography) {
   const {
-    fontFamilyPrimary = '"Helvetica", "Arial", sans-serif',
-    fontFamilySecondary = fontFamilyPrimary,
+    fontFamilyPrimary = '"Crimson Text", serif',
+    // fontFamilySecondary = '"Abril Fatface", cursive',
+    fontFamilySecondary = '"Abril Fatface"',
+
+    fontFamilyTertiary = '"Open Sans", serif',
     // The default font size of the Material Specification.
     fontSize = 14, // px
     fontWeightLight = 300,
@@ -47,11 +50,11 @@ export default function createTypography(palette, typography) {
     subtitle2: buildVariant(fontFamilyPrimary, fontWeightMedium, 12, 1.7, 0.02),
     body1: buildVariant(fontFamilyPrimary, fontWeightRegular, 16, 1.7, 0),
     body2: buildVariant(fontFamilyPrimary, fontWeightRegular, 14, 1.7, 0),
-    button: buildVariant(fontFamilySecondary, fontWeightMedium, 12, 1.4, 0.04, caseAllCaps),
+    button: buildVariant(fontFamilyTertiary, fontWeightLight, 12, 1.4, 0.04, caseAllCaps),
     caption: buildVariant(fontFamilyPrimary, fontWeightSemibold, 14, 1.3, 0.02),
     overline: buildVariant(fontFamilySecondary, fontWeightRegular, 8, 1.7, 0.12, caseAllCaps),
     // Custom variants
-    input: buildVariant(fontFamilyPrimary, fontWeightRegular, 16, 1.5, 0), // Should at least be 16px fontSize for iOS Safari not to zoom in on focus.
+    input: buildVariant(fontFamilyTertiary, fontWeightLight, 16, 1.5, 0), // Should at least be 16px fontSize for iOS Safari not to zoom in on focus.
   }
 
   const typographyOutput = deepmerge(
@@ -60,6 +63,7 @@ export default function createTypography(palette, typography) {
       pxToRem,
       fontFamilyPrimary,
       fontFamilySecondary,
+      fontFamilyTertiary,
       fontSize,
       fontWeightLight,
       fontWeightRegular,
