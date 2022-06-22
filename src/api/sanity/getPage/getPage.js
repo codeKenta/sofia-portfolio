@@ -21,8 +21,6 @@ export default async function getPage(uri) {
     ? `*[_type== "page" && slug.current == $uri ][0] {${pageQuery}}`
     : `*[_type == 'siteSettings'] {...frontpage->{${pageQuery}},}[0]`
 
-  console.log('sanityPageQuery', sanityPageQuery)
-
   const args = {
     uri,
   }

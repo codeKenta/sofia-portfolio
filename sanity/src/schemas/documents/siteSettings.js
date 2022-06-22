@@ -23,12 +23,12 @@ export default {
         {
           name: 'primary',
           type: 'reference',
-          to: [{ type: 'menu' }],
+          to: [{ type: 'menuItem' }],
         },
         {
           name: 'footer',
           type: 'reference',
-          to: [{ type: 'menu' }],
+          to: [{ type: 'menuItem' }],
         },
       ],
     },
