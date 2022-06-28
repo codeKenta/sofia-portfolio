@@ -18,7 +18,7 @@ export const ASPECT_RATIOS = {
     width: 320,
     height: 420,
   },
-  product: {
+  portrait: {
     width: 4,
     height: 5,
   },

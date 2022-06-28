@@ -4,3 +4,4 @@ export const ArticleSlideshow = dynamic(() => import(/* webpackChunkName: "block
 export const Content = dynamic(() => import(/* webpackChunkName: "blocks/Content" */ './Content')) // prettier-ignore
 export const Hero = dynamic(() => import(/* webpackChunkName: "blocks/Hero" */ './Hero')) // prettier-ignore
 export const Media = dynamic(() => import(/* webpackChunkName: "blocks/Media" */ './Media')) // prettier-ignore
+export const DynamicContent = dynamic(() => import(/* webpackChunkName: "blocks/DynamicContent" */ './DynamicContent')) // prettier-ignore

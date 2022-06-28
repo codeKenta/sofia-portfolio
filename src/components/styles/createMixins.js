@@ -87,6 +87,9 @@ export default function createMixins(breakpoints, spacing, mixins) {
         },
       }
     },
+    customBreakpoint: (upOrDown, width) =>
+      `@media (${upOrDown === 'up' ? 'min' : 'max'}-width: ${width}px)`,
+
     lineClamp: (lines) => ({
       display: '-webkit-box',
       WebkitBoxOrient: 'vertical',

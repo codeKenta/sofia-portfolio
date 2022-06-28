@@ -4,7 +4,7 @@ import { styled } from '@mui/system'
 import { Button } from '@mui/material'
 import { Media, MediaReveal } from '@noaignite/oui'
 import { RouterLink, SanityHtml } from '~/containers'
-import linkType from '~/utils/linkType'
+import { linkType, mediaType } from '~/api/utils'
 
 const HeroRoot = styled('section', {
   name: 'Hero',
@@ -119,7 +119,7 @@ function Hero(props) {
 }
 
 Hero.propTypes = {
-  mediaProps: PropTypes.object.isRequired,
+  mediaProps: mediaType,
   renderIndex: PropTypes.number.isRequired,
   heading: PropTypes.string,
   excerpt: PropTypes.array,
