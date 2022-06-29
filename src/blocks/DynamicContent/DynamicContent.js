@@ -2,21 +2,20 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 import useEmblaCarousel from 'embla-carousel-react'
 import { styled, useTheme } from '@mui/system'
-import { Button } from '@mui/material'
+import { Button, IconButton } from '@mui/material'
 import Box from '@mui/material/Box'
 import { Media, MediaReveal } from '@noaignite/oui'
 import { RouterLink, SanityHtml } from '~/containers'
 import { linkType, mediaType } from '~/api/utils'
 import ContentContainer from '~/components/ContentContainer'
 import { ASPECT_RATIOS } from '~/utils/constants'
+import { ChevronBack, ChevronForward } from '~/components/icons'
 
 const Root = styled('section', {
   name: 'DynamicContent',
   slot: 'Root',
 })(({ theme }) => ({
   ...theme.mixins.verticalRhythm(2),
-  // paddingLeft: 'var(--cia-section-spacing)',
-  // paddingRight: 'var(--cia-section-spacing)',
   padding: 'var(--cia-section-spacing)',
 }))
 
@@ -31,43 +30,15 @@ const Heading = styled('h1', {
 const ContentPlacement = styled('div', {
   name: 'Placement',
   slot: 'ContentPlacement',
-})(({ theme }) => ({
-  display: 'grid',
-  gridGap: theme.spacing(4),
-  gridTemplateColumns: '1fr 1fr',
-  alignItems: 'center',
-  [theme.breakpoints.up('sm')]: {
-    gridGap: 50,
-  },
+})(() => ({}))
 
-  [theme.mixins.customBreakpoint('up', 600)]: {
-    gridGap: theme.spacing(4),
-  },
-
-  [theme.mixins.customBreakpoint('up', 900)]: {
-    gridGap: '10vw',
-  },
-
-  [theme.mixins.customBreakpoint('up', 1300)]: {
-    gridGap: 180,
-  },
-}))
-
-const MediaPlacementWrapper = styled('div', {
-  name: 'Placement',
-  slot: 'MediaWrapper',
-})(({ theme }) => ({
-  [theme.mixins.customBreakpoint('up', 600)]: {
-    // maxWidth: 200,
-  },
-}))
+const DisplayImageMediaReveal = styled(MediaReveal)(() => ({}))
 
 const EmblaContainer = styled('div', {
   name: 'Slideshow',
   slot: 'EmblaContainer',
 })(({ theme }) => ({
   display: 'flex',
-  marginTop: theme.spacing(2),
   marginLeft: theme.spacing(-2),
 }))
 
@@ -75,17 +46,28 @@ const EmblaSlide = styled('div', {
   name: 'Slideshow',
   slot: 'EmblaSlide',
 })(({ theme }) => ({
+  cursor: 'pointer',
   position: 'relative',
   flexShrink: 0,
-  width: '100%',
-  paddingLeft: theme.spacing(1),
-  cursor: 'pointer',
-  [theme.breakpoints.up('sm')]: {
-    width: 'calc(100% / 2)',
-  },
+  width: 'calc(100% / 3)',
+  paddingLeft: theme.spacing(2),
   [theme.breakpoints.up('md')]: {
-    width: 'calc(100% / 3)',
+    paddingLeft: theme.spacing(1),
   },
+}))
+
+const PrevButton = styled(IconButton, {
+  name: 'Slideshow',
+  slot: 'EmblaPrevButton',
+})(() => ({
+  paddingLeft: 0,
+}))
+
+const NextButton = styled(IconButton, {
+  name: 'Slideshow',
+  slot: 'EmblaNextButton',
+})(() => ({
+  paddingRight: 0,
 }))
 
 function DynamicContent(props) {
@@ -100,10 +82,35 @@ function DynamicContent(props) {
   } = props
   const theme = useTheme()
 
-  const [emblaRef] = useEmblaCarousel({
+  const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
     containScroll: 'trimSnaps',
   })
+
+  const [scrollIndex, setScrollIndex] = React.useState(0)
+
+  const scrollPrev = React.useCallback(() => {
+    if (emblaApi) {
+      if (emblaApi?.canScrollPrev()) {
+        setScrollIndex((prev) => prev - 1)
+      }
+      emblaApi.scrollPrev()
+    }
+  }, [emblaApi])
+
+  const scrollNext = React.useCallback(() => {
+    if (emblaApi) {
+      if (emblaApi?.canScrollNext()) {
+        setScrollIndex((prev) => prev + 1)
+      }
+      emblaApi.scrollNext()
+    }
+  }, [emblaApi])
+
+  const canScrollPrev = images?.length > 3 && scrollIndex > 0
+  const canScrollNext = images?.length > 3 && scrollIndex < images.length - 3
+
+  const noScrollAvailable = images?.length < 4
 
   const [displayImageIndex, setDisplayImageIndex] = React.useState(0)
 
@@ -113,6 +120,10 @@ function DynamicContent(props) {
 
   const displayImage = images[displayImageIndex]
 
+  const gridTemplateColumns = placeContentLeft
+    ? 'minmax(auto, 540px) 1fr minmax(auto, 400px)'
+    : ' minmax(auto, 400px) 1fr minmax(auto, 540px)'
+
   return (
     <Root
       sx={{
@@ -120,12 +131,23 @@ function DynamicContent(props) {
       }}
     >
       <ContentContainer>
-        <ContentPlacement>
+        <ContentPlacement
+          sx={{
+            display: 'grid',
+            gridGap: theme.spacing(2),
+            alignItems: 'center',
+            gridTemplateColumns: '1fr',
+            [theme.breakpoints.up('md')]: {
+              gridTemplateColumns,
+            },
+          }}
+        >
           <Box
             sx={{
-              gridRow: 1,
-              gridColumn: placeContentLeft ? 1 : 2,
-              minWidth: 290,
+              [theme.breakpoints.up('md')]: {
+                gridRow: 1,
+                gridColumn: placeContentLeft ? 1 : 3,
+              },
             }}
           >
             {heading && <Heading>{heading}</Heading>}
@@ -148,15 +170,35 @@ function DynamicContent(props) {
             )}
           </Box>
 
-          <MediaPlacementWrapper
+          <Box
             sx={{
-              gridRow: 1,
-              gridColumn: placeContentLeft ? 2 : 1,
+              [theme.breakpoints.down('md')]: {
+                marginTop: theme.spacing(2),
+              },
+              [theme.breakpoints.up('md')]: {
+                gridRow: 1,
+                gridColumn: placeContentLeft ? 3 : 1,
+              },
             }}
           >
             {displayImage && (
-              <Box>
-                <MediaReveal {...ASPECT_RATIOS.portrait}>
+              <Box
+                sx={{
+                  display: 'grid',
+                  gridRowGap: theme.spacing(2),
+                  gridTemplateColumns: 'auto 1fr auto',
+                }}
+              >
+                <DisplayImageMediaReveal
+                  sx={{
+                    gridColumn: images?.length > 1 ? '2' : '1 / -1',
+                    gridRow: images?.length > 1 ? '2' : '1',
+                    [theme.breakpoints.up('md')]: {
+                      gridRow: '1',
+                    },
+                  }}
+                  {...ASPECT_RATIOS.portrait}
+                >
                   <Media
                     {...ASPECT_RATIOS.portrait}
                     {...(displayImage?.component === 'video'
@@ -170,24 +212,70 @@ function DynamicContent(props) {
                     {...displayImage}
                     priority={renderIndex === 0}
                   />
-                </MediaReveal>
+                </DisplayImageMediaReveal>
 
                 {images?.length > 1 && (
-                  <Box sx={{ overflow: 'hidden' }} ref={emblaRef}>
-                    <EmblaContainer>
-                      {images?.map((item, idx) => (
-                        <EmblaSlide key={idx} onClick={() => onSelectImage(idx)}>
-                          <MediaReveal {...ASPECT_RATIOS.portrait}>
-                            <Media {...ASPECT_RATIOS.portrait} {...item} />
-                          </MediaReveal>
-                        </EmblaSlide>
-                      ))}
-                    </EmblaContainer>
-                  </Box>
+                  <React.Fragment>
+                    {!noScrollAvailable && (
+                      <PrevButton
+                        sx={{
+                          opacity: canScrollPrev ? '1' : '0.2',
+                          cursor: canScrollPrev ? 'pointer' : 'auto',
+                          gridRow: '1',
+                          gridTemplate: '1',
+                          [theme.breakpoints.up('md')]: {
+                            gridRow: '2',
+                          },
+                        }}
+                        onClick={scrollPrev}
+                      >
+                        <ChevronBack />
+                      </PrevButton>
+                    )}
+
+                    <Box
+                      sx={{
+                        overflow: 'hidden',
+                        gridRow: '1',
+                        gridColumn: noScrollAvailable ? '1 / -1' : '2',
+                        [theme.breakpoints.up('md')]: {
+                          gridRow: '2',
+                        },
+                      }}
+                      ref={emblaRef}
+                    >
+                      <EmblaContainer>
+                        {images?.map((item, idx) => (
+                          <EmblaSlide key={idx} onClick={() => onSelectImage(idx)}>
+                            <MediaReveal {...ASPECT_RATIOS.portrait}>
+                              <Media {...ASPECT_RATIOS.portrait} {...item} />
+                            </MediaReveal>
+                          </EmblaSlide>
+                        ))}
+                      </EmblaContainer>
+                    </Box>
+
+                    {!noScrollAvailable && (
+                      <NextButton
+                        sx={{
+                          opacity: canScrollNext ? '1' : '0.2',
+                          cursor: canScrollNext ? 'pointer' : 'auto',
+                          gridRow: '1',
+                          gridTemplate: '3',
+                          [theme.breakpoints.up('md')]: {
+                            gridRow: '2',
+                          },
+                        }}
+                        onClick={scrollNext}
+                      >
+                        <ChevronForward />
+                      </NextButton>
+                    )}
+                  </React.Fragment>
                 )}
               </Box>
             )}
-          </MediaPlacementWrapper>
+          </Box>
         </ContentPlacement>
       </ContentContainer>
     </Root>

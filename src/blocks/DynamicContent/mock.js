@@ -61,13 +61,13 @@ export default {
         sm: '//source.unsplash.com/6UQTHH6hcUo/1920x1080',
       },
     },
-    {
-      component: 'picture',
-      breakpoints: {
-        xs: '//source.unsplash.com/04CYx6p2rJ4/1280x720',
-        sm: '//source.unsplash.com/04CYx6p2rJ4/1920x1080',
-      },
-    },
+    // {
+    //   component: 'picture',
+    //   breakpoints: {
+    //     xs: '//source.unsplash.com/04CYx6p2rJ4/1280x720',
+    //     sm: '//source.unsplash.com/04CYx6p2rJ4/1920x1080',
+    //   },
+    // },
   ],
   placeContentLeft: true,
 }
