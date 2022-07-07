@@ -71,15 +71,7 @@ const NextButton = styled(IconButton, {
 }))
 
 function DynamicContent(props) {
-  const {
-    heading,
-    text,
-    images,
-    cta,
-    renderIndex,
-    placeContentLeft = true,
-    backgroundColor,
-  } = props
+  const { heading, text, images, cta, renderIndex, placeContent = 'left', backgroundColor } = props
   const theme = useTheme()
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -120,9 +112,10 @@ function DynamicContent(props) {
 
   const displayImage = images[displayImageIndex]
 
-  const gridTemplateColumns = placeContentLeft
-    ? 'minmax(auto, 540px) 1fr minmax(auto, 400px)'
-    : ' minmax(auto, 400px) 1fr minmax(auto, 540px)'
+  const gridTemplateColumns =
+    placeContent === 'right'
+      ? ' minmax(auto, 400px) 1fr minmax(auto, 540px)'
+      : 'minmax(auto, 540px) 1fr minmax(auto, 400px)'
 
   return (
     <Root
@@ -146,7 +139,7 @@ function DynamicContent(props) {
             sx={{
               [theme.breakpoints.up('md')]: {
                 gridRow: 1,
-                gridColumn: placeContentLeft ? 1 : 3,
+                gridColumn: placeContent === 'right' ? 3 : 1,
               },
             }}
           >
@@ -177,7 +170,7 @@ function DynamicContent(props) {
               },
               [theme.breakpoints.up('md')]: {
                 gridRow: 1,
-                gridColumn: placeContentLeft ? 3 : 1,
+                gridColumn: placeContent === 'right' ? 1 : 3,
               },
             }}
           >
@@ -286,7 +279,7 @@ DynamicContent.propTypes = {
   cta: PropTypes.shape(linkType),
   heading: PropTypes.string,
   images: PropTypes.arrayOf(mediaType),
-  placeContentLeft: PropTypes.bool,
+  placeContent: PropTypes.string,
   renderIndex: PropTypes.number.isRequired,
   text: PropTypes.array,
   backgroundColor: PropTypes.string,

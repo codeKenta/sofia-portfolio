@@ -69,5 +69,5 @@ export default {
     //   },
     // },
   ],
-  placeContentLeft: true,
+  placeContent: 'left',
 }
