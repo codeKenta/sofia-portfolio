@@ -35,7 +35,7 @@ export default [
   {
     name: 'blocks',
     type: 'array',
-    of: [{ type: 'Hero' }, { type: 'Content' }],
+    of: [{ type: 'Hero' }, { type: 'Content' }, { type: 'DynamicContent' }],
     group: 'content',
   },
   {

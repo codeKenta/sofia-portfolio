@@ -1,9 +1,9 @@
-// import { formatCtaLink, formatAdvancedMedia } from '~/api/sanity/utils'
+import { formatCtaLink, formatMedia } from '~/api/sanity/utils'
 
-// export default `{
-//   heading,
-//   excerpt,
-//   mediaProps ${formatAdvancedMedia},
-//   ${formatCtaLink('ctaPrimary', 'ctaLabelPrimary', 'ctaUrlPrimary')},
-//   ${formatCtaLink('ctaSecondary', 'ctaLabelSecondary', 'ctaUrlSecondary')}
-// }`
+export default `{
+  heading,
+  text,
+  images[] ${formatMedia},
+  ${formatCtaLink('cta', 'ctaLabel', 'ctaUrl')},
+  placeContent,
+}`

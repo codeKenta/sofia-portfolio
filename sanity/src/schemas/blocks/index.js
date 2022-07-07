@@ -1,2 +1,3 @@
-export { default as ContentBlock } from './content'
-export { default as HeroBlock } from './hero'
+export { default as Content } from './content'
+export { default as DynamicContent } from './dynamicContent'
+export { default as Hero } from './hero'
