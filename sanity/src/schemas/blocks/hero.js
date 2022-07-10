@@ -10,7 +10,7 @@ export default {
     },
   ],
   name: 'Hero',
-  title: 'Hero block',
+  title: 'Hero',
   type: 'object',
   fields: [
     {
