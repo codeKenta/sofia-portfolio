@@ -12,7 +12,7 @@ export default function createTypography(palette, typography) {
 
     fontFamilyTertiary = '"Open Sans", serif',
     // The default font size of the Material Specification.
-    fontSize = 14, // px
+    fontSize = 16, // px
     fontWeightLight = 300,
     fontWeightRegular = 400,
     fontWeightMedium = 500,
@@ -20,13 +20,13 @@ export default function createTypography(palette, typography) {
     fontWeightBold = 700,
     // Tell MUI what's the font-size on the html element.
     // 16px is the default font-size used by browsers.
-    htmlFontSize = 16,
+    htmlFontSize = 18,
     // Apply the CSS properties to all the variants.
     allVariants,
     ...other
   } = typeof typography === 'function' ? typography(palette) : typography
 
-  const coef = fontSize / 14
+  const coef = fontSize / 16
   const pxToRem = (size) => `${(size / htmlFontSize) * coef}rem`
   const buildVariant = (typeFace, fontWeight, size, lineHeight, letterSpacing, casing) => ({
     fontFamily: typeFace,
