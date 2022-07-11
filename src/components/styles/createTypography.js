@@ -12,7 +12,7 @@ export default function createTypography(palette, typography) {
 
     fontFamilyTertiary = '"Open Sans", serif',
     // The default font size of the Material Specification.
-    fontSize = 16, // px
+    fontSize = 14, // px
     fontWeightLight = 300,
     fontWeightRegular = 400,
     fontWeightMedium = 500,
@@ -20,13 +20,13 @@ export default function createTypography(palette, typography) {
     fontWeightBold = 700,
     // Tell MUI what's the font-size on the html element.
     // 16px is the default font-size used by browsers.
-    htmlFontSize = 18,
+    htmlFontSize = 16,
     // Apply the CSS properties to all the variants.
     allVariants,
     ...other
   } = typeof typography === 'function' ? typography(palette) : typography
 
-  const coef = fontSize / 16
+  const coef = fontSize / 14
   const pxToRem = (size) => `${(size / htmlFontSize) * coef}rem`
   const buildVariant = (typeFace, fontWeight, size, lineHeight, letterSpacing, casing) => ({
     fontFamily: typeFace,
@@ -48,7 +48,7 @@ export default function createTypography(palette, typography) {
     h6: buildVariant(fontFamilySecondary, fontWeightRegular, 12, 1.5, 0.04),
     subtitle1: buildVariant(fontFamilyPrimary, fontWeightRegular, 18, 1.5, 0),
     subtitle2: buildVariant(fontFamilyPrimary, fontWeightMedium, 12, 1.7, 0.02),
-    body1: buildVariant(fontFamilyPrimary, fontWeightRegular, 16, 1.7, 0),
+    body1: buildVariant(fontFamilyPrimary, fontWeightRegular, 18, 1.7, 0),
     body2: buildVariant(fontFamilyPrimary, fontWeightRegular, 14, 1.7, 0),
     button: buildVariant(fontFamilyTertiary, fontWeightLight, 12, 1.4, 0.04, caseAllCaps),
     caption: buildVariant(fontFamilyPrimary, fontWeightSemibold, 14, 1.3, 0.02),

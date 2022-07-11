@@ -52,10 +52,10 @@ const overrides = {
     /* Define :root css variables. */
     :root {
       --cia-theme-spacing: ${theme.spacing(1)};
-      --cia-section-spacing: ${theme.spacing(4)};
+      --cia-section-spacing: ${theme.spacing(2)};
       --cia-container-spacing: ${theme.spacing(2)};
       --cia-toolbar-dense-min-height: 48px;
-      --cia-toolbar-min-height: 56px;
+      --cia-toolbar-min-height: 56
       --cia-toolbar-spacing: ${theme.spacing(2)};
       ${theme.breakpoints.up('sm')} {
         --cia-section-spacing: ${theme.spacing(6)};

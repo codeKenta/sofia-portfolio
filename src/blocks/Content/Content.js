@@ -1,14 +1,14 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 import { styled } from '@mui/system'
-import { Container } from '@mui/material'
 import { SanityHtml } from '~/containers'
+import ContentContainer from '~/components/ContentContainer'
 
 const ContentRoot = styled('section', {
   name: 'Content',
   slot: 'Root',
 })({
-  margin: 'var(--cia-section-spacing) 0',
+  padding: 'var(--cia-section-spacing)',
 })
 
 function Content(props) {
@@ -16,9 +16,9 @@ function Content(props) {
 
   return (
     <ContentRoot>
-      <Container maxWidth="md">
+      <ContentContainer small>
         <SanityHtml textBlocks={text} />
-      </Container>
+      </ContentContainer>
     </ContentRoot>
   )
 }
