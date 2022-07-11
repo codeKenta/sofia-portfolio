@@ -1,11 +1,11 @@
 import groq from 'groq'
+import * as blockQueries from '~/blocks/queries'
 import sanityClient from '../sanityClient'
-import * as blocks from '../blocks'
 
 export default async function getPage(uri) {
   const pageQuery = groq`
     "blocks": blocks[] {
-      ${Object.entries(blocks).map(
+      ${Object.entries(blockQueries).map(
         ([key, query]) => `_type == "${key}" => { "name": _type, "props": ${query} }`,
       )}
     },

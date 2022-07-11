@@ -1,0 +1,5 @@
+export { default as Heading } from './Heading/query'
+export { default as Hero } from './Hero/query'
+export { default as Content } from './Content/query'
+export { default as DynamicContent } from './DynamicContent/query'
+export { default as MediaRow } from './MediaRow/query'
