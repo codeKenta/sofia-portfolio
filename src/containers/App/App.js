@@ -10,6 +10,7 @@ import {
   AppLoader,
   AppNavDrawer,
   AppSkipLink,
+  AppExitPreview,
 } from './partials'
 
 const AppRoot = styled('div', {
@@ -30,7 +31,7 @@ const AppMain = styled('main', {
 })
 
 function App(props) {
-  const { children, disableFooter, disableHeader, headerColor, headerMode } = props
+  const { children, disableFooter, disableHeader, headerColor, headerMode, preview } = props
 
   return (
     <AppRoot>
@@ -49,6 +50,8 @@ function App(props) {
       <AppNavDrawer />
       <AppLoader />
 
+      {preview && <AppExitPreview />}
+
       <GlobalStateContext.Consumer>
         {({ isCookieBarOpen }) => {
           // Will only fetch `AppCookieBar` chunk if user has not consented.
@@ -65,6 +68,7 @@ App.propTypes = {
   disableHeader: PropTypes.bool,
   headerColor: PropTypes.string,
   headerMode: PropTypes.string,
+  preview: PropTypes.bool,
 }
 
 export default App

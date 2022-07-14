@@ -1,5 +1,5 @@
 import groq from 'groq'
-import sanityClient from '../sanityClient'
+import { sanityClient } from '../sanityClient'
 import { menuQuery } from '../utils'
 
 export default async function getGlobal() {

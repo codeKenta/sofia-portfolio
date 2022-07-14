@@ -1,8 +1,9 @@
 import groq from 'groq'
 import * as blockQueries from '~/blocks/queries'
-import sanityClient from '../sanityClient'
+import { getClient } from '../sanityClient'
+import { filterDataToSingleItem } from '../utils'
 
-export default async function getPage(uri) {
+export default async function getPage(uri, preview) {
   const pageQuery = groq`
     "blocks": blocks[] {
       ${Object.entries(blockQueries).map(
@@ -17,12 +18,25 @@ export default async function getPage(uri) {
     "isDraft": _id in path("drafts.**")
   `
 
-  const sanityPageQuery = uri
-    ? `*[_type== "page" && slug.current == $uri ][0] {${pageQuery}}`
-    : `*[_type == 'siteSettings'] {...frontpage->{${pageQuery}},}[0]`
+  const query = uri
+    ? `*[_type== "page" && slug.current == $uri ] {${pageQuery}}`
+    : `*[_type == 'siteSettings'] {...frontpage->{${pageQuery}}}`
 
-  const args = {
+  const params = {
     uri,
   }
-  return sanityClient.fetch(sanityPageQuery, args)
+
+  const data = await getClient(preview).fetch(query, params)
+
+  if (!data) {
+    return null
+  }
+
+  const page = filterDataToSingleItem(data, preview)
+
+  return {
+    page,
+    query,
+    params,
+  }
 }
