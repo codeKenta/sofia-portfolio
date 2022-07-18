@@ -26,6 +26,8 @@ function App(props) {
     pageProps,
   } = props
 
+  const { preview } = pageProps
+
   return (
     <CacheProvider value={emotionCache}>
       <Head>
@@ -47,6 +49,7 @@ function App(props) {
                 disableHeader={pageProps?.disableHeader}
                 headerColor={pageProps?.headerColor}
                 headerMode={pageProps?.headerMode}
+                preview={preview}
               >
                 <Component {...pageProps} />
               </AppBase>
@@ -86,6 +89,7 @@ App.propTypes = {
   emotionCache: PropTypes.object,
   locale: PropTypes.string.isRequired,
   pageProps: PropTypes.object.isRequired,
+  preview: PropTypes.bool,
 }
 
 export default App

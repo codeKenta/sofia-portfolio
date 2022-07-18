@@ -1,5 +1,21 @@
 import groq from 'groq'
 
+export function filterDataToSingleItem(data, preview) {
+  if (!Array.isArray(data)) {
+    return data
+  }
+
+  if (data.length === 1) {
+    return data[0]
+  }
+
+  if (preview) {
+    return data.find(({ isDraft }) => isDraft) || data[0]
+  }
+
+  return data[0]
+}
+
 export function formatLink(fieldName) {
   return `
     coalesce('/' + ${fieldName}.reference->slug.current, ${fieldName}.url, '')
