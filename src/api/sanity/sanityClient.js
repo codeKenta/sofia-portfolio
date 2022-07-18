@@ -2,8 +2,8 @@ import createClient from '@sanity/client'
 import { createPreviewSubscriptionHook } from 'next-sanity'
 
 export const config = {
-  projectId: process.env.SANITY_PROJECT_ID,
-  dataset: process.env.SANITY_DATASET,
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
   apiVersion: '2021-10-21',
   useCdn: process.env.NODE_ENV !== 'development',
 }
@@ -14,7 +14,7 @@ export const sanityClient = createClient(config)
 // Set up a preview client with serverless authentication for drafts
 export const previewClient = createClient({
   ...config,
-  token: process.env.SANITY_TOKEN, // TODO: THIS ENV IS NOT LOADING CORRECTYL
+  token: process.env.SANITY_TOKEN,
   useCdn: false,
 })
 
