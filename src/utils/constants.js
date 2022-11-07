@@ -18,6 +18,10 @@ export const ASPECT_RATIOS = {
     width: 320,
     height: 420,
   },
+  landscape: {
+    width: 5,
+    height: 4,
+  },
   portrait: {
     width: 4,
     height: 5,

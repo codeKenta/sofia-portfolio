@@ -1,13 +1,13 @@
 import * as React from 'react'
-import MediaRow from './MediaRow'
+import MediaGrid from './MediaGrid'
 import mock from './mock'
 
 export default {
-  title: 'Blocks/MediaRow',
-  component: MediaRow,
+  title: 'Blocks/MediaGrid',
+  component: MediaGrid,
 }
 
-const Template = (args) => <MediaRow {...args} />
+const Template = (args) => <MediaGrid {...args} />
 
 export const Default = Template.bind({})
 Default.args = mock

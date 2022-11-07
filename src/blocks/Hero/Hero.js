@@ -1,7 +1,7 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 import { styled } from '@mui/system'
-import { Button, Box } from '@mui/material'
+import { Button } from '@mui/material'
 import { Media, MediaReveal, } from '@noaignite/oui'
 import { RouterLink, SanityHtml } from '~/containers'
 import { linkType, mediaType } from '~/api/utils'
@@ -17,7 +17,7 @@ const HeroRoot = styled('section', {
   color: theme.palette.common.black,
   gridGap: theme.spacing(2),
   [theme.breakpoints.up('sm')]: {
-    minHeight: 550,
+    minHeight: 650,
   },
 }))
 
@@ -63,7 +63,7 @@ const HeroContent = styled('div', {
       minWidth: 300,
       gridColumn: 1,
       gridRow: 1,
-      top: -20,
+      top: -40,
     },
 }))
 
@@ -105,6 +105,7 @@ const ImageWrapper = styled('div', {
       width: 450,
       minHeight: 450,
       minWidth: 450,
+      top: -120,
     },
 }))
 

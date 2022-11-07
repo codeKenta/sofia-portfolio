@@ -22,6 +22,7 @@ export default async function getPage(uri, preview) {
     ? `*[_type== "page" && slug.current == $uri ] {${pageQuery}}`
     : `*[_type == 'siteSettings'] {...frontpage->{${pageQuery}}}`
 
+
   const params = {
     uri,
   }
