@@ -49,7 +49,7 @@ export const light = {
   // The colors used to style the action elements.
   action: {
     // The color of an active action like an icon button.
-    active: common.black,
+    active: common.pink,
     // The background color of an hovered action.
     hover: 'rgba(0, 0, 0, 0.04)',
     hoverOpacity: 0.04,
@@ -94,12 +94,12 @@ export default function createPalette(palette) {
   const {
     primary = {
       light: pink[300],
-      main: pink[500],
+      main: '#FFEDED',
       dark: pink[700],
     },
     secondary = {
       light: purple[300],
-      main: purple[500],
+      main: '#D90606',
       dark: purple[700],
     },
     error = {

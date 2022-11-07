@@ -20,6 +20,7 @@ function Page(props) {
 
   const { blocks, seo } = page
 
+
   return (
     <React.Fragment>
       <Head>{<title>{seo?.title}</title>}</Head>
