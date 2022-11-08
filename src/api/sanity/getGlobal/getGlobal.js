@@ -11,5 +11,6 @@ export default async function getGlobal() {
      }
   }
  `
+
   return sanityClient.fetch(globalQuery)
 }

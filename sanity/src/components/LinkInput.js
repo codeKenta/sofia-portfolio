@@ -5,9 +5,6 @@ import PatchEvent, { set, unset } from '@sanity/form-builder/PatchEvent'
 import CreatableSelect from 'react-select/creatable'
 import sanityClient from '../utils/sanityClient'
 
-/*
-SOURCE: CAKE
-*/
 
 const LinkInput = React.forwardRef((props, ref) => {
   const { type, value: valueProp, markers, presence, compareValue, onChange, document } = props
@@ -24,7 +21,7 @@ const LinkInput = React.forwardRef((props, ref) => {
     // query for all pages that are not drafts
 
     const query = `*[
-      _type == 'page' && _id != $currentDocumentId &&
+      _type == 'page' ||_type == 'casePage' && _id != $currentDocumentId &&
       slug != null && !(_id in path("drafts.**"))] | order(slug.current asc)`
 
     sanityClient

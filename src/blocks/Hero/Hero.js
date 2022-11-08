@@ -5,10 +5,19 @@ import { Button } from '@mui/material'
 import { Media, MediaReveal, } from '@noaignite/oui'
 import { RouterLink, SanityHtml } from '~/containers'
 import { linkType, mediaType } from '~/api/utils'
+import ContentContainer from '~/components/ContentContainer'
 
-const HeroRoot = styled('section', {
-  name: 'Hero',
+const Root = styled('section', {
+  name: 'Root',
   slot: 'Root',
+})(() => ({
+  paddingLeft: 'var(--cia-section-spacing)',
+}))
+
+
+const HeroGridContainer = styled('section', {
+  name: 'HeroGridContainer',
+  slot: 'HeroGridContainer',
 })(({ theme }) => ({
   display: 'grid',
   gridTemplateColumns: "1.5fr 1fr",
@@ -20,6 +29,27 @@ const HeroRoot = styled('section', {
     minHeight: 650,
   },
 }))
+
+const HeroContent = styled('div', {
+  name: 'Hero',
+  slot: 'Main',
+})(({ theme }) => ({
+  // ...theme.mixins.verticalRhythm(2),
+  // ...theme.mixins.contain('sm'),
+  maxWidth: 550,
+  gridColumn: "1 / -1",
+  gridRow: "1",
+  zIndex: 200,
+  // top: -30,
+  position: 'relative',
+  [theme.breakpoints.up('sm')]: {
+      minWidth: 300,
+      gridColumn: 1,
+      gridRow: 1,
+      // top: -40,
+    },
+}))
+
 
 const HeroMediaReveal = styled(MediaReveal, {
   name: 'MediaReveal',
@@ -43,30 +73,6 @@ const HeroMedia = styled(Media, {
 })(() => ({
   height: "100%",
 }))
-
-
-
-const HeroContent = styled('div', {
-  name: 'Hero',
-  slot: 'Main',
-})(({ theme }) => ({
-  ...theme.mixins.verticalRhythm(2),
-  ...theme.mixins.contain('sm'),
-  paddingLeft: 'var(--cia-container-spacing)',
-  paddingRight: 'var(--cia-container-spacing)',
-  gridColumn: "1 / -1",
-  gridRow: "1",
-  zIndex: 200,
-  top: -30,
-  position: 'relative',
-  [theme.breakpoints.up('sm')]: {
-      minWidth: 300,
-      gridColumn: 1,
-      gridRow: 1,
-      top: -40,
-    },
-}))
-
 
 const Circle = styled('div', {
   name: 'Circle',
@@ -109,7 +115,6 @@ const ImageWrapper = styled('div', {
     },
 }))
 
-
 const HeroHeading = styled('h1', {
   name: 'Hero',
   slot: 'Heading',
@@ -117,6 +122,7 @@ const HeroHeading = styled('h1', {
   ...theme.typography.h3,
   margin: 0,
   fontSize: `max(${theme.typography.h3.fontSize}, 3.2vw)`,
+  marginBottom: theme.spacing(2),
 }))
 
 const HeroButton = styled(Button, {
@@ -131,7 +137,8 @@ const ButtonContainer = styled('div', {
 })(({ theme }) => ({
   display: 'grid',
   gridTemplateColumns: "1fr 1fr",
-  gridGap: theme.spacing(1)
+  gridGap: theme.spacing(1),
+  marginTop: theme.spacing(4),
 }))
 
 
@@ -144,62 +151,66 @@ const showPrimaryButton = Boolean(ctaPrimary && ctaPrimary.url && ctaPrimary.lab
   const showSecondaryBtn = Boolean(ctaSecondary && ctaSecondary.url && ctaSecondary.label)
 
   return (
-    <HeroRoot>
-        <HeroContent>
-          <HeroHeading>{heading}</HeroHeading>
+    <Root>
+      <ContentContainer>
+        <HeroGridContainer>
+            <HeroContent>
+              <HeroHeading>{heading}</HeroHeading>
 
-        {excerpt && <SanityHtml textBlocks={excerpt} />}
-
-
-        { Boolean(showPrimaryButton || showSecondaryBtn) && <ButtonContainer>
-            {showPrimaryButton && (
-              <HeroButton
-              component={RouterLink}
-              href={ctaPrimary.url}
-              color="inherit"
-              variant="outlined"
-              >
-                {ctaPrimary.label}
-              </HeroButton>
-            )}
+            {excerpt && <SanityHtml textBlocks={excerpt} />}
 
 
-            {showSecondaryBtn && (
-              <HeroButton
-              component={RouterLink}
-              href={ctaSecondary.url}
-              color="inherit"
-              variant="outlined"
-              >
-                {ctaSecondary.label}
-              </HeroButton>
-            )}
-          </ButtonContainer> }
-      </HeroContent>
+            { Boolean(showPrimaryButton || showSecondaryBtn) && <ButtonContainer>
+                {showPrimaryButton && (
+                  <HeroButton
+                  component={RouterLink}
+                  href={ctaPrimary.url}
+                  color="inherit"
+                  variant="outlined"
+                  >
+                    {ctaPrimary.label}
+                  </HeroButton>
+                )}
 
 
-      {mediaProps && (
-        <ImageWrapper>
-          <Circle />
-        <HeroMediaReveal>
-          <HeroMedia
-            {...(mediaProps?.component === 'video'
-              ? {
-                  autoPlay: true,
-                  muted: true,
-                  loop: true,
-                  playsInline: true,
-                }
-              : { alt: '' })}
-            {...mediaProps}
-            priority={renderIndex === 0}
-          />
-        </HeroMediaReveal>
-          </ImageWrapper>
-      )}
+                {showSecondaryBtn && (
+                  <HeroButton
+                  component={RouterLink}
+                  href={ctaSecondary.url}
+                  color="inherit"
+                  variant="outlined"
+                  >
+                    {ctaSecondary.label}
+                  </HeroButton>
+                )}
+              </ButtonContainer> }
+          </HeroContent>
 
 
-    </HeroRoot>
+          {mediaProps && (
+            <ImageWrapper>
+              <Circle />
+            <HeroMediaReveal>
+              <HeroMedia
+                {...(mediaProps?.component === 'video'
+                  ? {
+                      autoPlay: true,
+                      muted: true,
+                      loop: true,
+                      playsInline: true,
+                    }
+                  : { alt: '' })}
+                {...mediaProps}
+                priority={renderIndex === 0}
+              />
+            </HeroMediaReveal>
+              </ImageWrapper>
+          )}
+
+
+        </HeroGridContainer>
+    </ContentContainer>
+  </Root>
   )
 }
 

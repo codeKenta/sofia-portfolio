@@ -3,6 +3,7 @@ const common = {
   white: '#ffffff',
   pink: '#FFEDED',
   red: '#D90606',
+  linkedInBlue: "#0072b1",
 }
 
 export default common

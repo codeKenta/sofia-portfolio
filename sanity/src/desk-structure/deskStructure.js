@@ -15,8 +15,10 @@ export const getDefaultDocumentNode = () => {
 }
 
 const pages = S.listItem().title('Pages').child(S.documentTypeList('page'))
+const casePages = S.listItem().title('Case Pages').child(S.documentTypeList('casePage'))
+
 const settings = S.listItem()
   .title('Site settings')
   .child(S.document().schemaType('siteSettings').documentId('siteSettings'))
 
-export default () => S.list().title('Content').items([pages, settings])
+export default () => S.list().title('Content').items([pages, casePages, settings])

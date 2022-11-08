@@ -44,6 +44,7 @@ const AppNavDrawer = React.memo(function AppNavDrawer(props) {
   const { isNavMenuOpen, ...other } = props
 
   const { menus } = useRemoteConfig()
+
   const { onNavMenuClose } = useGlobalHandlers()
   const { t } = useI18n()
 
@@ -65,14 +66,6 @@ const AppNavDrawer = React.memo(function AppNavDrawer(props) {
           {menus?.primary?.length > 0 && (
             <AppNavDrawerList>
               {menus.primary.map((menuLink, idx) => (
-                <AppNavDrawerListItem key={idx} menuLink={menuLink} />
-              ))}
-            </AppNavDrawerList>
-          )}
-
-          {menus?.secondary?.length > 0 && (
-            <AppNavDrawerList>
-              {menus.secondary.map((menuLink, idx) => (
                 <AppNavDrawerListItem key={idx} menuLink={menuLink} />
               ))}
             </AppNavDrawerList>

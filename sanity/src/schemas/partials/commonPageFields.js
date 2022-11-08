@@ -23,8 +23,8 @@ export default [
       source: (doc) => {
         switch (doc._type) {
           /* prefix the slug  for different types */
-          // case 'casePage':
-          //   return `activities/${doc.title}`
+          case 'casePage':
+            return `case/${doc.title}`
 
           default:
             return doc.title
