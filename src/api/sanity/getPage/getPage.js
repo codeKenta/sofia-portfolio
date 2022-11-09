@@ -22,7 +22,6 @@ export default async function getPage(uri, preview) {
     ? `*[_type== "page" || _type == "casePage" && slug.current == $uri ] {${pageQuery}}`
     : `*[_type == 'siteSettings'] {...frontpage->{${pageQuery}}}`
 
-
   const params = {
     uri,
   }
@@ -32,7 +31,6 @@ export default async function getPage(uri, preview) {
   if (!data) {
     return null
   }
-
 
   const page = filterDataToSingleItem(data, preview)
 

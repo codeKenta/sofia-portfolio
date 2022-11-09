@@ -6,5 +6,6 @@ export const Content = dynamic(() => import(/* webpackChunkName: "blocks/Content
 export const DynamicContent = dynamic(() => import(/* webpackChunkName: "blocks/DynamicContent" */ './DynamicContent')) // prettier-ignore
 export const Heading = dynamic(() => import(/* webpackChunkName: "blocks/Heading" */ './Heading')) // prettier-ignore
 export const Hero = dynamic(() => import(/* webpackChunkName: "blocks/Hero" */ './Hero')) // prettier-ignore
+export const LinkedMediaGrid = dynamic(() => import(/* webpackChunkName: "blocks/LinkedMediaGrid" */ './LinkedMediaGrid')) // prettier-ignore
 export const Media = dynamic(() => import(/* webpackChunkName: "blocks/Media" */ './Media')) // prettier-ignore
 export const MediaGrid = dynamic(() => import(/* webpackChunkName: "blocks/MediaGrid" */ './MediaGrid')) // prettier-ignore

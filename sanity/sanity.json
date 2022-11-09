@@ -15,12 +15,15 @@
     "@sanity/desk-tool",
     "@sanity/document-internationalization",
     "@sanity/production-preview",
-    "@sanity/vision"
+    "@sanity/vision",
+    "tags"
   ],
   "env": {
     "development": {
       "dataset": "develop",
-      "plugins": ["@sanity/vision"]
+      "plugins": [
+        "@sanity/vision"
+      ]
     }
   },
   "parts": [

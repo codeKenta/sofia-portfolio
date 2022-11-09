@@ -24,5 +24,11 @@ export default {
       },
       group: 'content',
     },
+    {
+      name: 'includePaddingBottom',
+      type: 'boolean',
+      title: 'Include bottom spacing',
+      group: 'content',
+    }
   ],
 }

@@ -4,21 +4,17 @@ import previewTitle from '../../utils/previewTitle'
 
 export default {
   ...commonBlockSettings,
-  title: 'Media Grid',
-  name: 'MediaGrid',
+  title: 'Linked Media Grid',
+  name: 'LinkedMediaGrid',
   type: 'object',
-  preview: previewTitle('Media Grid', 'heading', MdImage),
+  preview: previewTitle('Linked Media Grid', 'heading', MdImage),
   fields: [
-
     {
-      title: 'Rows',
-      name: 'rows',
+      title: 'Images',
+      name: 'images',
       type: 'array',
-      of: [
-        { type: 'mediaRowObject', }
-      ],
+      of: [{ type: 'linkedTagMedia' }],
       group: 'content',
     },
   ],
 }
-

@@ -5,7 +5,4 @@ export default `{
       images[] ${formatMedia},
       orientation,
   },
-  "hej" : rows[],
-  images[] ${formatMedia},
-  orientation,
 }`
