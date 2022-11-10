@@ -1,9 +1,9 @@
-import { formatMedia, formatLink } from '~/api/sanity/utils'
+import { formatMedia } from '~/api/sanity/utils'
 
 export default `{
   images[] {
-   media ${formatMedia},
-   "tag": tag.label,
-   "link": ${formatLink('link')},
+    media ${formatMedia},
+    "tag": tag.label,
+    "link":  coalesce('/' + pageAndSectionLink.link.reference->slug.current + coalesce('#' + pageAndSectionLink.sectionLink.section, '') , pageAndSectionLink.link.url, '')
   },
 }`

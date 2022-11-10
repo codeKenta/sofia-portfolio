@@ -15,10 +15,16 @@ export default {
         includeFromReference: 'caseTag',
       },
     },
+    // {
+    //   title: 'Link',
+    //   type: 'link',
+    //   name: 'link',
+    // },
+
     {
-      type: 'link',
-      name: 'link',
-      title: 'Link',
+      title: 'Page and section link',
+      name: 'pageAndSectionLink',
+      type: 'pageAndSectionLink',
     },
   ],
 

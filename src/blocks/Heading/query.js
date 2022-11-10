@@ -1,5 +1,6 @@
 export default `{
   heading,
   headingType,
-  includePaddingBottom
+  includePaddingBottom,
+  id
 }`

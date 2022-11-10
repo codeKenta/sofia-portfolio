@@ -1,5 +1,6 @@
 import { MdOutlineArticle } from 'react-icons/md'
 import commonBlockSettings from '../partials/commonBlockSettings'
+
 import previewTitle from '../../utils/previewTitle'
 
 export default {

@@ -13,11 +13,12 @@ const Root = styled('section', {
 }))
 
 function Heading(props) {
-  const { headingType = 'h2', heading, includePaddingBottom = true } = props
+  const { headingType = 'h2', heading, includePaddingBottom = true, id = '' } = props
 
   return (
     headingType && (
       <Root
+        id={id}
         sx={{
           paddingBottom: includePaddingBottom ? 'var(--cia-section-spacing)' : '0',
         }}
@@ -31,8 +32,9 @@ function Heading(props) {
 }
 
 Heading.propTypes = {
-  headingType: PropTypes.string,
   heading: PropTypes.string.isRequired,
+  headingType: PropTypes.string,
+  id: PropTypes.string,
   includePaddingBottom: PropTypes.bool,
 }
 

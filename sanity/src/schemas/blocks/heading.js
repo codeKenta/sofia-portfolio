@@ -2,6 +2,8 @@ import { MdTextFields } from 'react-icons/md'
 import commonBlockSettings from '../partials/commonBlockSettings'
 import previewTitle from '../../utils/previewTitle'
 
+import commonBlockFields from '../partials/commonBlockFields'
+
 export default {
   ...commonBlockSettings,
   title: 'Heading',
@@ -9,6 +11,7 @@ export default {
   type: 'object',
   preview: previewTitle('Heading', 'heading', MdTextFields),
   fields: [
+    ...commonBlockFields,
     { title: 'Heading', name: 'heading', type: 'string', group: 'content' },
 
     {
@@ -29,6 +32,6 @@ export default {
       type: 'boolean',
       title: 'Include bottom spacing',
       group: 'content',
-    }
+    },
   ],
 }
