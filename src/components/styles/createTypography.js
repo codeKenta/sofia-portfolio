@@ -6,9 +6,16 @@ const caseAllCaps = {
 
 export default function createTypography(palette, typography) {
   const {
-    fontFamilyPrimary = '"Crimson Text", serif',
+    // fontFamilyPrimary = '"Crimson Text", serif',
+    fontFamilyPrimary = '"Gotham Light"',
+
     // fontFamilySecondary = '"Abril Fatface", cursive',
-    fontFamilySecondary = '"Abril Fatface"',
+    // fontFamilySecondary = '"Hiragino Kaku Gothic Std"',
+    fontFamilySecondary = 'Poppins',
+
+    // fontFamilySecondary = 'Kanit',
+
+    // fontFamilySecondary = '"Hiragino Kaku Gothic Std"',
 
     fontFamilyTertiary = '"Open Sans", serif',
     // The default font size of the Material Specification.
@@ -40,12 +47,12 @@ export default function createTypography(palette, typography) {
   })
 
   const variants = {
-    h1: buildVariant(fontFamilySecondary, fontWeightRegular, 72, 1, -0.01),
-    h2: buildVariant(fontFamilySecondary, fontWeightRegular, 58, 1, 0.01),
-    h3: buildVariant(fontFamilySecondary, fontWeightRegular, 40, 1.05, 0.01),
-    h4: buildVariant(fontFamilySecondary, fontWeightRegular, 22, 1.2, 0.03),
-    h5: buildVariant(fontFamilySecondary, fontWeightRegular, 16, 1.3, 0.03),
-    h6: buildVariant(fontFamilySecondary, fontWeightRegular, 12, 1.5, 0.04),
+    h1: buildVariant(fontFamilySecondary, fontWeightBold, 72, 1, -0.01),
+    h2: buildVariant(fontFamilySecondary, fontWeightBold, 58, 1, 0.01),
+    h3: buildVariant(fontFamilySecondary, fontWeightBold, 40, 1.05, 0.01),
+    h4: buildVariant(fontFamilySecondary, fontWeightBold, 22, 1.2, 0.03),
+    h5: buildVariant(fontFamilySecondary, fontWeightBold, 16, 1.3, 0.03),
+    h6: buildVariant(fontFamilySecondary, fontWeightBold, 12, 1.5, 0.04),
     subtitle1: buildVariant(fontFamilyPrimary, fontWeightRegular, 18, 1.5, 0),
     subtitle2: buildVariant(fontFamilyPrimary, fontWeightMedium, 12, 1.7, 0.02),
     body1: buildVariant(fontFamilyPrimary, fontWeightRegular, 18, 1.7, 0),

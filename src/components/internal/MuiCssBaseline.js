@@ -1,39 +1,27 @@
+//  fontFamilyPrimary = '"Gotham Light", serif',
+
+// fontFamilySecondary = '"Abril Fatface", cursive',
+// fontFamilySecondary = 'Hiragino',
+
+// href = '/fonts/Hiragino/Hiragino-Kaku-Gothic.woff2'
 const overrides = {
   styleOverrides: (theme) => `
     /* Include font files here. */
 
-
     @font-face {
-      font-family: 'Abril Fatface';
-      font-weight: 400;
-      font-display: swap;
-      src: url('/fonts/Abril_Fatface/AbrilFatface-Regular.woff2') format('woff2');
-    }
-
-    @font-face {
-      font-family: 'Crimson Text';
+      font-family: 'Poppins';
       font-weight: 700;
       font-display: swap;
-      src: url('/fonts/Crimson_Text/CrimsonText-Bold.woff2') format('woff2');
+      src: url('/fonts/Poppins/Poppins-Bold.woff2') format('woff2');
     }
+
     @font-face {
-      font-family: 'Crimson Text';
-      font-weight: 700;
-      font-display: swap;
-      src: url('/fonts/Crimson_Text/CrimsonText-BoldItalic.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Crimson Text';
+      font-family: 'Gotham Light';
       font-weight: 400;
       font-display: swap;
-      src: url('/fonts/Crimson_Text/CrimsonText-Italic.woff2') format('woff2');
+      src: url('fonts/Gotham/Gotham-Light-Regular.woff2') format('woff2');
     }
-    @font-face {
-      font-family: 'Crimson Text';
-      font-weight: 400;
-      font-display: swap;
-      src: url('/fonts/Crimson_Text/CrimsonText-Regular.woff2') format('woff2');
-    }
+
 
     @font-face {
       font-family: 'Open Sans';

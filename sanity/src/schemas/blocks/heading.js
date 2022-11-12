@@ -12,8 +12,8 @@ export default {
   preview: previewTitle('Heading', 'heading', MdTextFields),
   fields: [
     ...commonBlockFields,
+    { title: 'Caption', name: 'caption', type: 'string', group: 'content' },
     { title: 'Heading', name: 'heading', type: 'string', group: 'content' },
-
     {
       title: 'Heading type',
       name: 'headingType',

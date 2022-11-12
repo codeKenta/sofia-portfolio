@@ -13,18 +13,16 @@ export default class MyDocument extends Document {
         <Head>
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
-
           {/* Generated from https://favicon.io/ */}
           <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
           <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
           <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
           <link rel="manifest" href="/site.webmanifest" />
-
           {/* Preload font files here: */}
-
+          {/* /Users/kennethosterholm/own-projects/sofia-portfolio/public/fonts/Kanit/Kanit-Bold.woff2 */}
           <link
             rel="preload"
-            href="/fonts/Abril_Fatface/AbrilFatface-Regular.woff2"
+            href="/fonts/Kanit/Kanit-Bold.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
@@ -32,49 +30,32 @@ export default class MyDocument extends Document {
 
           <link
             rel="preload"
-            href="/fonts/Crimson_Text/CrimsonText-Bold.woff2"
+            href="/fonts/Hiragino/Hiragino-Kaku-Gothic.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
           />
           <link
             rel="preload"
-            href="/fonts/Crimson_Text/CrimsonText-BoldItalic.woff2"
+            href="/fonts/Gotham/Gotham-Light-Regular.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
           />
-
-          <link
-            rel="preload"
-            href="/fonts/Crimson_Text/CrimsonText-Italic.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          />
-          <link
-            rel="preload"
-            href="/fonts/Crimson_Text/CrimsonText-Regular.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          />
-
-          <link
+          {/* <link
             rel="preload"
             href="/fonts/Open_Sans/OpenSans-Light.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
           />
-
           <link
             rel="preload"
             href="/fonts/Open_Sans/OpenSans-Medium.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
-          />
+          /> */}
         </Head>
         <body>
           <Main />
