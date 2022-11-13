@@ -1,5 +1,7 @@
 export default {
+  caption: 'illustrationer & kommunikation',
   heading: 'Blad af blad',
+  id: 'abacsdadasfas',
   text: [
     {
       _key: 'cccb50599cc3',

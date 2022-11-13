@@ -52,6 +52,7 @@ const AppNavDrawer = React.memo(function AppNavDrawer(props) {
     <AppNavDrawerRoot onClose={onNavMenuClose} open={isNavMenuOpen} anchor="left" {...other}>
       <Toolbar>
         <IconButton
+          sx={{ padding: 2 }}
           onClick={onNavMenuClose}
           edge="start"
           size="small"

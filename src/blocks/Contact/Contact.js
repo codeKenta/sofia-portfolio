@@ -17,6 +17,9 @@ const Root = styled('section', {
   backgroundColor: theme.palette.common.pink,
   ...theme.mixins.verticalRhythm(2),
   padding: 'var(--cia-section-spacing)',
+  [theme.breakpoints.down('sm')]: {
+    paddingTop: theme.spacing(4),
+  },
 }))
 
 const NameHeading = styled('h3', {

@@ -5,5 +5,6 @@ export default `{
       ...,
       "_key": _id
     }
-  }
+  },
+  place
 }`

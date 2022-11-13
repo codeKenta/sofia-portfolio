@@ -1,8 +1,7 @@
 import { MdTextFields } from 'react-icons/md'
 import commonBlockSettings from '../partials/commonBlockSettings'
-import previewTitle from '../../utils/previewTitle'
-
 import commonBlockFields from '../partials/commonBlockFields'
+import previewTitle from '../../utils/previewTitle'
 
 export default {
   ...commonBlockSettings,

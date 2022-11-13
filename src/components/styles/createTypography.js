@@ -35,7 +35,15 @@ export default function createTypography(palette, typography) {
 
   const coef = fontSize / 14
   const pxToRem = (size) => `${(size / htmlFontSize) * coef}rem`
-  const buildVariant = (typeFace, fontWeight, size, lineHeight, letterSpacing, casing) => ({
+  const buildVariant = (
+    typeFace,
+    fontWeight,
+    size,
+    lineHeight,
+    letterSpacing,
+    casing,
+    responsiveFontSize,
+  ) => ({
     fontFamily: typeFace,
     fontWeight,
     fontSize: pxToRem(size),
@@ -44,21 +52,26 @@ export default function createTypography(palette, typography) {
     letterSpacing: `${letterSpacing}em`,
     ...casing,
     ...allVariants,
+    ...(responsiveFontSize && {
+      '@media (max-width:600px)': {
+        fontSize: pxToRem(responsiveFontSize),
+      },
+    }),
   })
 
   const variants = {
-    h1: buildVariant(fontFamilySecondary, fontWeightBold, 72, 1, -0.01),
-    h2: buildVariant(fontFamilySecondary, fontWeightBold, 58, 1, 0.01),
-    h3: buildVariant(fontFamilySecondary, fontWeightBold, 40, 1.05, 0.01),
-    h4: buildVariant(fontFamilySecondary, fontWeightBold, 22, 1.2, 0.03),
-    h5: buildVariant(fontFamilySecondary, fontWeightBold, 16, 1.3, 0.03),
-    h6: buildVariant(fontFamilySecondary, fontWeightBold, 12, 1.5, 0.04),
+    h1: buildVariant(fontFamilySecondary, fontWeightBold, 72, 1, -0.01, caseAllCaps, 50),
+    h2: buildVariant(fontFamilySecondary, fontWeightBold, 58, 1, 0.01, caseAllCaps, 45),
+    h3: buildVariant(fontFamilySecondary, fontWeightBold, 40, 1.05, 0.01, caseAllCaps, 30),
+    h4: buildVariant(fontFamilySecondary, fontWeightBold, 22, 1.2, 0.03, caseAllCaps),
+    h5: buildVariant(fontFamilySecondary, fontWeightBold, 16, 1.3, 0.03, caseAllCaps),
+    h6: buildVariant(fontFamilySecondary, fontWeightBold, 12, 1.5, 0.04, caseAllCaps),
     subtitle1: buildVariant(fontFamilyPrimary, fontWeightRegular, 18, 1.5, 0),
     subtitle2: buildVariant(fontFamilyPrimary, fontWeightMedium, 12, 1.7, 0.02),
-    body1: buildVariant(fontFamilyPrimary, fontWeightRegular, 18, 1.7, 0),
-    body2: buildVariant(fontFamilyPrimary, fontWeightRegular, 14, 1.7, 0),
+    body1: buildVariant(fontFamilyPrimary, fontWeightRegular, 18, 1.6, 0),
+    body2: buildVariant(fontFamilyPrimary, fontWeightRegular, 14, 1.6, 0),
     button: buildVariant(fontFamilyTertiary, fontWeightLight, 12, 1.4, 0.04, caseAllCaps),
-    caption: buildVariant(fontFamilyPrimary, fontWeightSemibold, 14, 1.3, 0.02),
+    caption: buildVariant(fontFamilyPrimary, fontWeightSemibold, 18, 1.3, 0.02, caseAllCaps),
     overline: buildVariant(fontFamilySecondary, fontWeightRegular, 8, 1.7, 0.12, caseAllCaps),
     // Custom variants
     input: buildVariant(fontFamilyTertiary, fontWeightLight, 16, 1.5, 0), // Should at least be 16px fontSize for iOS Safari not to zoom in on focus.

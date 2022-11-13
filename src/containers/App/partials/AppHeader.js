@@ -12,7 +12,6 @@ import ContentContainer from '~/components/ContentContainer'
 import RouterLink from '../../RouterLink'
 import AppNavDrawerListItem from './AppNavDrawerListItem'
 
-
 const BREAKPOINT_KEY = 'md'
 
 export const classes = generateUtilityClasses('CiaAppHeader', [
@@ -57,7 +56,7 @@ const AppHeaderBrandLink = styled(RouterLink, {
   slot: 'BrandLink',
 })({
   '& > svg': {
-    height: "30px",
+    height: '30px',
     display: 'block',
     width: 'auto',
   },
@@ -66,26 +65,24 @@ const AppHeaderBrandLink = styled(RouterLink, {
 const NavList = styled('ul', {
   name: 'NavList',
   slot: 'List',
-})(({theme}) => ({
-
+})(({ theme }) => ({
   display: 'flex',
   margin: 0,
   padding: 0,
-  "& > li": {
+  '& > li': {
     marginLeft: theme.spacing(3),
-  }
+  },
 }))
 
 const Nav = styled('nav', {
   name: 'Nav',
   slot: 'Nav',
 })(({ theme }) => ({
-    display: 'none',
-   [theme.breakpoints.up('sm')]: {
+  display: 'none',
+  [theme.breakpoints.up('sm')]: {
     display: 'block',
   },
 }))
-
 
 const ToggleNav = styled(IconButton, {
   name: 'ToggleNav',
@@ -93,12 +90,9 @@ const ToggleNav = styled(IconButton, {
 })(({ theme }) => ({
   display: 'block',
   [theme.breakpoints.up('sm')]: {
-     display: 'none',
+    display: 'none',
   },
-
 }))
-
-
 
 const AppHeader = React.memo(function AppHeader(props) {
   const {
@@ -119,7 +113,6 @@ const AppHeader = React.memo(function AppHeader(props) {
 
   const rootRef = React.useRef(null)
   const [, rootHeight] = useSize(rootRef)
-
 
   const [disableTransparency, setDisableTransparency] = React.useState(undefined)
   const syncDisableTransparency = React.useCallback(() => {
@@ -178,48 +171,49 @@ const AppHeader = React.memo(function AppHeader(props) {
         }}
       />
 
-      <Toolbar sx={{
-        height: 'max-content',
-        display: 'block',
-      }}>
+      <Toolbar
+        sx={{
+          height: 'max-content',
+          display: 'block',
+        }}
+      >
+        <ContentContainer>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              padding: theme.spacing(1, 2),
+              borderBottom: '1px solid black',
+            }}
+          >
+            <AppHeaderBrandLink href="/" aria-label={t(__translationGroup)`Go to the homepage`}>
+              <BrandIcon />
+            </AppHeaderBrandLink>
 
-          <ContentContainer>
-            <Box sx={
-              {
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: theme.spacing(2),
-                borderBottom: '1px solid black',
-                }}>
-                <AppHeaderBrandLink href="/" aria-label={t(__translationGroup)`Go to the homepage`}>
-                  <BrandIcon />
-                </AppHeaderBrandLink>
+            <Nav aria-label={t(__translationGroup)`Main navigation`}>
+              {menus?.primary?.length > 0 && (
+                <NavList>
+                  {menus.primary.map((menuLink, idx) => (
+                    <AppNavDrawerListItem key={idx} menuLink={menuLink} />
+                  ))}
+                </NavList>
+              )}
+            </Nav>
 
-                  <Nav aria-label={t(__translationGroup)`Main navigation`}>
-                    {menus?.primary?.length > 0 && (
-                    <NavList>
-                      {menus.primary.map((menuLink, idx) => (
-                        <AppNavDrawerListItem key={idx} menuLink={menuLink} />
-                      ))}
-                    </NavList>
-                  )}
-                  </Nav>
-
-                  <ToggleNav
-                  onClick={onNavMenuToggle}
-                  color="inherit" // Inherit color from `headerColor`.
-                  edge="start"
-                  size="small"
-                  aria-haspopup="true"
-                  aria-expanded={isNavMenuOpen}
-                  aria-label={t(__translationGroup)`Toggle main menu`}
-                >
-                {isNavMenuOpen ? <CloseIcon /> : <MenuIcon />}
-                </ToggleNav>
-                </Box>
-          </ContentContainer>
-
+            <ToggleNav
+              onClick={onNavMenuToggle}
+              color="inherit" // Inherit color from `headerColor`.
+              edge="start"
+              size="small"
+              aria-haspopup="true"
+              aria-expanded={isNavMenuOpen}
+              aria-label={t(__translationGroup)`Toggle main menu`}
+            >
+              {isNavMenuOpen ? <CloseIcon /> : <MenuIcon />}
+            </ToggleNav>
+          </Box>
+        </ContentContainer>
       </Toolbar>
     </AppHeaderRoot>
   )

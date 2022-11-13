@@ -6,10 +6,10 @@ export const HtmlRoot = styled('div', {
   slot: 'Root',
 })(({ theme }) => ({
   ...theme.typography.body1,
-  h1: theme.typography.h3,
-  h2: theme.typography.h4,
-  h3: theme.typography.h5,
-  h4: theme.typography.h6,
+  h1: theme.typography.h1,
+  h2: theme.typography.h2,
+  h3: theme.typography.h3,
+  h4: theme.typography.h4,
   h5: theme.typography.subtitle1,
   h6: theme.typography.overline,
   'h1, h2, h3, h4, h5, h6, ol, ul, p, hr': {

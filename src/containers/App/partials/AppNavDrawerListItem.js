@@ -1,6 +1,8 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
+import { useRouter } from 'next/router'
 import { styled } from '@mui/system'
+import { useTheme } from '@mui/material/styles'
 import { Collapse, Link } from '@mui/material'
 import { menuItemType } from '~/api'
 import { Add as AddIcon, Remove as RemoveIcon } from '~/components/icons'
@@ -19,19 +21,19 @@ const AppNavDrawerListItemItem = styled('li', {
 const AppNavDrawerListItemLink = styled(Link, {
   name: 'AppNavDrawerListItem',
   slot: 'Link',
-})(({ theme }) => ({
+})(() => ({
   display: 'inherit',
   alignItems: 'inherit',
-  'ul &': theme.typography.h4,
-  'ul ul &': theme.typography.body2,
+  fontSize: 16,
+  textTransform: 'uppercase',
+  // 'ul &': theme.typography.caption,
+  // 'ul ul &': theme.typography.caption,
 }))
 
 const AppNavDrawerListItemList = styled('ul', {
   name: 'AppNavDrawerListItem',
   slot: 'List',
-})(({ theme }) => ({
-  margin: theme.spacing(1, 0, 2),
-}))
+})(({ theme }) => ({ margin: theme.spacing(1, 0, 2) }))
 
 function AppNavDrawerListItem(props) {
   const { level = 0, menuLink } = props
@@ -40,6 +42,11 @@ function AppNavDrawerListItem(props) {
   const handleClick = React.useCallback(() => {
     setExpanded((prev) => !prev)
   }, [])
+
+  const { asPath } = useRouter()
+  const theme = useTheme()
+
+  const matchPath = menuLink.url === asPath
 
   const submenu = menuLink.items
   const hasSubmenu = submenu?.length > 0
@@ -58,7 +65,12 @@ function AppNavDrawerListItem(props) {
   return (
     <React.Fragment>
       <AppNavDrawerListItemItem style={{ '--level': level }}>
-        <AppNavDrawerListItemLink {...LinkProps}>
+        <AppNavDrawerListItemLink
+          sx={{
+            color: matchPath ? theme?.palette?.common?.red : 'inherit',
+          }}
+          {...LinkProps}
+        >
           {hasSubmenu && <Icon sx={{ mr: 1 }} />}
           <span>{menuLink.label}</span>
         </AppNavDrawerListItemLink>

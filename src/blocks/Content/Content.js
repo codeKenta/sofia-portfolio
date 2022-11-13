@@ -12,11 +12,11 @@ const ContentRoot = styled('section', {
 })
 
 function Content(props) {
-  const { text } = props
+  const { text, place = 'center' } = props
 
   return (
     <ContentRoot>
-      <ContentContainer small>
+      <ContentContainer place={place} small>
         <SanityHtml textBlocks={text} />
       </ContentContainer>
     </ContentRoot>
@@ -25,6 +25,7 @@ function Content(props) {
 
 Content.propTypes = {
   text: PropTypes.string,
+  place: PropTypes.string,
 }
 
 export default Content

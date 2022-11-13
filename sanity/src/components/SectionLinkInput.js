@@ -21,9 +21,9 @@ const SectionLinkInput = React.forwardRef((props, ref) => {
 
   const pageLinkRef = parent?.link?.reference?._ref
 
-  const value = valueProp?.url
-    ? { label: valueProp.url, value: valueProp.url }
-    : options.find((option) => option.value === valueProp?.reference?._ref)
+  const value = valueProp?.section
+    ? { label: valueProp.section, value: valueProp.section }
+    : options.find((option) => option.value === valueProp?.section)
 
   React.useEffect(() => {
     const currentDocumentId = document?._id
@@ -39,24 +39,23 @@ const SectionLinkInput = React.forwardRef((props, ref) => {
         currentDocumentId,
       })
       .then((results) => {
-        const filteredBlocks = results?.blocks?.filter(({ _type, id }) => _type === 'Heading' && id)
+        const filteredBlocks = results?.blocks?.filter(({ id }) => id)
 
-        const ids = filteredBlocks.map((result) => ({
-          label: result?.heading,
-          value: result.id,
+        const ids = filteredBlocks.map(({ _type, id, heading }) => ({
+          label: `${heading} (${_type})`,
+          value: id,
         }))
 
         setOptions(ids)
       })
       .catch((err) => console.log('ERROR, err', err))
-  }, [])
+  }, [pageLinkRef])
 
   const handleAutocompleteChange = React.useCallback(
     (event, meta) => {
       const { action } = meta
       const newValue = event?.value
 
-      console.log(newValue)
       switch (action) {
         case 'select-option':
           // value exists among options, it's a reference
@@ -95,14 +94,3 @@ const SectionLinkInput = React.forwardRef((props, ref) => {
 })
 
 export default withDocument(SectionLinkInput)
-
-const ob = {
-  _type: 'pageAndSectionLink',
-  link: {
-    _type: 'link',
-    reference: {
-      _ref: '33724773-e167-4d66-a721-ea71bfbd2a3d',
-      _type: 'reference',
-    },
-  },
-}

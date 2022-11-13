@@ -3,39 +3,36 @@ export default {
   type: 'object',
   fields: [
     {
-      title: 'Media',
-      name: 'media',
-      type: 'media',
-    },
-    {
-      name: 'tag',
-      title: 'Hover tag',
-      type: 'tag',
-      options: {
-        includeFromReference: 'caseTag',
-      },
-    },
-    // {
-    //   title: 'Link',
-    //   type: 'link',
-    //   name: 'link',
-    // },
-
-    {
       title: 'Page and section link',
       name: 'pageAndSectionLink',
       type: 'pageAndSectionLink',
+    },
+    {
+      title: 'Heading',
+      name: 'heading',
+      type: 'string',
+    },
+    {
+      title: 'Caption',
+      name: 'caption',
+      type: 'string',
+    },
+    {
+      title: 'Media',
+      name: 'media',
+      type: 'media',
     },
   ],
 
   preview: {
     select: {
-      tag: 'tag',
       media: 'media',
+      caption: 'caption',
+      heading: 'heading',
     },
-    prepare: ({ tag, media, customHoverText }) => {
+    prepare: ({ media, caption, heading }) => {
       return {
-        title: tag?.value || customHoverText,
+        title: heading || caption,
         media: media?.picture,
       }
     },

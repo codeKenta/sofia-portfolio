@@ -1,10 +1,7 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 import { styled } from '@mui/system'
-// import Box from '@mui/material/Box'
 import { Media, MediaReveal } from '@noaignite/oui'
-// import { useTheme } from '@mui/material/styles'
-// import { Typography } from '@mui/material'
 import ContentContainer from '~/components/ContentContainer'
 import { RouterLink } from '~/containers'
 import { ASPECT_RATIOS } from '~/utils/constants'
@@ -30,42 +27,49 @@ const Cover = styled('div', {
   name: 'Cover',
   slot: 'Cover',
 })(({ theme }) => ({
-  span: {
+  padding: theme.spacing(1),
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  backgroundColor: 'rgba(255, 255, 255, 0)',
+  position: 'absolute',
+  inset: 0,
+  transition: 'background 750ms cubic-bezier(0.4, 0, 0.2, 1)',
+  '*': {
     transition: 'opacity 750ms cubic-bezier(0.4, 0, 0.2, 1)',
   },
   [theme.breakpoints.down('sm')]: {
     backgroundColor: theme.palette.common.redTransparent,
-    span: {
+    '*': {
       opacity: '1',
     },
   },
 
   [theme.breakpoints.up('sm')]: {
-    span: {
+    '*': {
       opacity: '0',
     },
   },
-  backgroundColor: 'rgba(255, 255, 255, 0)',
-  position: 'absolute',
-  inset: 0,
-  display: 'grid',
-  placeItems: 'center',
-  transition: 'background 750ms cubic-bezier(0.4, 0, 0.2, 1)',
 
   '&:hover': {
     backgroundColor: theme.palette.common.redTransparent,
-    span: {
+    '*': {
       opacity: '1',
     },
   },
 }))
 
-const Tag = styled('span', {
-  name: 'Tag',
-  slot: 'Tag',
-})(() => ({
-  textTransform: 'uppercase',
+const Heading = styled('h3', {
+  name: 'Heading',
+  slot: 'Heading',
+})(({ theme }) => ({
+  ...theme.typography.h3,
+  margin: 0,
+  fontSize: '120%',
   color: 'white',
+  textAlign: 'center',
+  // marginTop: theme.spacing(2),
+  wordBreak: 'break-word',
 }))
 
 const Link = styled(RouterLink, {
@@ -123,7 +127,7 @@ function LinkedMediaGrid(props) {
     <Root>
       <ContentContainer>
         <FlexContainer>
-          {images?.map(({ media, tag, link }, index) => (
+          {images?.map(({ media, heading, link }, index) => (
             <Link href={link}>
               <MediaReveal key={index} {...ASPECT_RATIOS.square}>
                 <Media
@@ -141,7 +145,8 @@ function LinkedMediaGrid(props) {
                 />
               </MediaReveal>
               <Cover>
-                <Tag>{tag}</Tag>
+                {/* <Tag>{heading}</Tag> */}
+                <Heading>{heading}</Heading>
               </Cover>
             </Link>
           ))}

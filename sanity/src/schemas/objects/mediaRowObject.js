@@ -1,4 +1,3 @@
-
 export default {
   name: 'mediaRowObject',
   type: 'object',
@@ -7,12 +6,18 @@ export default {
       title: 'Orientation',
       name: 'orientation',
       type: 'string',
-      description: 'Set an orientation that will be used for aspect ratio if there is multiple images',
+      description:
+        'Set an orientation that will be used for aspect ratio if there is multiple images',
       options: {
-        list:  [
+        list: [
           { title: 'Portrait', value: 'portrait' },
-          { title: 'Landscape', value: 'landscape' }
-        ]
+          { title: 'Landscape', value: 'landscape' },
+          {
+            title: 'Auto',
+            description: 'Uses the first image in the row as input for aspect ratio',
+            value: 'auto',
+          },
+        ],
       },
     },
     {

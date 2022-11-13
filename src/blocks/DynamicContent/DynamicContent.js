@@ -11,6 +11,8 @@ import ContentContainer from '~/components/ContentContainer'
 import { ASPECT_RATIOS } from '~/utils/constants'
 import { ChevronBack, ChevronForward } from '~/components/icons'
 
+const includeLineBreaks = (str) => str.split(/(\*)/g).map((part) => (part === '*' ? <br /> : part))
+
 const Root = styled('section', {
   name: 'DynamicContent',
   slot: 'Root',
@@ -24,6 +26,14 @@ const Heading = styled('h1', {
   slot: 'Heading',
 })(({ theme }) => ({
   ...theme.typography.h2,
+  margin: 0,
+}))
+
+const Caption = styled('h3', {
+  name: 'Caption',
+  slot: 'Caption',
+})(({ theme }) => ({
+  ...theme.typography.caption,
   margin: 0,
 }))
 
@@ -71,7 +81,17 @@ const NextButton = styled(IconButton, {
 }))
 
 function DynamicContent(props) {
-  const { heading, text, images, cta, renderIndex, placeContent = 'left', backgroundColor } = props
+  const {
+    heading,
+    caption = '',
+    id = '',
+    text,
+    images,
+    cta,
+    renderIndex,
+    placeContent = 'left',
+    backgroundColor,
+  } = props
   const theme = useTheme()
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -110,7 +130,7 @@ function DynamicContent(props) {
     setDisplayImageIndex(index)
   }, [])
 
-  const displayImage = images[displayImageIndex]
+  const displayImage = images?.length && images[displayImageIndex]
 
   const gridTemplateColumns =
     placeContent === 'right'
@@ -119,6 +139,7 @@ function DynamicContent(props) {
 
   return (
     <Root
+      id={id}
       sx={{
         backgroundColor: backgroundColor || null,
       }}
@@ -143,7 +164,24 @@ function DynamicContent(props) {
               },
             }}
           >
-            {heading && <Heading>{heading}</Heading>}
+            {caption && (
+              <Box
+                sx={{
+                  maxWidth: 400,
+                  marginBottom: theme.spacing(2),
+                }}
+              >
+                <Caption>{includeLineBreaks(caption)}</Caption>
+                <Box
+                  sx={{
+                    marginTop: theme.spacing(2),
+                    width: 70,
+                    borderBottom: '3px solid black',
+                  }}
+                />
+              </Box>
+            )}
+            {heading && <Heading>{includeLineBreaks(heading)}</Heading>}
 
             {text && (
               <Box
@@ -278,6 +316,8 @@ function DynamicContent(props) {
 DynamicContent.propTypes = {
   cta: PropTypes.shape(linkType),
   heading: PropTypes.string,
+  caption: PropTypes.string,
+  id: PropTypes.string,
   images: PropTypes.arrayOf(mediaType),
   placeContent: PropTypes.string,
   renderIndex: PropTypes.number.isRequired,

@@ -19,43 +19,63 @@ function MediaGrid(props) {
   const { rows, renderIndex } = props
   const theme = useTheme()
 
+  const ratios = React.useMemo(
+    () =>
+      rows.map(({ images, orientation }) => {
+        if (orientation && orientation !== 'auto') {
+          return ASPECT_RATIOS?.[orientation] ?? ASPECT_RATIOS.portrait
+        }
+
+        const [width, height] = images[0]?.src?.split('-').pop().split('.').shift().split('x') ?? [
+          3, 4,
+        ]
+
+        return {
+          width,
+          height,
+        }
+      }),
+    [rows],
+  )
+
   return (
     <Root>
       <ContentContainer>
-        <Box sx={{display: 'grid', gridRowGap: theme.spacing(2)}}>
-          {rows?.map(({images, orientation}, outerIndex) => {
-
-            const chosenRatio = ASPECT_RATIOS?.[orientation] ?? ASPECT_RATIOS.portrait
+        <Box sx={{ display: 'grid', gridRowGap: theme.spacing(2) }}>
+          {rows?.map(({ images, orientation }, outerIndex) => {
+            const chosenRatio = ratios[outerIndex]
             const aspectRatio = images?.length === 1 && !orientation ? {} : chosenRatio
 
-            return (<Box key={outerIndex}
-              sx={{
-                display: 'grid',
-                gridGap: theme.spacing(2),
-                gridTemplateColumns: `${images?.map(() => '1fr').join(' ')}`,
-              }}
-            >
-            {images?.map((image, innerIndex) => (
-              <MediaReveal key={innerIndex} {...aspectRatio}>
-                <Media
-                  {...aspectRatio}
-                  {...(image?.component === 'video'
-                    ? {
-                        autoPlay: true,
-                        muted: true,
-                        loop: true,
-                        playsInline: true,
-                      }
-                    : { alt: '' })}
-                  {...image}
-                  priority={renderIndex === 0}
-                />
-              </MediaReveal>
-            ))}
-          </Box>)
-
-        })}
-      </Box>
+            return (
+              <Box
+                key={outerIndex}
+                sx={{
+                  display: 'grid',
+                  gridGap: theme.spacing(2),
+                  gridTemplateColumns: `${images?.map(() => '1fr').join(' ')}`,
+                }}
+              >
+                {images?.map((image, innerIndex) => (
+                  <MediaReveal key={innerIndex} {...aspectRatio}>
+                    <Media
+                      {...aspectRatio}
+                      {...(image?.component === 'video'
+                        ? {
+                            autoPlay: true,
+                            muted: true,
+                            loop: true,
+                            playsInline: true,
+                          }
+                        : { alt: '' })}
+                      {...image}
+                      priority={renderIndex === 0}
+                    />
+                  </MediaReveal>
+                ))}
+              </Box>
+            )
+          })}
+        </Box>
       </ContentContainer>
     </Root>
   )

@@ -1,6 +1,6 @@
 import { MdOutlineArticle } from 'react-icons/md'
 import commonBlockSettings from '../partials/commonBlockSettings'
-
+import commonBlockFields from '../partials/commonBlockFields'
 import previewTitle from '../../utils/previewTitle'
 
 export default {
@@ -17,6 +17,8 @@ export default {
   ],
   preview: previewTitle('Dynamic Content', 'heading', MdOutlineArticle),
   fields: [
+    ...commonBlockFields,
+    { title: 'Caption', name: 'caption', type: 'string', group: 'content' },
     { title: 'Heading', name: 'heading', type: 'string', group: 'content' },
     { title: 'Text', name: 'text', type: 'simpleRichText', group: 'content' },
     {

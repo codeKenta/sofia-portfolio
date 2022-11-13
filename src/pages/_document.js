@@ -42,7 +42,7 @@ export default class MyDocument extends Document {
             type="font/woff2"
             crossOrigin="anonymous"
           />
-          {/* <link
+          <link
             rel="preload"
             href="/fonts/Open_Sans/OpenSans-Light.woff2"
             as="font"
@@ -55,7 +55,7 @@ export default class MyDocument extends Document {
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
-          /> */}
+          />
         </Head>
         <body>
           <Main />

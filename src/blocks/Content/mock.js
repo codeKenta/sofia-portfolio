@@ -246,4 +246,5 @@ const html = [
 ]
 export default {
   text: html,
+  place: 'center',
 }

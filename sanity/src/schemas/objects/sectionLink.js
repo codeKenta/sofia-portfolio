@@ -5,12 +5,6 @@ export default {
   title: 'Section link',
   type: 'object',
   fields: [
-    // {
-    //   name: 'reference',
-    //   type: 'reference',
-    //   weak: true,
-    //   to: [{ type: 'page' }],
-    // },
     {
       title: 'Section ID',
       name: 'section',

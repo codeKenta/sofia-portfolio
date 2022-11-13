@@ -14,6 +14,7 @@ export default {
       title: 'Section link',
       name: 'sectionLink',
       type: 'sectionLink',
+      hidden: ({ parent }) => !parent?.link,
     },
   ],
 }

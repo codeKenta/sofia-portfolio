@@ -49,7 +49,7 @@ export const light = {
   // The colors used to style the action elements.
   action: {
     // The color of an active action like an icon button.
-    active: common.pink,
+    active: common.black,
     // The background color of an hovered action.
     hover: 'rgba(0, 0, 0, 0.04)',
     hoverOpacity: 0.04,
