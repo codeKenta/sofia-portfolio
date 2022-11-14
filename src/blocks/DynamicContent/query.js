@@ -8,4 +8,5 @@ export default `{
   images[] ${formatMedia},
   ${formatCtaLink('cta', 'ctaLabel', 'ctaUrl')},
   placeContent,
+  excludeBottomPadding
 }`

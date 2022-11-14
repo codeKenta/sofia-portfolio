@@ -56,5 +56,11 @@ export default {
         ],
       },
     },
+    {
+      name: 'excludeBottomPadding',
+      title: 'Exclude bottom spacing',
+      type: 'boolean',
+      group: 'content',
+    },
   ],
 }

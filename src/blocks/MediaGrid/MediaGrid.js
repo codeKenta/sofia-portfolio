@@ -45,18 +45,30 @@ function MediaGrid(props) {
           {rows?.map(({ images, orientation }, outerIndex) => {
             const chosenRatio = ratios[outerIndex]
             const aspectRatio = images?.length === 1 && !orientation ? {} : chosenRatio
-
+            const isLandScape = aspectRatio.width * 1 > aspectRatio.height * 1
+            const landscapeItemsSmallStyles = isLandScape ? { gridColumn: '1 / -1' } : {}
             return (
               <Box
                 key={outerIndex}
                 sx={{
                   display: 'grid',
                   gridGap: theme.spacing(2),
-                  gridTemplateColumns: `${images?.map(() => '1fr').join(' ')}`,
+                  gridTemplateColumns: '1fr 1fr',
+                  [theme.breakpoints.up('sm')]: {
+                    gridTemplateColumns: `repeat(${images?.length}, 1fr)`,
+                  },
                 }}
               >
                 {images?.map((image, innerIndex) => (
-                  <MediaReveal key={innerIndex} {...aspectRatio}>
+                  <MediaReveal
+                    sx={{
+                      [theme.breakpoints.down('sm')]: {
+                        ...landscapeItemsSmallStyles,
+                      },
+                    }}
+                    key={innerIndex}
+                    {...aspectRatio}
+                  >
                     <Media
                       {...aspectRatio}
                       {...(image?.component === 'video'
@@ -87,3 +99,7 @@ MediaGrid.propTypes = {
 }
 
 export default MediaGrid
+
+// [theme.breakpoints.up('md')]: {
+//           gridTemplateColumns,
+//         },

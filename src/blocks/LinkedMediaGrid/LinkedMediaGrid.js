@@ -63,12 +63,11 @@ const Heading = styled('h3', {
   name: 'Heading',
   slot: 'Heading',
 })(({ theme }) => ({
-  ...theme.typography.h3,
+  ...theme.typography.h4,
   margin: 0,
   fontSize: '120%',
   color: 'white',
   textAlign: 'center',
-  // marginTop: theme.spacing(2),
   wordBreak: 'break-word',
 }))
 
@@ -145,7 +144,6 @@ function LinkedMediaGrid(props) {
                 />
               </MediaReveal>
               <Cover>
-                {/* <Tag>{heading}</Tag> */}
                 <Heading>{heading}</Heading>
               </Cover>
             </Link>

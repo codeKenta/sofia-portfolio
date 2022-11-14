@@ -2,6 +2,7 @@ export default {
   caption: 'illustrationer & kommunikation',
   heading: 'Blad af blad',
   id: 'abacsdadasfas',
+  excludeBottomPadding: false,
   text: [
     {
       _key: 'cccb50599cc3',
@@ -63,13 +64,6 @@ export default {
         sm: '//source.unsplash.com/6UQTHH6hcUo/1920x1080',
       },
     },
-    // {
-    //   component: 'picture',
-    //   breakpoints: {
-    //     xs: '//source.unsplash.com/04CYx6p2rJ4/1280x720',
-    //     sm: '//source.unsplash.com/04CYx6p2rJ4/1920x1080',
-    //   },
-    // },
   ],
   placeContent: 'left',
 }

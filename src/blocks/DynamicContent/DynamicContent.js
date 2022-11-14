@@ -19,6 +19,10 @@ const Root = styled('section', {
 })(({ theme }) => ({
   ...theme.mixins.verticalRhythm(2),
   padding: 'var(--cia-section-spacing)',
+  paddingTop: theme.spacing(6),
+  [theme.breakpoints.up('md')]: {
+    paddingTop: theme.spacing(8),
+  },
 }))
 
 const Heading = styled('h1', {
@@ -91,6 +95,7 @@ function DynamicContent(props) {
     renderIndex,
     placeContent = 'left',
     backgroundColor,
+    excludeBottomPadding = false,
   } = props
   const theme = useTheme()
 
@@ -137,11 +142,13 @@ function DynamicContent(props) {
       ? ' minmax(auto, 400px) 1fr minmax(auto, 540px)'
       : 'minmax(auto, 540px) 1fr minmax(auto, 400px)'
 
+  const rootBottomSpacing = excludeBottomPadding ? { paddingBottom: '0' } : {}
   return (
     <Root
       id={id}
       sx={{
         backgroundColor: backgroundColor || null,
+        ...rootBottomSpacing,
       }}
     >
       <ContentContainer>
@@ -186,8 +193,11 @@ function DynamicContent(props) {
             {text && (
               <Box
                 sx={{
-                  marginTop: theme.spacing(6),
-                  marginBottom: theme.spacing(6),
+                  marginTop: theme.spacing(2),
+                  [theme.breakpoints.up('md')]: {
+                    marginTop: theme.spacing(6),
+                    marginBottom: theme.spacing(2),
+                  },
                 }}
               >
                 <SanityHtml textBlocks={text} />
@@ -323,6 +333,7 @@ DynamicContent.propTypes = {
   renderIndex: PropTypes.number.isRequired,
   text: PropTypes.array,
   backgroundColor: PropTypes.string,
+  excludeBottomPadding: PropTypes.bool,
 }
 
 export default DynamicContent
