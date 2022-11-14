@@ -6,6 +6,7 @@ import { Media, MediaReveal } from '@noaignite/oui'
 import { RouterLink, SanityHtml } from '~/containers'
 import { linkType, mediaType } from '~/api/utils'
 import ContentContainer from '~/components/ContentContainer'
+import { includeLineBreaks } from '~/utils'
 
 const Root = styled('section', {
   name: 'Root',
@@ -149,7 +150,7 @@ function Hero(props) {
       <ContentContainer>
         <HeroGridContainer>
           <HeroContent>
-            <HeroHeading>{heading}</HeroHeading>
+            <HeroHeading>{includeLineBreaks(heading)}</HeroHeading>
 
             {excerpt && <SanityHtml textBlocks={excerpt} />}
 

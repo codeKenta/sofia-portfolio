@@ -8,8 +8,9 @@ export default {
     },
     {
       name: 'url',
-      type: 'link',
+      type: 'pageAndSectionLink',
     },
+
     {
       name: 'menuItems',
       description: 'Add nested menu items',

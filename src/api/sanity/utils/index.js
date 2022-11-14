@@ -85,10 +85,10 @@ export const formatMenuItem = `{
 // Supports two levels of menus
 export const menuQuery = `menuItems[] {
   label,
-  defined(url) => {'url': ${formatLink('url')}},
+  defined(url) => {'url': ${formatPageAndSectionLink('url')}},
   menuItems[] {
     label,
-    defined(url) => {'url': ${formatLink('url')}},
+    defined(url) => {'url': ${formatPageAndSectionLink('url')}},
   }
 }
 `

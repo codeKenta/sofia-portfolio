@@ -10,8 +10,7 @@ import { linkType, mediaType } from '~/api/utils'
 import ContentContainer from '~/components/ContentContainer'
 import { ASPECT_RATIOS } from '~/utils/constants'
 import { ChevronBack, ChevronForward } from '~/components/icons'
-
-const includeLineBreaks = (str) => str.split(/(\*)/g).map((part) => (part === '*' ? <br /> : part))
+import { includeLineBreaks } from '~/utils'
 
 const Root = styled('section', {
   name: 'DynamicContent',

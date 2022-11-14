@@ -82,12 +82,20 @@ function Contact(props) {
 
           <NameHeading>{name}</NameHeading>
 
-          {email && <Typography sx={{ fontSize: 21, lineHeight: 1.2 }}>{email}</Typography>}
+          {email && (
+            <a style={{ color: 'inherit', textDecoration: 'none' }} href={`mailto:${phone}`}>
+              <Typography sx={{ fontSize: 21, lineHeight: 1.2, marginBottom: theme.spacing(1) }}>
+                {email}
+              </Typography>
+            </a>
+          )}
 
           {phone && (
-            <Typography sx={{ fontSize: 21, lineHeight: 1.2, marginBottom: theme.spacing(2) }}>
-              {phone}
-            </Typography>
+            <a style={{ color: 'inherit', textDecoration: 'none' }} href={`tel:${phone}`}>
+              <Typography sx={{ fontSize: 21, lineHeight: 1.2, marginBottom: theme.spacing(2) }}>
+                {phone}
+              </Typography>
+            </a>
           )}
 
           {linkedInUrl && (
