@@ -42,7 +42,7 @@ const SectionLinkInput = React.forwardRef((props, ref) => {
         const filteredBlocks = results?.blocks?.filter(({ id }) => id)
 
         const ids = filteredBlocks.map(({ _type, id, heading }) => ({
-          label: `${heading} (${_type})`,
+          label: `${heading || ''}(${_type})`,
           value: id,
         }))
 

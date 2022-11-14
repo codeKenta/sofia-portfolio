@@ -6,7 +6,7 @@ export default {
     {
       title: 'CTA Buttons',
       name: 'cta',
-      options: { columns: 2 },
+      options: { columns: 1 },
     },
   ],
   name: 'Hero',
@@ -40,7 +40,7 @@ export default {
     {
       name: 'ctaUrlPrimary',
       title: 'link',
-      type: 'link',
+      type: 'pageAndSectionLink',
       group: 'content',
       fieldset: 'cta',
     },
@@ -55,7 +55,7 @@ export default {
     {
       name: 'ctaUrlSecondary',
       title: 'link',
-      type: 'link',
+      type: 'pageAndSectionLink',
       group: 'content',
       fieldset: 'cta',
     },

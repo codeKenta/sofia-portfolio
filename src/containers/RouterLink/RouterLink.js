@@ -5,17 +5,19 @@ import Link from 'next/link'
 const RouterLink = React.forwardRef(function RouterLink(props, ref) {
   const { as, children, external, href = '', replace, scroll, shallow, ...other } = props
 
+  const cleanUpHref = href.replace('//', '/')
+
   // Render as a regular `a` tag if external link.
-  if (external || /^https?:\/\//.test(href)) {
+  if (external || /^https?:\/\//.test(cleanUpHref)) {
     return (
-      <a href={href} rel="noopener noreferrer" target="_blank" ref={ref} {...other}>
+      <a href={cleanUpHref} rel="noopener noreferrer" target="_blank" ref={ref} {...other}>
         {children}
       </a>
     )
   }
 
   return (
-    <Link as={as} href={href} replace={replace} scroll={scroll} shallow={shallow} passHref>
+    <Link as={as} href={cleanUpHref} replace={replace} scroll={scroll} shallow={shallow} passHref>
       <a ref={ref} {...other}>
         {children}
       </a>

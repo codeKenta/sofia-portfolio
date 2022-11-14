@@ -26,6 +26,8 @@ export default async function getPage(uri, preview) {
     uri,
   }
 
+  // console.log('\n\n', query, '\n\n')
+
   const data = await getClient(preview).fetch(query, params)
 
   if (!data) {

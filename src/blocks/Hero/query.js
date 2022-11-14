@@ -4,6 +4,6 @@ export default `{
   heading,
   excerpt,
   mediaProps ${formatAdvancedMedia},
-  ${formatCtaLink('ctaPrimary', 'ctaLabelPrimary', 'ctaUrlPrimary')},
-  ${formatCtaLink('ctaSecondary', 'ctaLabelSecondary', 'ctaUrlSecondary')}
+  ${formatCtaLink('ctaPrimary', 'ctaLabelPrimary', 'ctaUrlPrimary', true)},
+  ${formatCtaLink('ctaSecondary', 'ctaLabelSecondary', 'ctaUrlSecondary', true)}
 }`

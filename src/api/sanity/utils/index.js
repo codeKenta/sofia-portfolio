@@ -22,15 +22,22 @@ export function formatLink(fieldName) {
   `
 }
 
+export function formatPageAndSectionLink(fieldName = 'pageAndSectionLink') {
+  return `
+  coalesce('/' + ${fieldName}.link.reference->slug.current + coalesce('#' + ${fieldName}.sectionLink.section, '') , ${fieldName}.link.url, '')
+  `
+}
+
 export function formatCtaLink(
   fieldGroupName = 'cta',
   labelFieldName = 'label',
   urlFieldName = 'url',
+  withSection = false,
 ) {
   return `
     "${fieldGroupName}": {
       "label": ${labelFieldName},
-      "url": ${formatLink(urlFieldName)}
+      "url": ${withSection ? formatPageAndSectionLink(urlFieldName) : formatLink(urlFieldName)}
     }
   `
 }

@@ -1,5 +1,3 @@
-import LinkInput from '../../components/LinkInput'
-
 export default {
   name: 'pageAndSectionLink',
   title: 'Link',

@@ -10,8 +10,8 @@ export default {
   type: 'object',
   preview: previewTitle('Contact', 'heading', MdTextFields),
   fields: [
+    ...commonBlockFields,
     {
-      ...commonBlockFields,
       title: 'Show image',
       name: 'showImage',
       type: 'boolean',
