@@ -51,13 +51,6 @@ function App(props) {
       <AppLoader />
 
       {preview && <AppExitPreview />}
-
-      <GlobalStateContext.Consumer>
-        {({ isCookieBarOpen }) => {
-          // Will only fetch `AppCookieBar` chunk if user has not consented.
-          return isCookieBarOpen ? <AppCookieBar open /> : null
-        }}
-      </GlobalStateContext.Consumer>
     </AppRoot>
   )
 }
