@@ -3,11 +3,9 @@ import PropTypes from 'prop-types'
 import { styled, useTheme } from '@mui/system'
 import { Typography } from '@mui/material'
 import Box from '@mui/material/Box'
-// import { Media, MediaReveal } from '@noaignite/oui'
 import { Media, MediaReveal } from '@noaignite/oui'
 import { mediaType } from '~/api/utils'
 import ContentContainer from '~/components/ContentContainer'
-// import { ASPECT_RATIOS } from '~/utils/constants'
 import { LinkedIn } from '~/components/icons'
 
 const Root = styled('section', {
@@ -62,11 +60,11 @@ const LinkedInLink = styled('a', {
 }))
 
 function Contact(props) {
-  const { name, email, image, phone, linkedInUrl, showImage, renderIndex } = props
+  const { name, email, image, phone, linkedInUrl, showImage, id = '', renderIndex } = props
   const theme = useTheme()
 
   return (
-    <Root>
+    <Root id={id}>
       <ContentContainer>
         <Box
           sx={{
@@ -104,13 +102,14 @@ function Contact(props) {
 }
 
 Contact.propTypes = {
-  name: PropTypes.string,
-  image: mediaType,
   email: PropTypes.string,
-  renderIndex: PropTypes.number.isRequired,
-  phone: PropTypes.string,
-  showImage: PropTypes.bool,
+  id: PropTypes.string,
+  image: mediaType,
   linkedInUrl: PropTypes.string,
+  name: PropTypes.string,
+  phone: PropTypes.string,
+  renderIndex: PropTypes.number.isRequired,
+  showImage: PropTypes.bool,
 }
 
 export default Contact

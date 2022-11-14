@@ -99,7 +99,3 @@ MediaGrid.propTypes = {
 }
 
 export default MediaGrid
-
-// [theme.breakpoints.up('md')]: {
-//           gridTemplateColumns,
-//         },
