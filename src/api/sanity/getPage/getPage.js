@@ -17,16 +17,13 @@ export default async function getPage(uri, preview) {
     },
     "isDraft": _id in path("drafts.**")
   `
-
   const query = uri
-    ? `*[_type== "page" || _type == "casePage" && slug.current == $uri ] {${pageQuery}}`
+    ? `*[_type in ['page', 'casePage']  && slug.current == $uri ] {${pageQuery}}`
     : `*[_type == 'siteSettings'] {...frontpage->{${pageQuery}}}`
 
   const params = {
     uri,
   }
-
-  // console.log('\n\n', query, '\n\n')
 
   const data = await getClient(preview).fetch(query, params)
 

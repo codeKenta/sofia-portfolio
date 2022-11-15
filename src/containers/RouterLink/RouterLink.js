@@ -1,11 +1,25 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useGlobalHandlers } from '~/context'
 
 const RouterLink = React.forwardRef(function RouterLink(props, ref) {
   const { as, children, external, href = '', replace, scroll, shallow, ...other } = props
+  const { onNavMenuClose } = useGlobalHandlers()
 
-  const cleanUpHref = href.replace('//', '/')
+  const cleanUpHref = href?.replace('//', '/')
+  const { asPath } = useRouter()
+  const isSamePage = cleanUpHref?.split('#')?.shift() === asPath
+
+  // link to section on the same page
+  if (cleanUpHref.includes('#') && isSamePage) {
+    return (
+      <a onClick={onNavMenuClose} href={cleanUpHref} ref={ref} {...other}>
+        {children}
+      </a>
+    )
+  }
 
   // Render as a regular `a` tag if external link.
   if (external || /^https?:\/\//.test(cleanUpHref)) {
