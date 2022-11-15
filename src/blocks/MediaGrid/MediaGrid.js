@@ -46,7 +46,7 @@ function MediaGrid(props) {
             const chosenRatio = ratios[outerIndex]
             const aspectRatio = images?.length === 1 && !orientation ? {} : chosenRatio
             const isLandScape = aspectRatio.width * 1 > aspectRatio.height * 1
-            const landscapeItemsSmallStyles = isLandScape ? { gridColumn: '1 / -1' } : {}
+
             return (
               <Box
                 key={outerIndex}
@@ -59,31 +59,38 @@ function MediaGrid(props) {
                   },
                 }}
               >
-                {images?.map((image, innerIndex) => (
-                  <MediaReveal
-                    sx={{
-                      [theme.breakpoints.down('sm')]: {
-                        ...landscapeItemsSmallStyles,
-                      },
-                    }}
-                    key={innerIndex}
-                    {...aspectRatio}
-                  >
-                    <Media
+                {images?.map((image, innerIndex) => {
+                  const itemsSmallScreenStyles =
+                    isLandScape || [2, 5, 8, 11].includes(innerIndex) || images.length === 1
+                      ? { gridColumn: '1 / -1' }
+                      : {}
+
+                  return (
+                    <MediaReveal
+                      sx={{
+                        [theme.breakpoints.down('sm')]: {
+                          ...itemsSmallScreenStyles,
+                        },
+                      }}
+                      key={innerIndex}
                       {...aspectRatio}
-                      {...(image?.component === 'video'
-                        ? {
-                            autoPlay: true,
-                            muted: true,
-                            loop: true,
-                            playsInline: true,
-                          }
-                        : { alt: '' })}
-                      {...image}
-                      priority={renderIndex === 0}
-                    />
-                  </MediaReveal>
-                ))}
+                    >
+                      <Media
+                        {...aspectRatio}
+                        {...(image?.component === 'video'
+                          ? {
+                              autoPlay: true,
+                              muted: true,
+                              loop: true,
+                              playsInline: true,
+                            }
+                          : { alt: '' })}
+                        {...image}
+                        priority={renderIndex === 0}
+                      />
+                    </MediaReveal>
+                  )
+                })}
               </Box>
             )
           })}

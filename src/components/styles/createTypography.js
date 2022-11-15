@@ -61,7 +61,7 @@ export default function createTypography(palette, typography) {
 
   const variants = {
     h1: buildVariant(fontFamilySecondary, fontWeightBold, 72, 1, -0.01, caseAllCaps, 50),
-    h2: buildVariant(fontFamilySecondary, fontWeightBold, 58, 1, 0.01, caseAllCaps, 45),
+    h2: buildVariant(fontFamilySecondary, fontWeightBold, 58, 1, 0.01, caseAllCaps, 40),
     h3: buildVariant(fontFamilySecondary, fontWeightBold, 40, 1.05, 0.01, caseAllCaps, 30),
     h4: buildVariant(fontFamilySecondary, fontWeightBold, 22, 1.2, 0.03, caseAllCaps),
     h5: buildVariant(fontFamilySecondary, fontWeightBold, 16, 1.3, 0.03, caseAllCaps),

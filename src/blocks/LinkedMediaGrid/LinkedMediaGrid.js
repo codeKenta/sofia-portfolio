@@ -144,7 +144,7 @@ function LinkedMediaGrid(props) {
                 />
               </MediaReveal>
               <Cover>
-                <Heading>{heading}</Heading>
+                <Heading sx={heading?.length > 10 ? { fontSize: 16 } : {}}>{heading}</Heading>
               </Cover>
             </Link>
           ))}
