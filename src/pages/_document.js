@@ -5,12 +5,15 @@ import Document, { Html, Head, Main, NextScript } from 'next/document'
 import createEmotionServer from '@emotion/server/create-instance'
 import createEmotionCache from '~/utils/createEmotionCache'
 import theme from '~/utils/theme.light'
+import { GtmHead, GtmBody } from '~/utils/gtm'
 
+const gtmId = process.env.NEXT_PUBLIC_GTM_ID
 export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
         <Head>
+          <GtmHead gtmId={gtmId} />
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
           {/* Generated from https://favicon.io/ */}
@@ -60,6 +63,7 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <GtmBody gtmId={gtmId} />
         </body>
       </Html>
     )
