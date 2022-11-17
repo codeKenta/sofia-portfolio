@@ -1,7 +1,6 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 import Router from 'next/router'
-import { trackPageview } from '~/utils/gtm'
 
 export const GlobalStateContext = React.createContext({})
 export const GlobalHandlersContext = React.createContext({})
@@ -42,10 +41,6 @@ function GlobalProvider(props) {
       closeAllMenus()
     }
 
-    const handleRouteChangeComplete = () => {
-      setTimeout(trackPageview, 500)
-    }
-
     if (!localStorage?.getItem(COOKIE_CONSENT_ID)) {
       setTimeout(() => {
         setCookieBarOpen(true)
@@ -53,11 +48,9 @@ function GlobalProvider(props) {
     }
 
     Router.events.on('routeChangeStart', handleRouteChangeStart)
-    Router.events.on('routeChangeComplete', handleRouteChangeComplete)
 
     return () => {
       Router.events.off('routeChangeStart', handleRouteChangeStart)
-      Router.events.off('routeChangeComplete', handleRouteChangeComplete)
     }
   }, [])
 
