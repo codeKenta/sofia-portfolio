@@ -2,14 +2,11 @@ import groq from 'groq'
 import * as blockQueries from '~/blocks/queries'
 import { getClient } from '../sanityClient'
 import { filterDataToSingleItem } from '../utils'
+import getBlocksQuery from '../getBlocksQuery'
 
 export default async function getPage(uri, preview) {
   const pageQuery = groq`
-    "blocks": blocks[] {
-      ${Object.entries(blockQueries).map(
-        ([key, query]) => `_type == "${key}" => { "name": _type, "props": ${query} }`,
-      )}
-    },
+    ${getBlocksQuery(blockQueries)},
     seo {
       title,
       description,

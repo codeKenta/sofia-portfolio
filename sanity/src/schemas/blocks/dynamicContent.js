@@ -18,6 +18,7 @@ export default {
   preview: previewTitle('Dynamic Content', 'heading', MdOutlineArticle),
   fields: [
     ...commonBlockFields,
+
     { title: 'Caption', name: 'caption', type: 'string', group: 'content' },
     { title: 'Heading', name: 'heading', type: 'string', group: 'content' },
     { title: 'Text', name: 'text', type: 'simpleRichText', group: 'content' },

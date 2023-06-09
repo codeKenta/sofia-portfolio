@@ -1,6 +1,6 @@
 import * as blocks from '../blocks'
 
-const blockNames = Object.keys(blocks)
+export const blockNames = Object.keys(blocks)
 
 const blockTypes = blockNames.map((blockName) => ({
   type: blockName,

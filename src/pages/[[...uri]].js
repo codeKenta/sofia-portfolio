@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 import Head from 'next/head'
 import { getPage, usePreviewSubscription, filterDataToSingleItem } from '~/api/sanity'
@@ -9,6 +10,8 @@ const renderBlock = createRenderBlock(blockVariants)
 
 function Page(props) {
   const { data, preview } = props
+  const router = useRouter()
+  const filterTags = router?.query?.tags
 
   const { data: previewData } = usePreviewSubscription(data?.query, {
     params: data?.params ?? {},
@@ -18,13 +21,12 @@ function Page(props) {
 
   const page = filterDataToSingleItem(previewData, preview)
 
-  const { blocks, seo } = page
-
+  const { blocks, seo } = page || {}
 
   return (
     <React.Fragment>
       <Head>{<title>{seo?.title}</title>}</Head>
-      {blocks?.map((block, idx) => renderBlock(block, idx))}
+      {blocks?.map((block, idx) => renderBlock(block, idx, filterTags))}
     </React.Fragment>
   )
 }
@@ -41,6 +43,7 @@ export async function getStaticProps(ctx) {
   } = ctx
 
   const uriString = uri ? nextUriToString(uri) : ''
+
   const queryResult = await getPage(uriString, preview)
 
   const { page, query, params } = queryResult
