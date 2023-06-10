@@ -11,6 +11,15 @@ export default {
   preview: previewTitle('Heading', 'heading', MdTextFields),
   fields: [
     ...commonBlockFields,
+    {
+      name: 'tags',
+      title: 'Tags',
+      type: 'tags',
+      options: {
+        includeFromReference: 'caseTag',
+      },
+      group: 'settings',
+    },
     { title: 'Caption', name: 'caption', type: 'string', group: 'content' },
     { title: 'Heading', name: 'heading', type: 'string', group: 'content' },
     {

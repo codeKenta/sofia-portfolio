@@ -1,6 +1,7 @@
 import { MdTextFields } from 'react-icons/md'
 import commonBlockSettings from '../partials/commonBlockSettings'
 import previewTitle from '../../utils/previewTitle'
+import commonBlockFields from '../partials/commonBlockFields'
 
 const BlockNames = ['Content', 'DynamicContent', 'Heading', 'Hero', 'MediaGrid']
 
@@ -15,6 +16,7 @@ export default {
   type: 'object',
   preview: previewTitle('Case', 'heading', MdTextFields),
   fields: [
+    ...commonBlockFields,
     { title: 'Heading', name: 'heading', type: 'string', group: 'content' },
     {
       name: 'tags',
