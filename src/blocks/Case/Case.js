@@ -17,21 +17,18 @@ const CaseRoot = styled('section', {
 })({})
 
 function Case(props) {
-  const {
-    blocks,
-    //   tags
-  } = props
+  const { blocks, id } = props
 
   if (!blocks || !blocks.length) {
     return null
   }
 
-  return <CaseRoot>{blocks?.map((block, idx) => renderBlock(block, idx))}</CaseRoot>
+  return <CaseRoot id={id}>{blocks?.map((block, idx) => renderBlock(block, idx))}</CaseRoot>
 }
 
 Case.propTypes = {
   blocks: PropTypes.array,
-  // tags: PropTypes.array,
+  id: PropTypes.string,
 }
 
 export default Case
