@@ -4,5 +4,9 @@ export default `{
   rows[] {
       images[] ${formatMedia},
       orientation,
+      customRatio {
+        width,
+        height,
+      }
   },
 }`

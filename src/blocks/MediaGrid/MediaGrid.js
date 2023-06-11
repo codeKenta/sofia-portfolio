@@ -21,7 +21,13 @@ function MediaGrid(props) {
 
   const ratios = React.useMemo(
     () =>
-      rows.map(({ images, orientation }) => {
+      rows.map(({ images, orientation, customRatio }) => {
+        if (orientation === 'custom' && customRatio) {
+          return {
+            width: customRatio?.width || 1,
+            height: customRatio?.height || 1,
+          }
+        }
         if (orientation && orientation !== 'auto') {
           return ASPECT_RATIOS?.[orientation] ?? ASPECT_RATIOS.portrait
         }

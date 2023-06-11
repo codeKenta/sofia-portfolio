@@ -95,10 +95,10 @@ export default function createPalette(palette) {
     primary = {
       light: pink[300],
       main: '#FFEDED',
-      dark: pink[700],
+      dark: pink[100],
     },
     secondary = {
-      light: purple[300],
+      light: purple[200],
       main: '#D90606',
       dark: purple[700],
     },

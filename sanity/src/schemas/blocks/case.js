@@ -28,6 +28,12 @@ export default {
       group: 'settings',
     },
     {
+      name: 'disable',
+      title: 'Disable',
+      type: 'boolean',
+      group: 'settings',
+    },
+    {
       name: 'blocks',
       type: 'array',
       of: blockTypes,

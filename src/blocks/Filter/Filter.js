@@ -2,7 +2,9 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 import { useRouter } from 'next/router'
 import { styled } from '@mui/system'
-import { Chip } from '@mui/material'
+import { Chip, IconButton, Box } from '@mui/material'
+import { Close as CloseIcon } from '~/components/icons'
+import ContentContainer from '~/components/ContentContainer'
 
 const FilterRoot = styled('div', {
   name: 'Filter',
@@ -65,43 +67,73 @@ function Filter(props) {
     // Join the updated tags array with commas
     const updatedTags = routerTagsValues.join(',')
 
-    // Update the query parameter 'tags' with the updated value
-
     const newQuery = {
       ...query,
       tags: updatedTags,
     }
 
+    if (!updatedTags) {
+      delete newQuery.tags
+    }
+
     router.replace({ pathname, query: newQuery }, undefined, { shallow: true })
+  }
+
+  const hasActiveTags = routerTagsValues?.length > 0
+
+  const handleClearFilter = () => {
+    if (hasActiveTags) {
+      const { query, pathname } = router
+
+      delete query.tags
+
+      router.replace({ pathname, query }, undefined, { shallow: true })
+    }
   }
 
   return (
     <FilterRoot>
-      <Heading
-        sx={{
-          fontWeight: '300',
-        }}
-      >
-        {heading}
-      </Heading>
-
-      {tags?.map((tag) => {
-        const isActive = routerTagsValues.includes(tag?.value?.toLowerCase())
-
-        return (
-          <Chip
-            data-value={tag?.value}
-            key={tag?.label}
-            variant={isActive ? 'filled' : 'outlined'}
-            color={isActive ? 'primary' : 'default'}
-            label={tag?.label}
-            onClick={handleTagClick}
+      <ContentContainer>
+        {heading && (
+          <Heading
             sx={{
-              marginRight: 1,
+              fontWeight: '300',
             }}
-          />
-        )
-      })}
+          >
+            {heading}
+          </Heading>
+        )}
+
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          {tags?.map((tag) => {
+            const isActive = routerTagsValues.includes(tag?.value?.toLowerCase())
+
+            return (
+              <Chip
+                data-value={tag?.value}
+                key={tag?.label}
+                variant={isActive ? 'filled' : 'outlined'}
+                color={isActive ? 'primary' : 'default'}
+                label={tag?.label}
+                onClick={handleTagClick}
+                sx={{
+                  marginRight: 1,
+                }}
+              />
+            )
+          })}
+          {hasActiveTags && (
+            <IconButton
+              onClick={handleClearFilter}
+              edge="start"
+              size="small"
+              aria-label={'Clear filter'}
+            >
+              <CloseIcon />
+            </IconButton>
+          )}
+        </Box>
+      </ContentContainer>
     </FilterRoot>
   )
 }
