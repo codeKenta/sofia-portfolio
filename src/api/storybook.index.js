@@ -1,5 +1,6 @@
 import { sleep } from '@noaignite/utils'
-import { filter, products } from '~/api/__mock__'
+const filter = {}
+const products = []
 
 export * from './utils'
 
