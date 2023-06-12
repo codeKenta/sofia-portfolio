@@ -1,13 +1,13 @@
 import * as React from 'react'
 import mock from './mock'
-import Content from './Case'
+import Filter from './Filter'
 
 export default {
-  title: 'Blocks/Case',
-  component: Content,
+  title: 'Blocks/Filter',
+  component: Filter,
 }
 
-const Template = (args) => <Content {...args} />
+const Template = (args) => <Filter {...args} />
 
 export const Default = Template.bind({})
 Default.args = mock
