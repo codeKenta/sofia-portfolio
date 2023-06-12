@@ -95,6 +95,7 @@ function DynamicContent(props) {
     placeContent = 'left',
     backgroundColor,
     excludeBottomPadding = false,
+    parentRenderIndex,
   } = props
   const theme = useTheme()
 
@@ -136,8 +137,14 @@ function DynamicContent(props) {
 
   const displayImage = images?.length && images[displayImageIndex]
 
+  const hasParentRenderIndex = typeof parentRenderIndex === 'number'
+  const placeContentFromParentRenderIndex = parentRenderIndex % 2 === 0 ? 'left' : 'right'
+
+  const finalPlaceContent =
+    placeContent || (hasParentRenderIndex && placeContentFromParentRenderIndex)
+
   const gridTemplateColumns =
-    placeContent === 'right'
+    finalPlaceContent === 'right'
       ? ' minmax(auto, 400px) 1fr minmax(auto, 540px)'
       : 'minmax(auto, 540px) 1fr minmax(auto, 400px)'
 
@@ -166,7 +173,7 @@ function DynamicContent(props) {
             sx={{
               [theme.breakpoints.up('md')]: {
                 gridRow: 1,
-                gridColumn: placeContent === 'right' ? 3 : 1,
+                gridColumn: finalPlaceContent === 'right' ? 3 : 1,
               },
             }}
           >
@@ -217,7 +224,7 @@ function DynamicContent(props) {
               },
               [theme.breakpoints.up('md')]: {
                 gridRow: 1,
-                gridColumn: placeContent === 'right' ? 1 : 3,
+                gridColumn: finalPlaceContent === 'right' ? 1 : 3,
               },
             }}
           >
@@ -333,6 +340,7 @@ DynamicContent.propTypes = {
   text: PropTypes.array,
   backgroundColor: PropTypes.string,
   excludeBottomPadding: PropTypes.bool,
+  parentRenderIndex: PropTypes.number,
 }
 
 export default DynamicContent

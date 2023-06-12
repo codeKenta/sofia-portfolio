@@ -1,10 +1,14 @@
 import * as React from 'react'
 
 export default function createRenderBlock(variants) {
-  function renderBlock({ name, props = {} }, idx, filterTags) {
+  function renderBlock({ name, props = {} }, idx, parentIdx, filterTags) {
     const { children: childrenProp, ...other } = props
 
     const { tags } = other
+
+    if (typeof parentIdx === 'number') {
+      other.parentRenderIndex = parentIdx
+    }
 
     if (filterTags?.length && tags?.length) {
       const blockTagValues = tags.map((tag) => tag?.value.toLowerCase())

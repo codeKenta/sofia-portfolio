@@ -26,7 +26,7 @@ function Page(props) {
   return (
     <React.Fragment>
       <Head>{<title>{seo?.title}</title>}</Head>
-      {blocks?.map((block, idx) => renderBlock(block, idx, filterTags))}
+      {blocks?.map((block, idx) => renderBlock(block, idx, null, filterTags))}
     </React.Fragment>
   )
 }
