@@ -21,19 +21,26 @@ function Page(props) {
     enabled: preview,
   })
 
-  useEffect(() => {
-    const hashSection = window?.location?.pathname // Retrieves the path from the window object
-    const section = hashSection.split('#')[1]
+  React.useEffect(() => {
+    const handleRouteChange = (url) => {
+      const section = url.split('#')[1]
 
-    const sectionId = document.getElementById(section)
-    if (sectionId) {
-      const { query, pathname } = router
-      query.section = section
-      router.replace({ pathname, query }, undefined, { shallow: true })
+      const sectionId = document.getElementById(section)
+      if (sectionId) {
+        const { query, pathname } = router
+        query.section = section
+        router.replace({ pathname, query }, undefined, { shallow: true })
+      }
     }
-  }, [router])
 
-  useEffect(() => {
+    router.events.on('routeChangeComplete', handleRouteChange)
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [])
+
+  React.useEffect(() => {
     if (routerSection) {
       const sectionId = document.getElementById(routerSection)
       if (sectionId) {
