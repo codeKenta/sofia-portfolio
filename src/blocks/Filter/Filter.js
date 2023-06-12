@@ -104,7 +104,26 @@ function Filter(props) {
           </Heading>
         )}
 
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+          }}
+        >
+          {hasActiveTags && (
+            <IconButton
+              onClick={handleClearFilter}
+              edge="start"
+              size="small"
+              aria-label={'Clear filter'}
+              sx={{ position: 'relative', top: -4 }}
+            >
+              <CloseIcon />
+            </IconButton>
+          )}
+
           {tags?.map((tag) => {
             const isActive = routerTagsValues.includes(tag?.value?.toLowerCase())
 
@@ -117,21 +136,12 @@ function Filter(props) {
                 label={tag?.label}
                 onClick={handleTagClick}
                 sx={{
-                  marginRight: 1,
+                  marginLeft: 1,
+                  marginBottom: 1,
                 }}
               />
             )
           })}
-          {hasActiveTags && (
-            <IconButton
-              onClick={handleClearFilter}
-              edge="start"
-              size="small"
-              aria-label={'Clear filter'}
-            >
-              <CloseIcon />
-            </IconButton>
-          )}
         </Box>
       </ContentContainer>
     </FilterRoot>

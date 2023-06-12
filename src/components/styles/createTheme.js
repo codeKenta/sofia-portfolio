@@ -35,6 +35,14 @@ export default function createTheme(options = {}) {
       spacing,
       typography,
       zIndex,
+      props: {
+        MuiButtonBase: {
+          disableRipple: true,
+        },
+        MuiChip: {
+          disableRipple: true,
+        },
+      },
     },
     other,
   )
