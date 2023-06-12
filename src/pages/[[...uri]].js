@@ -37,7 +37,7 @@ function Page(props) {
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
-  }, [])
+  }, [router])
 
   React.useEffect(() => {
     if (routerSection) {
