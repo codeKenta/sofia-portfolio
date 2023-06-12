@@ -2,6 +2,7 @@ import * as React from 'react'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 import Head from 'next/head'
+import { useEffect } from 'react'
 import { getPage, usePreviewSubscription, filterDataToSingleItem } from '~/api/sanity'
 import { createRenderBlock, nextUriToString } from '~/utils'
 import * as blockVariants from '~/blocks'
@@ -12,12 +13,34 @@ function Page(props) {
   const { data, preview } = props
   const router = useRouter()
   const filterTags = router?.query?.tags
+  const routerSection = router?.query?.section
 
   const { data: previewData } = usePreviewSubscription(data?.query, {
     params: data?.params ?? {},
     initialData: data?.page,
     enabled: preview,
   })
+
+  useEffect(() => {
+    const hashSection = window?.location?.pathname // Retrieves the path from the window object
+    const section = hashSection.split('#')[1]
+
+    const sectionId = document.getElementById(section)
+    if (sectionId) {
+      const { query, pathname } = router
+      query.section = section
+      router.replace({ pathname, query }, undefined, { shallow: true })
+    }
+  }, [router])
+
+  useEffect(() => {
+    if (routerSection) {
+      const sectionId = document.getElementById(routerSection)
+      if (sectionId) {
+        sectionId.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+  }, [routerSection])
 
   const page = filterDataToSingleItem(previewData, preview)
 
