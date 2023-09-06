@@ -8,12 +8,12 @@ import { useRouter } from 'next/router'
 import { CacheProvider } from '@emotion/react'
 import { ThemeProvider } from '@mui/material/styles'
 import { CssBaseline } from '@mui/material'
-import ReactGA from 'react-ga'
 import { GlobalProvider, I18nProvider, RemoteConfigProvider } from '~/context'
 import createEmotionCache from '~/utils/createEmotionCache'
 import theme from '~/utils/theme.light'
 import AppBase from '~/containers/App'
 import { getGlobal } from '~/api/sanity'
+import * as gtag from '~/utils/gtag'
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
@@ -33,22 +33,14 @@ function App(props) {
   const router = useRouter()
 
   React.useEffect(() => {
-    ReactGA.initialize('G-3QXW4KQL0G')
-    // Send initial pageview when the app is first loaded
-    ReactGA.pageview(window.location.pathname)
-
-    // Track pageview on route change
     const handleRouteChange = (url) => {
-      ReactGA.pageview(url)
+      gtag.pageview(url)
     }
-
     router.events.on('routeChangeComplete', handleRouteChange)
-
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [router.events])
 
   return (
     <CacheProvider value={emotionCache}>
