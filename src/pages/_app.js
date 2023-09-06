@@ -4,9 +4,11 @@ import '../../scripts/polyfills'
 import * as React from 'react'
 import PropTypes from 'prop-types'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { CacheProvider } from '@emotion/react'
 import { ThemeProvider } from '@mui/material/styles'
 import { CssBaseline } from '@mui/material'
+import ReactGA from 'react-ga'
 import { GlobalProvider, I18nProvider, RemoteConfigProvider } from '~/context'
 import createEmotionCache from '~/utils/createEmotionCache'
 import theme from '~/utils/theme.light'
@@ -27,6 +29,26 @@ function App(props) {
   } = props
 
   const { preview } = pageProps
+
+  const router = useRouter()
+
+  React.useEffect(() => {
+    ReactGA.initialize('G-3QXW4KQL0G')
+    // Send initial pageview when the app is first loaded
+    ReactGA.pageview(window.location.pathname)
+
+    // Track pageview on route change
+    const handleRouteChange = (url) => {
+      ReactGA.pageview(url)
+    }
+
+    router.events.on('routeChangeComplete', handleRouteChange)
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <CacheProvider value={emotionCache}>
