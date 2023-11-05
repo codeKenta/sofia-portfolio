@@ -23,6 +23,17 @@ function Page(props) {
 
   const { blocks, seo } = page || {}
 
+  React.useLayoutEffect(() => {
+    const hash = window.location.hash
+
+    if (hash) {
+      const element = document.getElementById(hash.slice(1))
+      if (element) {
+        element.scrollIntoView()
+      }
+    }
+  }, [])
+
   return (
     <React.Fragment>
       <Head>{<title>{seo?.title}</title>}</Head>
