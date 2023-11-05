@@ -24,7 +24,14 @@ function Heading(props) {
         }}
       >
         <ContentContainer paddingBottom={includePaddingBottom}>
-          <Typography variant={headingType}>{heading}</Typography>
+          <Typography
+            sx={{
+              hyphens: 'manual',
+            }}
+            variant={headingType}
+          >
+            {heading}
+          </Typography>
         </ContentContainer>
       </Root>
     )
