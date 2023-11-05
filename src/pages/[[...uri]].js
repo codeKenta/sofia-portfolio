@@ -12,41 +12,12 @@ function Page(props) {
   const { data, preview } = props
   const router = useRouter()
   const filterTags = router?.query?.tags
-  const routerSection = router?.query?.section
 
   const { data: previewData } = usePreviewSubscription(data?.query, {
     params: data?.params ?? {},
     initialData: data?.page,
     enabled: preview,
   })
-
-  React.useEffect(() => {
-    const handleRouteChange = (url) => {
-      const section = url.split('#')[1]
-
-      const sectionId = document.getElementById(section)
-      if (sectionId) {
-        const { query, pathname } = router
-        query.section = section
-        router.replace({ pathname, query }, undefined, { shallow: true })
-      }
-    }
-
-    router.events.on('routeChangeComplete', handleRouteChange)
-
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange)
-    }
-  }, [router])
-
-  React.useEffect(() => {
-    if (routerSection) {
-      const sectionId = document.getElementById(routerSection)
-      if (sectionId) {
-        sectionId.scrollIntoView({ behavior: 'smooth' })
-      }
-    }
-  }, [routerSection])
 
   const page = filterDataToSingleItem(previewData, preview)
 
