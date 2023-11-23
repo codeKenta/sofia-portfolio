@@ -1,4 +1,5 @@
 export { default as Case } from './Case/query'
+export { default as CaseLinks } from './CaseLinks/query'
 export { default as Contact } from './Contact/query'
 export { default as Content } from './Content/query'
 export { default as DynamicContent } from './DynamicContent/query'
