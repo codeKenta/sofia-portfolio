@@ -8,7 +8,7 @@ export default {
       name: 'size',
       type: 'string',
       options: {
-        list: ['large', 'small'],
+        list: ['large', 'medium', 'small'],
         layout: 'radio',
         direction: 'horizontal',
       },

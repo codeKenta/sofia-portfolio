@@ -16,7 +16,7 @@ function Content(props) {
 
   return (
     <ContentRoot>
-      <ContentContainer place={place} small>
+      <ContentContainer place={place} size="small">
         <SanityHtml textBlocks={text} />
       </ContentContainer>
     </ContentRoot>

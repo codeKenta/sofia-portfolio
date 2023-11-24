@@ -13,10 +13,15 @@ const Root = styled('section', {
 })(({ theme }) => ({
   ...theme.mixins.verticalRhythm(2),
   padding: 'var(--cia-section-spacing)',
+  [theme.breakpoints.up('md')]: {
+    paddingTop: theme.spacing(14),
+    paddingBottom: theme.spacing(14),
+  },
 }))
 
 function MediaGrid(props) {
-  const { rows, renderIndex } = props
+  const { rows, backgroundColor, containerSize, renderIndex } = props
+
   const theme = useTheme()
 
   const ratios = React.useMemo(
@@ -45,29 +50,57 @@ function MediaGrid(props) {
   )
 
   return (
-    <Root>
-      <ContentContainer>
-        <Box sx={{ display: 'grid', gridRowGap: theme.spacing(2) }}>
-          {rows?.map(({ images, orientation }, outerIndex) => {
+    <Root
+      sx={{
+        backgroundColor: backgroundColor === 'color' ? theme.palette.common.pink : 'transparent',
+      }}
+    >
+      <ContentContainer size={containerSize}>
+        <Box
+          sx={{
+            display: 'grid',
+
+            gridGap: theme.spacing(1),
+            [theme.breakpoints.up('sm')]: {
+              gridGap: theme.spacing(2),
+            },
+          }}
+        >
+          {rows?.map(({ images, orientation, minColumns }, outerIndex) => {
             const chosenRatio = ratios[outerIndex]
             const aspectRatio = images?.length === 1 && !orientation ? {} : chosenRatio
             const isLandScape = aspectRatio.width * 1 > aspectRatio.height * 1
 
+            const gridColumnsStyles =
+              minColumns > 0
+                ? {
+                    gridTemplateColumns: `repeat(${minColumns}, 1fr)`,
+                    [theme.breakpoints.up('sm')]: {
+                      gridTemplateColumns: `repeat(${Math.max(images?.length, minColumns)}, 1fr)`,
+                    },
+                  }
+                : {
+                    gridTemplateColumns: '1fr 1fr',
+                    [theme.breakpoints.up('sm')]: {
+                      gridTemplateColumns: `repeat(${images?.length}, 1fr)`,
+                    },
+                  }
             return (
               <Box
                 key={outerIndex}
                 sx={{
                   display: 'grid',
-                  gridGap: theme.spacing(2),
-                  gridTemplateColumns: '1fr 1fr',
+                  gridGap: theme.spacing(1),
                   [theme.breakpoints.up('sm')]: {
-                    gridTemplateColumns: `repeat(${images?.length}, 1fr)`,
+                    gridGap: theme.spacing(2),
                   },
+                  ...gridColumnsStyles,
                 }}
               >
                 {images?.map((image, innerIndex) => {
                   const itemsSmallScreenStyles =
-                    isLandScape || [2, 5, 8, 11].includes(innerIndex) || images.length === 1
+                    !minColumns &&
+                    (isLandScape || [2, 5, 8, 11].includes(innerIndex) || images.length === 1)
                       ? { gridColumn: '1 / -1' }
                       : {}
 
@@ -108,6 +141,8 @@ function MediaGrid(props) {
 
 MediaGrid.propTypes = {
   rows: PropTypes.instanceOf(Object),
+  backgroundColor: PropTypes.string,
+  containerSize: PropTypes.string,
   renderIndex: PropTypes.number.isRequired,
 }
 

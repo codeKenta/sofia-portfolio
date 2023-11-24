@@ -5,6 +5,26 @@ export default {
   ...commonPageSettings,
   name: 'casePage',
   title: 'Case Page',
+  preview: {
+    select: {
+      title: 'title',
+      media: 'seo.image',
+      tags: 'tags',
+    },
+    prepare: ({
+      title,
+      media,
+      // tags
+    }) => {
+      // const labels = tags.map((item) => item.label)
+      // const labelsString = labels.join(', ')
+
+      return {
+        title,
+        media,
+      }
+    },
+  },
   fields: [
     ...commonPageFields,
     {

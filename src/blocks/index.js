@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic'
 
 export const ArticleSlideshow = dynamic(() => import(/* webpackChunkName: "blocks/ArticleSlideshow" */ './ArticleSlideshow')) // prettier-ignore
 export const Case = dynamic(() => import(/* webpackChunkName: "blocks/Case" */ './Case')) // prettier-ignore
+export const CaseLinks = dynamic(() => import(/* webpackChunkName: "blocks/CaseLinks" */ './CaseLinks')) // prettier-ignore
 export const Contact = dynamic(() => import(/* webpackChunkName: "blocks/Contact" */ './Contact')) // prettier-ignore
 export const Content = dynamic(() => import(/* webpackChunkName: "blocks/Content" */ './Content')) // prettier-ignore
 export const DynamicContent = dynamic(() => import(/* webpackChunkName: "blocks/DynamicContent" */ './DynamicContent')) // prettier-ignore
