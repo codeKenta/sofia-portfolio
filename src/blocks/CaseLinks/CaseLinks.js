@@ -54,25 +54,12 @@ function CaseLinks(props) {
       })
     : cases
 
-  const casesToShow = numberOfCases ? filteredCases.slice(0, numberOfCases) : filteredCases
+  const casesToShow = numberOfCases > 0 ? filteredCases.slice(0, numberOfCases) : filteredCases
 
   return (
     <Root>
       <ContentContainer>
         <GridContainer>
-          {casesToShow?.map((c) => (
-            <Link href={c.link}>
-              {c.image && (
-                <MediaReveal key={c.image} {...ASPECT_RATIOS.square}>
-                  <Media {...ASPECT_RATIOS.square} {...c.image} alt={c.title} />
-                </MediaReveal>
-              )}
-
-              <Typography variant="h4">{c.title}</Typography>
-              <Typography variant="body1">{c.description}</Typography>
-            </Link>
-          ))}
-
           {casesToShow?.map((c) => (
             <Link href={c.link}>
               {c.image && (

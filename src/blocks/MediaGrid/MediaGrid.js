@@ -77,12 +77,14 @@ function MediaGrid(props) {
                     gridTemplateColumns: `repeat(${minColumns}, 1fr)`,
                     [theme.breakpoints.up('sm')]: {
                       gridTemplateColumns: `repeat(${Math.max(images?.length, minColumns)}, 1fr)`,
+                      gridGap: theme.spacing(2),
                     },
                   }
                 : {
                     gridTemplateColumns: '1fr 1fr',
                     [theme.breakpoints.up('sm')]: {
                       gridTemplateColumns: `repeat(${images?.length}, 1fr)`,
+                      gridGap: theme.spacing(2),
                     },
                   }
             return (
@@ -91,9 +93,7 @@ function MediaGrid(props) {
                 sx={{
                   display: 'grid',
                   gridGap: theme.spacing(1),
-                  [theme.breakpoints.up('sm')]: {
-                    gridGap: theme.spacing(2),
-                  },
+
                   ...gridColumnsStyles,
                 }}
               >
