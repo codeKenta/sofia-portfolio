@@ -54,5 +54,10 @@ export default {
         },
       ],
     },
+    {
+      title: 'Min Columns',
+      name: 'minColumns',
+      type: 'number',
+    },
   ],
 }

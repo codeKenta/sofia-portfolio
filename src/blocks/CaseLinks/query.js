@@ -1,20 +1,29 @@
-import {
-  // formatMedia,
-  formatPageAndSectionLink,
-} from '~/api/sanity/utils'
+import // formatMedia,
+
+'~/api/sanity/utils'
 
 export default `{
   numberOfCases,
   tags[],
-  selectedCases[]-> {
+  cases[]-> {
     "title": seo.title,
     "description": seo.description,
-    "image": seo.image.asset->url,
-    "link": ${formatPageAndSectionLink()}
+    "image":{
+      "component": "picture",
+      "src": seo.image.asset->url + "?dl="
+    },
+    "link": slug.current,
+    tags[],
   },
-}`
 
-// media ${formatMedia},
-// caption,
-// heading,
-// "link": ${formatPageAndSectionLink()}
+  "allCases": *[_type == "casePage" && !(_id in path('drafts.**'))] {
+    "title": seo.title,
+    "description": seo.description,
+    "image":{
+      "component": "picture",
+      "src": seo.image.asset->url + "?dl="
+    },
+    "link": slug.current,
+    tags[],
+  } | order(title asc)
+}`

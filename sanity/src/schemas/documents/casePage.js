@@ -11,12 +11,16 @@ export default {
       media: 'seo.image',
       tags: 'tags',
     },
-    prepare: ({ title, media, tags }) => {
-      const labels = tags.map((item) => item.label)
-      const labelsString = labels.join(', ')
+    prepare: ({
+      title,
+      media,
+      // tags
+    }) => {
+      // const labels = tags.map((item) => item.label)
+      // const labelsString = labels.join(', ')
 
       return {
-        title: `${title} ${labelsString}`,
+        title,
         media,
       }
     },

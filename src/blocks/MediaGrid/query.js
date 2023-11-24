@@ -7,6 +7,9 @@ export default `{
       customRatio {
         width,
         height,
-      }
+      },
+      minColumns
   },
+  "backgroundColor": backgroundColor.bg,
+  "containerSize": containerSize.size,
 }`

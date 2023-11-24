@@ -2,8 +2,13 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 import Box from '@mui/material/Box'
 
+const maxSizes = {
+  small: 525,
+  medium: 700,
+  large: 1200,
+}
 function ContentContainer(props) {
-  const { small = false, place = 'center', children } = props
+  const { size = 'large', place = 'center', children } = props
 
   const placeMargin = {}
 
@@ -20,7 +25,7 @@ function ContentContainer(props) {
       sx={{
         margin: '0 auto',
         ...placeMargin,
-        maxWidth: small ? 525 : 1200,
+        maxWidth: maxSizes[size],
       }}
     >
       {children}
@@ -29,7 +34,7 @@ function ContentContainer(props) {
 }
 
 ContentContainer.propTypes = {
-  small: PropTypes.bool,
+  size: PropTypes.oneOf(['large', 'medium', 'small']),
   place: PropTypes.string,
   children: PropTypes.array,
 }

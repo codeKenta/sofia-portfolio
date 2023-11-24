@@ -1,1 +1,1 @@
-export { default } from './LinkedMediaGrid'
+export { default } from './CaseLinks'
