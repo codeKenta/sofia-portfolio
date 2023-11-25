@@ -1,8 +1,7 @@
-import // formatMedia,
-
-'~/api/sanity/utils'
+import { formatCtaLink } from '~/api/sanity/utils'
 
 export default `{
+  ${formatCtaLink('cta', 'ctaLabel', 'ctaUrl')},
   numberOfCases,
   tags[],
   cases[]-> {

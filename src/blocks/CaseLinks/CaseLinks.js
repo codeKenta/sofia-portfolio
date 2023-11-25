@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material'
+import { Typography, Button } from '@mui/material'
 import { styled } from '@mui/system'
 import { Media, MediaReveal } from '@noaignite/oui'
 import PropTypes from 'prop-types'
@@ -41,8 +41,13 @@ const Link = styled(RouterLink, {
   gap: theme.spacing(1),
 }))
 
+const CTAButton = styled(Button, {
+  name: 'CTAButton',
+  slot: 'Button',
+})(() => ({}))
+
 function CaseLinks(props) {
-  const { tags, cases, allCases, numberOfCases } = props
+  const { tags, cases, allCases, numberOfCases, cta } = props
 
   const tagsValues = tags?.map((tag) => tag.value)
 
@@ -55,6 +60,7 @@ function CaseLinks(props) {
     : cases
 
   const casesToShow = numberOfCases > 0 ? filteredCases.slice(0, numberOfCases) : filteredCases
+  const showCta = Boolean(cta.url && cta.label)
 
   return (
     <Root>
@@ -73,6 +79,11 @@ function CaseLinks(props) {
             </Link>
           ))}
         </GridContainer>
+        {showCta && (
+          <CTAButton component={RouterLink} href={cta.url} color="inherit" variant="outlined">
+            {cta.label}
+          </CTAButton>
+        )}
       </ContentContainer>
     </Root>
   )
@@ -83,6 +94,7 @@ CaseLinks.propTypes = {
   cases: PropTypes.array.isRequired,
   allCases: PropTypes.array.isRequired,
   numberOfCases: PropTypes.number,
+  cta: PropTypes.object,
 }
 
 CaseLinks.defaultProps = {
