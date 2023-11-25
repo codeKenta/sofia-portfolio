@@ -6,16 +6,8 @@ const caseAllCaps = {
 
 export default function createTypography(palette, typography) {
   const {
-    // fontFamilyPrimary = '"Crimson Text", serif',
-    fontFamilyPrimary = '"Gotham Light"',
-
-    // fontFamilySecondary = '"Abril Fatface", cursive',
-    // fontFamilySecondary = '"Hiragino Kaku Gothic Std"',
+    fontFamilyPrimary = '"Open Sans", serif',
     fontFamilySecondary = 'Poppins',
-
-    // fontFamilySecondary = 'Kanit',
-
-    // fontFamilySecondary = '"Hiragino Kaku Gothic Std"',
 
     fontFamilyTertiary = '"Open Sans", serif',
     // The default font size of the Material Specification.
@@ -68,8 +60,8 @@ export default function createTypography(palette, typography) {
     h6: buildVariant(fontFamilySecondary, fontWeightBold, 12, 1.5, 0.04, caseAllCaps),
     subtitle1: buildVariant(fontFamilyPrimary, fontWeightRegular, 18, 1.5, 0),
     subtitle2: buildVariant(fontFamilyPrimary, fontWeightMedium, 12, 1.7, 0.02),
-    body1: buildVariant(fontFamilyPrimary, fontWeightRegular, 18, 1.6, 0, {}, 16),
-    body2: buildVariant(fontFamilyPrimary, fontWeightRegular, 14, 1.6, 0),
+    body1: buildVariant(fontFamilyPrimary, fontWeightLight, 18, 1.6, 0, {}, 16),
+    body2: buildVariant(fontFamilyPrimary, fontWeightLight, 14, 1.6, 0),
     button: buildVariant(fontFamilyTertiary, fontWeightLight, 12, 1.4, 0.04, caseAllCaps),
     caption: buildVariant(fontFamilyPrimary, fontWeightSemibold, 18, 1.3, 0.02, caseAllCaps),
     overline: buildVariant(fontFamilySecondary, fontWeightRegular, 8, 1.7, 0.12, caseAllCaps),
