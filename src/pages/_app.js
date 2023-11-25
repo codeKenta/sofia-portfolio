@@ -5,7 +5,6 @@ import * as React from 'react'
 import Script from 'next/script'
 import PropTypes from 'prop-types'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import { CacheProvider } from '@emotion/react'
 import { ThemeProvider } from '@mui/material/styles'
 import { CssBaseline } from '@mui/material'
@@ -30,18 +29,6 @@ function App(props) {
   } = props
 
   const { preview } = pageProps
-
-  const router = useRouter()
-
-  React.useEffect(() => {
-    const handleRouteChange = (url) => {
-      gtag.pageview(url)
-    }
-    router.events.on('routeChangeComplete', handleRouteChange)
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange)
-    }
-  }, [router.events])
 
   return (
     <CacheProvider value={emotionCache}>

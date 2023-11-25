@@ -1,9 +1,3 @@
-//  fontFamilyPrimary = '"Gotham Light", serif',
-
-// fontFamilySecondary = '"Abril Fatface", cursive',
-// fontFamilySecondary = 'Hiragino',
-
-// href = '/fonts/Hiragino/Hiragino-Kaku-Gothic.woff2'
 const overrides = {
   styleOverrides: (theme) => `
     /* Include font files here. */
@@ -14,14 +8,6 @@ const overrides = {
       font-display: swap;
       src: url('/fonts/Poppins/Poppins-Bold.woff2') format('woff2');
     }
-
-    @font-face {
-      font-family: 'Gotham Light';
-      font-weight: 400;
-      font-display: swap;
-      src: url('fonts/Gotham/Gotham-Light-Regular.woff2') format('woff2');
-    }
-
 
     @font-face {
       font-family: 'Open Sans';

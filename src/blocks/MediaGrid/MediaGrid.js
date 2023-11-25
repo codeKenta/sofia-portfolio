@@ -49,6 +49,11 @@ function MediaGrid(props) {
     [rows],
   )
 
+  const hasOneRow = rows?.length === 1
+  const hasTwoImages = rows?.[0]?.images?.length === 2
+
+  const shouldBaseContainerWidthOnViewportHeight = hasOneRow && hasTwoImages
+
   return (
     <Root
       sx={{
@@ -57,82 +62,87 @@ function MediaGrid(props) {
     >
       <ContentContainer size={containerSize}>
         <Box
-          sx={{
-            display: 'grid',
-
-            gridGap: theme.spacing(1),
-            [theme.breakpoints.up('sm')]: {
-              gridGap: theme.spacing(2),
-            },
-          }}
+          sx={
+            shouldBaseContainerWidthOnViewportHeight ? { maxWidth: '100vh', margin: '0 auto' } : {}
+          }
         >
-          {rows?.map(({ images, orientation, minColumns }, outerIndex) => {
-            const chosenRatio = ratios[outerIndex]
-            const aspectRatio = images?.length === 1 && !orientation ? {} : chosenRatio
-            const isLandScape = aspectRatio.width * 1 > aspectRatio.height * 1
+          <Box
+            sx={{
+              display: 'grid',
+              gridGap: theme.spacing(1),
+              [theme.breakpoints.up('sm')]: {
+                gridGap: theme.spacing(2),
+              },
+            }}
+          >
+            {rows?.map(({ images, orientation, minColumns }, outerIndex) => {
+              const chosenRatio = ratios[outerIndex]
+              const aspectRatio = images?.length === 1 && !orientation ? {} : chosenRatio
+              const isLandScape = aspectRatio.width * 1 > aspectRatio.height * 1
 
-            const gridColumnsStyles =
-              minColumns > 0
-                ? {
-                    gridTemplateColumns: `repeat(${minColumns}, 1fr)`,
-                    [theme.breakpoints.up('sm')]: {
-                      gridTemplateColumns: `repeat(${Math.max(images?.length, minColumns)}, 1fr)`,
-                      gridGap: theme.spacing(2),
-                    },
-                  }
-                : {
-                    gridTemplateColumns: '1fr 1fr',
-                    [theme.breakpoints.up('sm')]: {
-                      gridTemplateColumns: `repeat(${images?.length}, 1fr)`,
-                      gridGap: theme.spacing(2),
-                    },
-                  }
-            return (
-              <Box
-                key={outerIndex}
-                sx={{
-                  display: 'grid',
-                  gridGap: theme.spacing(1),
+              const gridColumnsStyles =
+                minColumns > 0
+                  ? {
+                      gridTemplateColumns: `repeat(${minColumns}, 1fr)`,
+                      [theme.breakpoints.up('sm')]: {
+                        gridTemplateColumns: `repeat(${Math.max(images?.length, minColumns)}, 1fr)`,
+                        gridGap: theme.spacing(2),
+                      },
+                    }
+                  : {
+                      gridTemplateColumns: '1fr 1fr',
+                      [theme.breakpoints.up('sm')]: {
+                        gridTemplateColumns: `repeat(${images?.length}, 1fr)`,
+                        gridGap: theme.spacing(2),
+                      },
+                    }
+              return (
+                <Box
+                  key={outerIndex}
+                  sx={{
+                    display: 'grid',
+                    gridGap: theme.spacing(1),
 
-                  ...gridColumnsStyles,
-                }}
-              >
-                {images?.map((image, innerIndex) => {
-                  const itemsSmallScreenStyles =
-                    !minColumns &&
-                    (isLandScape || [2, 5, 8, 11].includes(innerIndex) || images.length === 1)
-                      ? { gridColumn: '1 / -1' }
-                      : {}
+                    ...gridColumnsStyles,
+                  }}
+                >
+                  {images?.map((image, innerIndex) => {
+                    const itemsSmallScreenStyles =
+                      !minColumns &&
+                      (isLandScape || [2, 5, 8, 11].includes(innerIndex) || images.length === 1)
+                        ? { gridColumn: '1 / -1' }
+                        : {}
 
-                  return (
-                    <MediaReveal
-                      sx={{
-                        [theme.breakpoints.down('sm')]: {
-                          ...itemsSmallScreenStyles,
-                        },
-                      }}
-                      key={innerIndex}
-                      {...aspectRatio}
-                    >
-                      <Media
+                    return (
+                      <MediaReveal
+                        sx={{
+                          [theme.breakpoints.down('sm')]: {
+                            ...itemsSmallScreenStyles,
+                          },
+                        }}
+                        key={innerIndex}
                         {...aspectRatio}
-                        {...(image?.component === 'video'
-                          ? {
-                              autoPlay: true,
-                              muted: true,
-                              loop: true,
-                              playsInline: true,
-                            }
-                          : { alt: '' })}
-                        {...image}
-                        priority={renderIndex === 0}
-                      />
-                    </MediaReveal>
-                  )
-                })}
-              </Box>
-            )
-          })}
+                      >
+                        <Media
+                          {...aspectRatio}
+                          {...(image?.component === 'video'
+                            ? {
+                                autoPlay: true,
+                                muted: true,
+                                loop: true,
+                                playsInline: true,
+                              }
+                            : { alt: '' })}
+                          {...image}
+                          priority={renderIndex === 0}
+                        />
+                      </MediaReveal>
+                    )
+                  })}
+                </Box>
+              )
+            })}
+          </Box>
         </Box>
       </ContentContainer>
     </Root>

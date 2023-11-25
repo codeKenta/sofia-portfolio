@@ -1,9 +1,6 @@
-import React from 'react'
 import { MdImage } from 'react-icons/md'
 import commonBlockSettings from '../partials/commonBlockSettings'
 import previewTitle from '../../utils/previewTitle'
-import { Preview } from 'part:@sanity/base/preview'
-import { PatchEvent, set, unset } from 'part:@sanity/form-builder/patch-event'
 
 export default {
   ...commonBlockSettings,
@@ -11,6 +8,14 @@ export default {
   name: 'CaseLinks',
   type: 'object',
   preview: previewTitle('Case Links', 'heading', MdImage),
+
+  fieldsets: [
+    {
+      title: 'CTA Button',
+      name: 'cta',
+      options: { columns: 1 },
+    },
+  ],
 
   fields: [
     {
@@ -34,6 +39,20 @@ export default {
       title: 'Selected Cases',
 
       of: [{ type: 'reference', to: [{ type: 'casePage' }] }],
+    },
+    {
+      name: 'ctaLabel',
+      title: 'label',
+      type: 'string',
+      group: 'content',
+      fieldset: 'cta',
+    },
+    {
+      name: 'ctaLink',
+      title: 'link',
+      type: 'link',
+      group: 'content',
+      fieldset: 'cta',
     },
   ],
 }

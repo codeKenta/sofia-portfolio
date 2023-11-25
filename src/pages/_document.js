@@ -35,13 +35,7 @@ export default class MyDocument extends Document {
             type="font/woff2"
             crossOrigin="anonymous"
           />
-          <link
-            rel="preload"
-            href="/fonts/Gotham/Gotham-Light-Regular.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          />
+
           <link
             rel="preload"
             href="/fonts/Open_Sans/OpenSans-Light.woff2"
