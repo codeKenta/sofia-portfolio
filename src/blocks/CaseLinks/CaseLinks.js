@@ -19,7 +19,7 @@ const Heading = styled('h3', {
   name: 'Hero',
   slot: 'Heading',
 })(({ theme }) => ({
-  ...theme.typography.h3,
+  ...theme.typography.h4,
   marginTop: theme.spacing(2),
   marginBottom: theme.spacing(4),
 }))
