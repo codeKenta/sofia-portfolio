@@ -1,7 +1,7 @@
 import { formatCtaLink } from '~/api/sanity/utils'
 
 export default `{
-  ${formatCtaLink('cta', 'ctaLabel', 'ctaUrl')},
+  title,
   numberOfCases,
   tags[],
   cases[]-> {
@@ -24,5 +24,6 @@ export default `{
     },
     "link": slug.current,
     tags[],
-  } | order(title asc)
+  } | order(title asc),
+  ${formatCtaLink('cta', 'ctaLabel', 'ctaLink')},
 }`

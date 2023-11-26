@@ -15,6 +15,15 @@ const Root = styled('section', {
   padding: 'var(--cia-section-spacing)',
 }))
 
+const Heading = styled('h3', {
+  name: 'Hero',
+  slot: 'Heading',
+})(({ theme }) => ({
+  ...theme.typography.h3,
+  marginTop: theme.spacing(2),
+  marginBottom: theme.spacing(4),
+}))
+
 const GridContainer = styled('div', {
   name: 'GridContainer',
   slot: 'GridContainer',
@@ -44,10 +53,12 @@ const Link = styled(RouterLink, {
 const CTAButton = styled(Button, {
   name: 'CTAButton',
   slot: 'Button',
-})(() => ({}))
+})(({ theme }) => ({
+  marginTop: theme.spacing(4),
+}))
 
 function CaseLinks(props) {
-  const { tags, cases, allCases, numberOfCases, cta } = props
+  const { title, tags, cases, allCases, numberOfCases, cta } = props
 
   const tagsValues = tags?.map((tag) => tag.value)
 
@@ -65,6 +76,8 @@ function CaseLinks(props) {
   return (
     <Root>
       <ContentContainer>
+        {title && <Heading>{title}</Heading>}
+
         <GridContainer>
           {casesToShow?.map((c) => (
             <Link href={c.link}>
@@ -90,6 +103,7 @@ function CaseLinks(props) {
 }
 
 CaseLinks.propTypes = {
+  title: PropTypes.string,
   tags: PropTypes.array,
   cases: PropTypes.array.isRequired,
   allCases: PropTypes.array.isRequired,

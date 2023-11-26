@@ -143,10 +143,11 @@ function DynamicContent(props) {
   const finalPlaceContent =
     placeContent || (hasParentRenderIndex && placeContentFromParentRenderIndex)
 
+  const textContentMaxWidth = displayImage ? 700 : 540
   const gridTemplateColumns =
     finalPlaceContent === 'right'
-      ? ' minmax(auto, 400px) 1fr minmax(auto, 540px)'
-      : 'minmax(auto, 540px) 1fr minmax(auto, 400px)'
+      ? `minmax(auto, 400px) 1fr minmax(auto, ${textContentMaxWidth}px)`
+      : `minmax(auto, ${textContentMaxWidth}px) 1fr minmax(auto, 400px)`
 
   const rootBottomSpacing = excludeBottomPadding ? { paddingBottom: '0' } : {}
   return (
