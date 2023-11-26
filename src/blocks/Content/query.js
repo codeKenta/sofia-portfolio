@@ -6,5 +6,7 @@ export default `{
       "_key": _id
     }
   },
-  place
+  place,
+  "backgroundColor": backgroundColor.bg,
+
 }`

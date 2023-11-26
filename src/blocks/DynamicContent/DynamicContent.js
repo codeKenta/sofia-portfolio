@@ -1,7 +1,8 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 import useEmblaCarousel from 'embla-carousel-react'
-import { styled, useTheme } from '@mui/system'
+import { styled } from '@mui/system'
+import { useTheme } from '@mui/material/styles'
 import { Button, IconButton } from '@mui/material'
 import Box from '@mui/material/Box'
 import { Media, MediaReveal } from '@noaignite/oui'
@@ -150,11 +151,12 @@ function DynamicContent(props) {
       : `minmax(auto, ${textContentMaxWidth}px) 1fr minmax(auto, 400px)`
 
   const rootBottomSpacing = excludeBottomPadding ? { paddingBottom: '0' } : {}
+
   return (
     <Root
       id={id}
       sx={{
-        backgroundColor: backgroundColor || null,
+        backgroundColor: backgroundColor === 'color' ? theme?.palette?.common?.pink : 'transparent',
         ...rootBottomSpacing,
       }}
     >

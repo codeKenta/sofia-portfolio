@@ -26,8 +26,7 @@ const AppNavDrawerListItemLink = styled(Link, {
   alignItems: 'inherit',
   fontSize: 16,
   textTransform: 'uppercase',
-  // 'ul &': theme.typography.caption,
-  // 'ul ul &': theme.typography.caption,
+  fontWeight: 'bold',
 }))
 
 const AppNavDrawerListItemList = styled('ul', {
@@ -75,7 +74,6 @@ function AppNavDrawerListItem(props) {
           <span>{menuLink.label}</span>
         </AppNavDrawerListItemLink>
       </AppNavDrawerListItemItem>
-
       {hasSubmenu && (
         <Collapse in={expanded} component="li" timeout="auto" unmountOnExit>
           <AppNavDrawerListItemList>
