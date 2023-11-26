@@ -13,14 +13,23 @@ const Root = styled('section', {
 })(({ theme }) => ({
   ...theme.mixins.verticalRhythm(2),
   padding: 'var(--cia-section-spacing)',
-  [theme.breakpoints.up('md')]: {
-    paddingTop: theme.spacing(14),
-    paddingBottom: theme.spacing(14),
-  },
+  [theme.breakpoints.up('md')]: {},
 }))
 
+const paddings = {
+  large: 14,
+  small: 7,
+  none: 0,
+}
+
 function MediaGrid(props) {
-  const { rows, backgroundColor, containerSize, renderIndex } = props
+  const { rows, backgroundColor, containerSize, renderIndex, bottomPadding, topPadding } = props
+
+  const paddingTopValue = paddings?.[topPadding] ?? 14
+  const paddingBottomValue = paddings?.[bottomPadding] ?? 14
+
+  const smScreenTopPStyles = bottomPadding === 'none' ? { paddingTop: 0 } : {}
+  const smScreenBottomPStyles = bottomPadding === 'none' ? { paddingBottom: 0 } : {}
 
   const theme = useTheme()
 
@@ -50,14 +59,18 @@ function MediaGrid(props) {
   )
 
   const hasOneRow = rows?.length === 1
-  const hasTwoImages = rows?.[0]?.images?.length === 2
-
-  const shouldBaseContainerWidthOnViewportHeight = hasOneRow && hasTwoImages
+  const shouldBaseContainerWidthOnViewportHeight = hasOneRow
 
   return (
     <Root
       sx={{
         backgroundColor: backgroundColor === 'color' ? theme.palette.common.pink : 'transparent',
+        ...smScreenTopPStyles,
+        ...smScreenBottomPStyles,
+        [theme.breakpoints.up('md')]: {
+          paddingTop: theme.spacing(paddingTopValue),
+          paddingBottom: theme.spacing(paddingBottomValue),
+        },
       }}
     >
       <ContentContainer size={containerSize}>
@@ -154,6 +167,8 @@ MediaGrid.propTypes = {
   backgroundColor: PropTypes.string,
   containerSize: PropTypes.string,
   renderIndex: PropTypes.number.isRequired,
+  topPadding: PropTypes.string,
+  bottomPadding: PropTypes.string,
 }
 
 export default MediaGrid
