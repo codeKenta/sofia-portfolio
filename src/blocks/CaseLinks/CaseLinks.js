@@ -82,8 +82,28 @@ function CaseLinks(props) {
           {casesToShow?.map((c) => (
             <Link href={c.link}>
               {c.image && (
-                <MediaReveal key={c.image} {...ASPECT_RATIOS.square}>
-                  <Media {...ASPECT_RATIOS.square} {...c.image} alt={c.title} />
+                <MediaReveal
+                  sx={{
+                    '& picture': {
+                      overflow: 'hidden',
+                    },
+                  }}
+                  key={c.image}
+                  {...ASPECT_RATIOS.square}
+                >
+                  <Media
+                    sx={{
+                      '& img': {
+                        transition: 'transform 0.3s ease-in-out',
+                      },
+                      '& img:hover': {
+                        transform: 'scale(1.02)',
+                      },
+                    }}
+                    {...ASPECT_RATIOS.square}
+                    {...c.image}
+                    alt={c.title}
+                  />
                 </MediaReveal>
               )}
 
