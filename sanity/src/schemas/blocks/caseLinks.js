@@ -19,6 +19,11 @@ export default {
 
   fields: [
     {
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+    },
+    {
       name: 'tags',
       title: 'Tags',
       type: 'tags',
@@ -44,14 +49,12 @@ export default {
       name: 'ctaLabel',
       title: 'label',
       type: 'string',
-      group: 'content',
       fieldset: 'cta',
     },
     {
       name: 'ctaLink',
       title: 'link',
       type: 'link',
-      group: 'content',
       fieldset: 'cta',
     },
   ],

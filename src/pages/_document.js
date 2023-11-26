@@ -20,17 +20,10 @@ export default class MyDocument extends Document {
           <link rel="manifest" href="/site.webmanifest" />
           {/* Preload font files here: */}
           {/* /Users/kennethosterholm/own-projects/sofia-portfolio/public/fonts/Kanit/Kanit-Bold.woff2 */}
-          <link
-            rel="preload"
-            href="/fonts/Kanit/Kanit-Bold.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          />
 
           <link
             rel="preload"
-            href="/fonts/Hiragino/Hiragino-Kaku-Gothic.woff2"
+            href="/fonts/Poppins/Poppins-Bold.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"

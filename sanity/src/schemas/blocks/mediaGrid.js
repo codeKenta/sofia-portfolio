@@ -18,5 +18,31 @@ export default {
       of: [{ type: 'mediaRowObject' }],
       group: 'content',
     },
+
+    {
+      title: 'Top Padding',
+      name: 'topPadding',
+      type: 'string',
+      options: {
+        list: ['large', 'small', 'none'],
+        layout: 'radio',
+        direction: 'horizontal',
+      },
+      initialValue: 'large',
+      group: 'settings',
+    },
+
+    {
+      title: 'Bottom Padding',
+      name: 'bottomPadding',
+      type: 'string',
+      options: {
+        list: ['large', 'small', 'none'],
+        layout: 'radio',
+        direction: 'horizontal',
+      },
+      initialValue: 'large',
+      group: 'settings',
+    },
   ],
 }

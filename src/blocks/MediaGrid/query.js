@@ -12,4 +12,6 @@ export default `{
   },
   "backgroundColor": backgroundColor.bg,
   "containerSize": containerSize.size,
+  topPadding,
+  bottomPadding,
 }`
