@@ -9,4 +9,5 @@ export default `{
   ${formatCtaLink('cta', 'ctaLabel', 'ctaUrl')},
   placeContent,
   excludeBottomPadding,
+  "backgroundColor": backgroundColor.bg,
 }`

@@ -27,7 +27,7 @@ const HeroGridContainer = styled('section', {
   color: theme.palette.common.black,
   gridGap: theme.spacing(2),
   [theme.breakpoints.up('sm')]: {
-    minHeight: 650,
+    minHeight: 450,
   },
 }))
 
@@ -71,25 +71,6 @@ const HeroMedia = styled(Media, {
   slot: 'MediaReveal',
 })(() => ({
   height: '100%',
-}))
-
-const Circle = styled('div', {
-  name: 'Circle',
-  slot: 'Circle',
-})(({ theme }) => ({
-  width: '500px',
-  height: '500px',
-  display: 'block',
-  position: 'absolute',
-  left: '20%',
-  bottom: '-4%',
-  background: theme.palette.primary.main,
-  borderRadius: '50%',
-  zIndex: '-200',
-  [theme.breakpoints.up('sm')]: {
-    left: '-20%',
-    bottom: '-20%',
-  },
 }))
 
 const ImageWrapper = styled('div', {
@@ -183,7 +164,6 @@ function Hero(props) {
 
           {mediaProps && (
             <ImageWrapper>
-              <Circle />
               <HeroMediaReveal>
                 <HeroMedia
                   {...(mediaProps?.component === 'video'
