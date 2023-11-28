@@ -62,7 +62,7 @@ export default function createTypography(palette, typography) {
     subtitle2: buildVariant(fontFamilyPrimary, fontWeightMedium, 12, 1.7, 0.02),
     body1: buildVariant(fontFamilyPrimary, fontWeightLight, 18, 1.6, 0, {}, 16),
     body2: buildVariant(fontFamilyPrimary, fontWeightLight, 14, 1.6, 0),
-    button: buildVariant(fontFamilyTertiary, fontWeightLight, 12, 1.4, 0.04, caseAllCaps),
+    button: buildVariant(fontFamilyTertiary, 400, 14, 1.4, 0.04, caseAllCaps),
     caption: buildVariant(fontFamilyPrimary, fontWeightSemibold, 18, 1.3, 0.02, caseAllCaps),
     overline: buildVariant(fontFamilySecondary, fontWeightRegular, 8, 1.7, 0.12, caseAllCaps),
     // Custom variants

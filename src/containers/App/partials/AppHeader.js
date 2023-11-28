@@ -174,6 +174,7 @@ const AppHeader = React.memo(function AppHeader(props) {
               padding: theme.spacing(1, 2),
             }}
           >
+            {/* <AppNavDrawerListItem menuLink={{ label: 'Sofia Andersson', url: '/' }} /> */}
             <div />
             {/* <AppHeaderBrandLink href="/" aria-label={t(__translationGroup)`Go to the homepage`}>
               <BrandIcon />

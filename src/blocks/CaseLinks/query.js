@@ -4,10 +4,11 @@ export default `{
   title,
   numberOfCases,
   tags[],
+  slideshow,
   cases[]-> {
     "title": seo.title,
     "description": seo.description,
-    "image":{
+    "mediaProps":{
       "component": "picture",
       "src": seo.image.asset->url + "?dl="
     },
@@ -18,7 +19,7 @@ export default `{
   "allCases": *[_type == "casePage" && !(_id in path('drafts.**'))] {
     "title": seo.title,
     "description": seo.description,
-    "image":{
+    "mediaProps":{
       "component": "picture",
       "src": seo.image.asset->url + "?dl="
     },

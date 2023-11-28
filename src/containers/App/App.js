@@ -1,9 +1,9 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 import { styled } from '@mui/system'
-import { SITE_FOOTER_ID, SITE_HEADER_ID, SITE_MAIN_ID } from '~/utils/constants'
+import { SITE_HEADER_ID, SITE_MAIN_ID } from '~/utils/constants'
 import {
-  AppFooter,
+  // AppFooter,
   AppHeader,
   AppLoader,
   AppNavDrawer,
@@ -29,7 +29,7 @@ const AppMain = styled('main', {
 })
 
 function App(props) {
-  const { children, disableFooter, disableHeader, headerColor, headerMode, preview } = props
+  const { children, disableHeader, headerColor, headerMode, preview } = props
 
   return (
     <AppRoot>
@@ -43,7 +43,7 @@ function App(props) {
         {children}
       </AppMain>
 
-      {!disableFooter && <AppFooter id={SITE_FOOTER_ID} />}
+      {/* {!disableFooter && <AppFooter id={SITE_FOOTER_ID} />} */}
 
       <AppNavDrawer />
       <AppLoader />
@@ -55,7 +55,6 @@ function App(props) {
 
 App.propTypes = {
   children: PropTypes.node.isRequired,
-  disableFooter: PropTypes.bool,
   disableHeader: PropTypes.bool,
   headerColor: PropTypes.string,
   headerMode: PropTypes.string,

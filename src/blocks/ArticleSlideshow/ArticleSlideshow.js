@@ -2,9 +2,9 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 import useEmblaCarousel from 'embla-carousel-react'
 import { styled } from '@mui/system'
-import { Button, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 import { Media, MediaReveal } from '@noaignite/oui'
-import { useI18n } from '~/context'
+import { useTheme } from '@mui/material/styles'
 import { ASPECT_RATIOS } from '~/utils/constants'
 import { RouterLink } from '~/containers'
 
@@ -19,12 +19,12 @@ const ArticleSlideshowRoot = styled('section', {
 const ArticleSlideshowHeader = styled('header', {
   name: 'ArticleSlideshow',
   slot: 'Header',
-})({
+})(({ theme }) => ({
   paddingLeft: 'var(--cia-container-spacing)',
   paddingRight: 'var(--cia-container-spacing)',
-  marginBottom: 'var(--cia-section-spacing)',
+  marginBottom: theme.spacing(2),
   textAlign: 'center',
-})
+}))
 
 const ArticleSlideshowMain = styled('div', {
   name: 'ArticleSlideshow',
@@ -49,13 +49,13 @@ const ArticleSlideshowEmblaSlide = styled('div', {
 })(({ theme }) => ({
   position: 'relative',
   flexShrink: 0,
-  width: '100%',
+  width: 'calc(100% / 2.5)',
   paddingLeft: theme.spacing(2),
   [theme.breakpoints.up('sm')]: {
-    width: 'calc(100% / 2)',
+    width: 'calc(100% / 3.2)',
   },
   [theme.breakpoints.up('md')]: {
-    width: 'calc(100% / 3)',
+    width: 'calc(100% / 4)',
   },
 }))
 
@@ -70,18 +70,27 @@ const ArticleSlideshowArticleContent = styled('div', {
 function ArticleSlideshow(props) {
   const { entries, heading } = props
 
-  const { t } = useI18n()
-
   const [emblaRef] = useEmblaCarousel({
     align: 'start',
     containScroll: 'trimSnaps',
   })
 
+  const theme = useTheme()
+
   return (
     <ArticleSlideshowRoot>
       {heading && (
         <ArticleSlideshowHeader>
-          <Typography component="h1" variant="h4">
+          <Typography
+            component="h3"
+            variant="h4"
+            sx={{
+              [theme.breakpoints.down('sm')]: {
+                fontSize: '1rem',
+                paddingTop: theme.spacing(1),
+              },
+            }}
+          >
             {heading}
           </Typography>
         </ArticleSlideshowHeader>
@@ -94,9 +103,20 @@ function ArticleSlideshow(props) {
               <ArticleSlideshowEmblaSlide key={idx}>
                 <article>
                   {item.mediaProps && (
-                    <RouterLink href={item.url}>
-                      <MediaReveal {...ASPECT_RATIOS.article}>
-                        <Media {...ASPECT_RATIOS.article} {...item.mediaProps} />
+                    <RouterLink href={item.link}>
+                      <MediaReveal {...ASPECT_RATIOS.square}>
+                        <Media
+                          sx={{
+                            '& img': {
+                              transition: 'transform 0.3s ease-in-out',
+                            },
+                            '& img:hover': {
+                              transform: 'scale(1.02)',
+                            },
+                          }}
+                          {...ASPECT_RATIOS.square}
+                          {...item.mediaProps}
+                        />
                       </MediaReveal>
                     </RouterLink>
                   )}
@@ -106,22 +126,20 @@ function ArticleSlideshow(props) {
                       <Typography variant="overline">{item.subheading}</Typography>
                     )}
 
-                    <Typography component="h2" variant="h4" paragraph>
-                      {item.heading}
-                    </Typography>
-
-                    <Typography variant="body1" paragraph>
-                      {item.excerpt}
-                    </Typography>
-
-                    <Button
-                      component={RouterLink}
-                      href={item.url}
-                      color="primary"
-                      variant="contained"
+                    <Typography
+                      component="h2"
+                      variant="h5"
+                      paragraph
+                      sx={{
+                        marginBottom: 0,
+                      }}
                     >
-                      {t(__translationGroup)`Read more`}
-                    </Button>
+                      {item.title}
+                    </Typography>
+
+                    <Typography variant="body2" sx={{ marginTop: 1 }} paragraph>
+                      {item.description}
+                    </Typography>
                   </ArticleSlideshowArticleContent>
                 </article>
               </ArticleSlideshowEmblaSlide>
