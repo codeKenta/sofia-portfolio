@@ -57,5 +57,11 @@ export default {
       type: 'link',
       fieldset: 'cta',
     },
+
+    {
+      name: 'slideshow',
+      title: 'Slideshow',
+      type: 'boolean',
+    },
   ],
 }
