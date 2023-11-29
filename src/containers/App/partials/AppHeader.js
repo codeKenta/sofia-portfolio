@@ -7,8 +7,9 @@ import { generateUtilityClasses } from '@mui/base'
 import { styled, useTheme } from '@mui/system'
 import { AppBar, IconButton, Toolbar, Box } from '@mui/material'
 import { useGlobalHandlers, useGlobalState, useI18n, useRemoteConfig } from '~/context'
-import { Close as CloseIcon, Menu as MenuIcon } from '~/components/icons'
+import { Brand as BrandIcon, Close as CloseIcon, Menu as MenuIcon } from '~/components/icons'
 import ContentContainer from '~/components/ContentContainer'
+import RouterLink from '../../RouterLink'
 import AppNavDrawerListItem from './AppNavDrawerListItem'
 
 const BREAKPOINT_KEY = 'md'
@@ -49,6 +50,17 @@ const AppHeaderRoot = styled(AppBar, {
     [theme.breakpoints.up(BREAKPOINT_KEY)]: { display: 'none' },
   },
 }))
+
+const AppHeaderBrandLink = styled(RouterLink, {
+  name: 'AppHeader',
+  slot: 'BrandLink',
+})({
+  '& > svg': {
+    height: '30px',
+    display: 'block',
+    width: 'auto',
+  },
+})
 
 const NavList = styled('ul', {
   name: 'NavList',
@@ -175,10 +187,10 @@ const AppHeader = React.memo(function AppHeader(props) {
             }}
           >
             {/* <AppNavDrawerListItem menuLink={{ label: 'Sofia Andersson', url: '/' }} /> */}
-            <div />
-            {/* <AppHeaderBrandLink href="/" aria-label={t(__translationGroup)`Go to the homepage`}>
+
+            <AppHeaderBrandLink href="/" aria-label={t(__translationGroup)`Go to the homepage`}>
               <BrandIcon />
-            </AppHeaderBrandLink> */}
+            </AppHeaderBrandLink>
 
             <Nav aria-label={t(__translationGroup)`Main navigation`}>
               {menus?.primary?.length > 0 && (

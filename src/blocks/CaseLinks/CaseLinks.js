@@ -4,6 +4,7 @@ import { Media, MediaReveal } from '@noaignite/oui'
 import PropTypes from 'prop-types'
 import * as React from 'react'
 import { useTheme } from '@mui/material/styles'
+import { useRouter } from 'next/router'
 import ContentContainer from '~/components/ContentContainer'
 import { RouterLink } from '~/containers'
 import { ASPECT_RATIOS } from '~/utils/constants'
@@ -66,10 +67,15 @@ const CTAButton = styled(Button, {
 function CaseLinks(props) {
   const { title, tags, cases, allCases, numberOfCases, cta, slideshow } = props
 
+  const router = useRouter()
   const tagsValues = tags?.map((tag) => tag.value)
 
   const filteredCases = tags?.length
     ? allCases.filter((c) => {
+        if (router.asPath.includes(c.link)) {
+          return false
+        }
+
         const t = c.tags?.map((tag) => tag.value) || []
         const includesTag = tagsValues.some((value) => t.includes(value))
         return includesTag
