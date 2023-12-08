@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import ContentContainer from '~/components/ContentContainer'
 import { RouterLink } from '~/containers'
 import { ASPECT_RATIOS } from '~/utils/constants'
+import { includeLineBreaks } from '~/utils'
 import ArticleSlideshow from '../ArticleSlideshow'
 
 const Root = styled('section', {
@@ -130,7 +131,7 @@ function CaseLinks(props) {
                   marginTop: theme.spacing(2),
                 }}
               >
-                {c.title}
+                {includeLineBreaks(c.title)}
               </Typography>
               <Typography variant="body1">{c.description}</Typography>
             </Link>
