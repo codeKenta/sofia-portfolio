@@ -7,6 +7,7 @@ import { Media, MediaReveal } from '@noaignite/oui'
 import { useTheme } from '@mui/material/styles'
 import { ASPECT_RATIOS } from '~/utils/constants'
 import { RouterLink } from '~/containers'
+import { includeLineBreaks } from '~/utils'
 
 const ArticleSlideshowRoot = styled('section', {
   name: 'ArticleSlideshow',
@@ -117,7 +118,7 @@ function ArticleSlideshow(props) {
               marginBottom: 0,
             }}
           >
-            {item.title}
+            {includeLineBreaks(item.title)}
           </Typography>
 
           <Typography variant="body2" sx={{ margin: '0 !important' }} paragraph>
