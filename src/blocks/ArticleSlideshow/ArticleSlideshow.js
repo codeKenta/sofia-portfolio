@@ -2,12 +2,14 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 import useEmblaCarousel from 'embla-carousel-react'
 import { styled } from '@mui/system'
-import { Typography } from '@mui/material'
+import { Box, Typography, Fab } from '@mui/material'
 import { Media, MediaReveal } from '@noaignite/oui'
 import { useTheme } from '@mui/material/styles'
 import { ASPECT_RATIOS } from '~/utils/constants'
 import { RouterLink } from '~/containers'
 import { includeLineBreaks } from '~/utils'
+import ArrowForwardIcon from '~/components/icons/ArrowForward'
+import ArrowBackIcon from '~/components/icons/ArrowBack'
 
 const ArticleSlideshowRoot = styled('section', {
   name: 'ArticleSlideshow',
@@ -57,79 +59,135 @@ const ArticleSlideshowArticleContent = styled('div', {
   padding: theme.spacing(2, 0),
 }))
 
+const MediaSlideshowButton = styled(Fab)(({ theme }) => ({
+  width: 48,
+  height: 48,
+  boxShadow: 'none',
+  backgroundColor: theme.palette.common.white,
+
+  '&:hover': {
+    backgroundColor: theme.palette.common.white,
+  },
+
+  '&:active': {
+    boxShadow: 'none',
+  },
+
+  '& svg': {
+    color: theme.palette.common.black,
+  },
+
+  '&.Mui-disabled': {
+    backgroundColor: theme.palette.common.white,
+
+    '& svg': {
+      color: theme.palette.action.disabled,
+    },
+  },
+}))
+
+const MediaSlideshowButtonPrev = styled(MediaSlideshowButton)(() => ({}))
+
+const MediaSlideshowButtonNext = styled(MediaSlideshowButton)(({ theme }) => ({
+  marginRight: theme.spacing(1),
+
+  [theme.breakpoints.up('sm')]: {
+    marginRight: theme.spacing(2),
+  },
+}))
+
 function ArticleSlideshow(props) {
+  const theme = useTheme()
   const { entries, heading } = props
 
-  const [emblaRef] = useEmblaCarousel({
+  const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'center',
     containScroll: 'trimSnaps',
   })
 
-  const theme = useTheme()
+  const shuffledEntries = React.useMemo(() => entries.sort(() => Math.random() - 0.5), [entries])
+
+  const handleScrollPrev = React.useCallback(() => emblaApi?.scrollPrev(), [emblaApi])
+  const handleScrollNext = React.useCallback(() => emblaApi?.scrollNext(), [emblaApi])
+
+  const [isPrevBtnEnabled, setPrevBtnEnabled] = React.useState(false)
+  const [isNextBtnEnabled, setNextBtnEnabled] = React.useState(false)
 
   const hideCaruselOnSmDwn = entries?.length < 3
   const hideCaruselOnSmUp = entries?.length < 4
   const hideCaruselOnMdUp = entries?.length < 5
 
-  const slides = entries
-    .sort(() => Math.random() - 0.5)
-    ?.map((item, idx) => (
-      <ArticleSlideshowSlide
-        sx={{
-          position: 'relative',
-          flexShrink: 0,
-          width: 'calc(100% / 2.3)',
-          paddingLeft: theme.spacing(2),
-          [theme.breakpoints.up('sm')]: {
-            width: entries.length > 3 ? 'calc(100% / 3.3)' : 'calc(100% / 3)',
-          },
-          [theme.breakpoints.up('md')]: {
-            width: entries.length > 4 ? 'calc(100% / 4.3)' : 'calc(100% / 4)',
-          },
-        }}
-        key={idx}
-      >
-        <article>
-          {item.mediaProps && (
-            <RouterLink href={item.link}>
-              <MediaReveal {...ASPECT_RATIOS.square}>
-                <Media
-                  sx={{
-                    '& img': {
-                      transition: 'transform 0.3s ease-in-out',
-                    },
-                    '& img:hover': {
-                      transform: 'scale(1.02)',
-                    },
-                  }}
-                  {...ASPECT_RATIOS.square}
-                  {...item.mediaProps}
-                />
-              </MediaReveal>
-            </RouterLink>
-          )}
+  const handleSelect = React.useCallback(() => {
+    setPrevBtnEnabled(emblaApi.canScrollPrev())
+    setNextBtnEnabled(emblaApi.canScrollNext())
+  }, [emblaApi])
 
-          <ArticleSlideshowArticleContent>
-            {item.subheading && <Typography variant="overline">{item.subheading}</Typography>}
+  React.useEffect(() => {
+    if (!emblaApi) {
+      return
+    }
 
-            <Typography
-              component="h2"
-              variant="h5"
-              paragraph
-              sx={{
-                marginBottom: 0,
-              }}
-            >
-              {includeLineBreaks(item.title)}
-            </Typography>
+    handleSelect()
+    emblaApi.on('select', handleSelect)
+  }, [emblaApi, handleSelect])
 
-            <Typography variant="body2" sx={{ margin: '0 !important' }} paragraph>
-              {item.description}
-            </Typography>
-          </ArticleSlideshowArticleContent>
-        </article>
-      </ArticleSlideshowSlide>
-    ))
+  const slides = shuffledEntries?.map((item, idx) => (
+    <ArticleSlideshowSlide
+      sx={{
+        position: 'relative',
+        flexShrink: 0,
+        width: 'calc(100% / 2)',
+        paddingLeft: theme.spacing(2),
+        [theme.breakpoints.up('sm')]: {
+          width: entries.length > 3 ? 'calc(100% / 3)' : 'calc(100% / 3)',
+        },
+        [theme.breakpoints.up('md')]: {
+          width: entries.length > 4 ? 'calc(100% / 4)' : 'calc(100% / 4)',
+        },
+      }}
+      key={idx}
+    >
+      <article>
+        {item.mediaProps && (
+          <RouterLink href={item.link}>
+            <MediaReveal {...ASPECT_RATIOS.square}>
+              <Media
+                sx={{
+                  '& img': {
+                    transition: 'transform 0.3s ease-in-out',
+                  },
+                  '& img:hover': {
+                    transform: 'scale(1.02)',
+                  },
+                }}
+                {...ASPECT_RATIOS.square}
+                {...item.mediaProps}
+              />
+            </MediaReveal>
+          </RouterLink>
+        )}
+
+        <ArticleSlideshowArticleContent>
+          {item.subheading && <Typography variant="overline">{item.subheading}</Typography>}
+
+          <Typography
+            component="h2"
+            variant="h5"
+            paragraph
+            sx={{
+              marginBottom: 0,
+            }}
+          >
+            {includeLineBreaks(item.title)}
+          </Typography>
+
+          <Typography variant="body2" sx={{ margin: '0 !important' }} paragraph>
+            {item.description}
+          </Typography>
+        </ArticleSlideshowArticleContent>
+      </article>
+    </ArticleSlideshowSlide>
+  ))
 
   return (
     <ArticleSlideshowRoot>
@@ -168,7 +226,7 @@ function ArticleSlideshow(props) {
         {slides}
       </ArticleSlideshowMain>
 
-      <ArticleSlideshowMain
+      <Box
         sx={{
           display: hideCaruselOnSmDwn ? 'none' : 'block',
 
@@ -181,10 +239,32 @@ function ArticleSlideshow(props) {
           },
         }}
       >
-        <div ref={emblaRef}>
-          <ArticleSlideshowEmblaContainer>{slides}</ArticleSlideshowEmblaContainer>
-        </div>
-      </ArticleSlideshowMain>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            marginBottom: theme.spacing(1),
+            marginTop: '-1.2rem',
+            [theme.breakpoints.up('sm')]: {
+              marginTop: '-1rem',
+              marginBottom: theme.spacing(2),
+            },
+          }}
+        >
+          <MediaSlideshowButtonPrev disabled={!isPrevBtnEnabled} onClick={handleScrollPrev}>
+            <ArrowBackIcon />
+          </MediaSlideshowButtonPrev>
+
+          <MediaSlideshowButtonNext disabled={!isNextBtnEnabled} onClick={handleScrollNext}>
+            <ArrowForwardIcon />
+          </MediaSlideshowButtonNext>
+        </Box>
+        <ArticleSlideshowMain>
+          <div ref={emblaRef}>
+            <ArticleSlideshowEmblaContainer>{slides}</ArticleSlideshowEmblaContainer>
+          </div>
+        </ArticleSlideshowMain>
+      </Box>
     </ArticleSlideshowRoot>
   )
 }
